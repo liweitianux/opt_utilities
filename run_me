@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "To run the program: type ./optcli"
+echo "To re-build the program, type: make clean;make"
+
