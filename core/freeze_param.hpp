@@ -12,8 +12,8 @@ namespace opt_utilities
   {
   private:
     std::set<Tstr> param_names;
-    std::vector<int> param_num;
-    int num_free;
+    std::vector<size_t> param_num;
+    size_t num_free;
     
   public:
     freeze_param()
@@ -53,12 +53,12 @@ namespace opt_utilities
 	}
     }
 
-    int do_get_num_free_params()const
+    size_t do_get_num_free_params()const
     {
       return this->get_model().get_num_params()-param_num.size();
     }
 
-    bool is_frozen(int i)const
+    bool is_frozen(size_t i)const
     {
       if(find(param_num.begin(),param_num.end(),i)==param_num.end())
 	{
@@ -70,10 +70,10 @@ namespace opt_utilities
 
     Tp do_reform(const Tp& p)const
     {
-      int nparams=(this->get_model().get_num_params());
+      size_t nparams=(this->get_model().get_num_params());
       Tp reformed_p(nparams);
-      int i=0,j=0;
-      for(i=0;i<(int)nparams;++i)
+      size_t i=0,j=0;
+      for(i=0;i<nparams;++i)
 	{
 	  if(this->is_frozen(i))
 	    {
@@ -105,9 +105,9 @@ namespace opt_utilities
     Tp do_deform(const Tp& p)const
     {
       Tp deformed_p(do_get_num_free_params());
-      int i(0),j(0);
+      size_t i(0),j(0);
       assert(get_size(p)==this->get_model().get_num_params());
-      for(;i<(int)get_size(p);++i)
+      for(;i<get_size(p);++i)
 	{
 	  //std::cout<<is_frozen(j)<<"\n";
 	  if(!this->is_frozen(i))

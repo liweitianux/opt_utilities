@@ -20,12 +20,12 @@ private:
   }
 
 
-  const data<Ty,Tx>& do_get_data(int i)const
+  const data<Ty,Tx>& do_get_data(size_t i)const
   {
     return data_vec.at(i);
   }
   
-  int do_size()const
+  size_t do_size()const
   {
     return data_vec.size();
   }

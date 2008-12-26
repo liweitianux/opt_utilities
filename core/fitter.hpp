@@ -145,8 +145,8 @@ namespace opt_utilities
   {
   private:
     
-    virtual const data<Ty,Tx>& do_get_data(int i)const=0;
-    virtual int do_size()const=0;
+    virtual const data<Ty,Tx>& do_get_data(size_t i)const=0;
+    virtual size_t do_size()const=0;
     virtual void do_push_back(const data<Ty,Tx>&)=0;
     virtual void do_clear()=0;
     virtual data_set<Ty,Tx>* do_clone()const=0;
@@ -156,11 +156,11 @@ namespace opt_utilities
       delete this;
     }
   public:
-    const data<Ty,Tx>& get_data(int i)const
+    const data<Ty,Tx>& get_data(size_t i)const
     {
       return this->do_get_data(i);
     }
-    int size()const
+    size_t size()const
     {
       return do_size();
     }
@@ -373,7 +373,7 @@ namespace opt_utilities
       return null_param;
     }
 
-    const param_info<Tp,Tstr>& get_param_info(int n)const
+    const param_info<Tp,Tstr>& get_param_info(size_t n)const
     {
       return param_info_list[n%get_num_params()];
     }
@@ -393,16 +393,16 @@ namespace opt_utilities
     }
 
   
-    int get_num_params()const
+    size_t get_num_params()const
     {
-      return (int)param_info_list.size();
+      return param_info_list.size();
     }
 
-    int get_num_free_params()const
+    size_t get_num_free_params()const
     {
       if(p_param_modifier)
 	{
-	  return (int)p_param_modifier->get_num_free_params();
+	  return p_param_modifier->get_num_free_params();
 	}
       return get_num_params();
     }
@@ -432,9 +432,9 @@ namespace opt_utilities
 	}
     }
 
-    int get_param_order(const Tstr& pname)const
+    size_t get_param_order(const Tstr& pname)const
     {
-      for(int i=0;i<(int)param_info_list.size();++i)
+      for(size_t i=0;i<param_info_list.size();++i)
 	{
 	  if(param_info_list[i].get_name()==pname)
 	    {
@@ -754,7 +754,7 @@ namespace opt_utilities
       return p_model->get_param_info(pname);
     }
 
-    const param_info<Tp,Tstr>& get_param_info(int n)const
+    const param_info<Tp,Tstr>& get_param_info(size_t n)const
     {
       if(p_model==0)
 	{
@@ -763,7 +763,7 @@ namespace opt_utilities
       return p_model->get_param_info(n);
     }
 
-    const int get_param_order(const Tstr& pname)const
+    size_t get_param_order(const Tstr& pname)const
     {
       if(p_model==0)
 	{
@@ -772,7 +772,7 @@ namespace opt_utilities
       return p_model->get_param_order(pname);
     }
 
-    int get_num_params()const
+    size_t get_num_params()const
     {
       if(p_model==0)
 	{
@@ -1006,7 +1006,7 @@ namespace opt_utilities
       return *(this->p_model);
     }
 
-    int get_num_free_params()const
+    size_t get_num_free_params()const
     {
       return do_get_num_free_params();
     }
@@ -1021,7 +1021,7 @@ namespace opt_utilities
   private:
     virtual Tp do_reform(const Tp& p)const=0;
     virtual Tp do_deform(const Tp& p)const=0;
-    virtual int do_get_num_free_params()const=0;
+    virtual size_t do_get_num_free_params()const=0;
     virtual Tstr do_report_param_status(const Tstr&)const=0;
     virtual void update(){}
 
