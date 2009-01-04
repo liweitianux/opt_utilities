@@ -10,7 +10,7 @@
 using std::cout;
 namespace opt_utilities
 {
-  template <typename Ty,typename Tx,typename Tp>
+  template <typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr=std::string>
   class bootstrap
   {
   private:
@@ -29,14 +29,14 @@ namespace opt_utilities
     std::vector<Tp> param_pool;
     default_data_set<Ty,Tx> current_data_set;
     default_data_set<Ty,Tx> origin_data_set;
-    fitter<Ty,Tx,Tp>* p_fitter;
+    fitter<Ty,Tx,Tp,Ts,Tstr>* p_fitter;
     Tp origin_param;
   public:
     bootstrap()
       :p_fitter(NULL)
     {}
 
-    void set_fitter(fitter<Ty,Tx,Tp>& pf)
+    void set_fitter(fitter<Ty,Tx,Tp,Ts,Tstr>& pf)
     {
       param_pool.clear();
       p_fitter=&pf;
@@ -92,7 +92,7 @@ namespace opt_utilities
     
   public:
     std::pair<typename element_type_trait<Tp>::element_type,typename element_type_trait<Tp>::element_type>
-    interval(std::string param_name,double level)
+    interval(const Tstr& param_name,double level)
     {
       if(p_fitter==NULL)
 	{
