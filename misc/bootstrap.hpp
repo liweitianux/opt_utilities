@@ -70,8 +70,12 @@ namespace opt_utilities
     }
     
   private:
-    void sample()
+    Tp sample()
     {
+      if(p_fitter==NULL)
+	{
+	  throw fitter_unset();
+	}
       current_data_set=default_data_set<Ty,Tx>();
       for(int i=0;i<origin_data_set.size();++i)
 	{
@@ -88,6 +92,7 @@ namespace opt_utilities
 	  cout<<param_pool.back()[i]<<",";
 	}
       std::cout<<std::endl;
+      return param_pool.back();
     }
     
   public:
