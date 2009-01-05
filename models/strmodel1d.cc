@@ -11,14 +11,15 @@ strmodel1d* strmodel1d::do_clone()const
 
 strmodel1d::strmodel1d()
 {
-  set_buildin_fun();  
+  set_buildin_fun();
 }
 
 strmodel1d::strmodel1d(const strmodel1d& rhs)
-  :expr(rhs.expr),
+  :par_vec(rhs.par_vec),
    par_names(rhs.par_names),
-   var_name(rhs.var_name),
-   par_vec(rhs.par_vec)
+   expr(rhs.expr),
+   var_name(rhs.var_name)
+   
 {
   set_buildin_fun();
   set_expr(expr,par_names,var_name);
@@ -56,7 +57,7 @@ void strmodel1d::set_expr(const string& _expr,
   par_vec.resize(par_names.size());
   mp.ClearVar();
   //  mp.ClearFun();
-  for(int i=0;i<par_vec.size();++i)
+  for(unsigned int i=0;i<par_vec.size();++i)
     {
       mp.DefineVar(par_names[i].c_str(),&par_vec[i]);
       this->push_param_info(param_info<std::vector<double> >(par_names[i],0));
@@ -68,7 +69,7 @@ void strmodel1d::set_expr(const string& _expr,
 
 double strmodel1d::do_eval(const double& _x,const vector<double>& p)
 {
-  for(int i=0;i<par_vec.size();++i)
+  for(unsigned int i=0;i<par_vec.size();++i)
     {
       //get_element(par_vec,i)=get_element(p,i);
       set_element(par_vec,i,get_element(p,i));
