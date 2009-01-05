@@ -36,6 +36,11 @@ namespace opt_utilities
       :p_fitter(NULL)
     {}
 
+    ~bootstrap()
+    {
+      reset();
+    }
+
     void set_fitter(fitter<Ty,Tx,Tp,Ts,Tstr>& pf)
     {
       param_pool.clear();
@@ -44,7 +49,14 @@ namespace opt_utilities
       origin_param=pf.get_all_params();
     }
     
-
+    void reset()
+    {
+      if(p_fitter!=NULL)
+	{
+	  p_fitter->load_data(origin_data_set);
+	  p_fitter->set_param_value(origin_param);
+	}
+    }
 
     void sample(int n)
     {
