@@ -1,5 +1,6 @@
 #ifndef OPT_TYPES_HPP
 #define OPT_TYPES_HPP
+#include <core/optimizer.hpp>
 #include <core/fitter.hpp>
 #include <core/default_data_set.hpp>
 #include <methods/powell/powell_method.hpp>
@@ -17,6 +18,9 @@ namespace opt_utilities
     typedef powell_method<Ty,Tp> powell_method;
     typedef model<Ty,Tx,Tp,Tstr> model;
     typedef default_data_set<Ty,Ty> data_set;
+    typedef optimizer<Ty,Tp> optimizer;
+    typedef func_obj<Ty,Tp> func_obj;
+    typedef opt_method<Ty,Tp> opt_method;
   };
 
   typedef opt_types<double,double,std::vector<double>,double,std::string> dopt;
