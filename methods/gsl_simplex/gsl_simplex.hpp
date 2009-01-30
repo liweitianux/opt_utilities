@@ -150,7 +150,9 @@ namespace opt_utilities
 	  status = gsl_multimin_fminimizer_iterate(s);
 	  
 	  if (status) 
-	    break;
+	    {
+	      break;
+	    }
 	  //std::cerr<<"threshold="<<threshold<<std::endl;
 	  size = gsl_multimin_fminimizer_size (s);
 	  status = gsl_multimin_test_size (size, threshold);
@@ -166,7 +168,7 @@ namespace opt_utilities
 	  //gsl_vector_get (s->x, 1), 
 	  //  s->fval, size);
 	}
-      while (status == GSL_CONTINUE && iter < 100);
+      while (status == GSL_CONTINUE);
       
       /*
 	foo f;
