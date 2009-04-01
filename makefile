@@ -1,5 +1,6 @@
 OPT_HEADS=models/beta1d.hpp  statistics/chisq.hpp    models/lin1d.hpp\
       models/pl1d.hpp models/bl1d.hpp\
+	statistics/leastsq.hpp\
 	core/fitter.hpp models/models.hpp\
 	core/opt_traits.hpp\
 	methods/powell/powell_method.hpp models/bpl1d.hpp\

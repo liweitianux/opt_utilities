@@ -5,6 +5,7 @@
 #include <core/default_data_set.hpp>
 #include <methods/powell/powell_method.hpp>
 #include <statistics/chisq.hpp>
+#include <statistics/leastsq.hpp>
 #include <vector>
 
 namespace opt_utilities
@@ -15,6 +16,7 @@ namespace opt_utilities
   public:
     typedef fitter<Ty,Tx,Tp,Ts,Tstr> fitter;
     typedef chisq<Ty,Tx,Tp,Ts,Tstr> chisq;
+    typedef leastsq<Ty,Tx,Tp,Ts,Tstr> leastsq;
     typedef powell_method<Ty,Tp> powell_method;
     typedef model<Ty,Tx,Tp,Tstr> model;
     typedef default_data_set<Ty,Ty> data_set;
