@@ -28,7 +28,9 @@ namespace opt_utilities
     Tx x,x_lower_err,x_upper_err;
     Ty y,y_lower_err,y_upper_err;
   public:
-    data(const Tx& _x,const Ty& _y,const Ty& _y_lower_err,const Ty& _y_upper_err,const Tx& _x_lower_err,const Tx& _x_upper_err)
+    data(const Tx& _x,const Ty& _y,
+	 const Ty& _y_lower_err,
+	 const Ty& _y_upper_err,const Tx& _x_lower_err,const Tx& _x_upper_err)
     {
       opt_eq(x,_x);
       opt_eq(x_lower_err,_x_lower_err);
@@ -147,7 +149,7 @@ namespace opt_utilities
     
     virtual const data<Ty,Tx>& do_get_data(size_t i)const=0;
     virtual size_t do_size()const=0;
-    virtual void do_push_back(const data<Ty,Tx>&)=0;
+    virtual void do_add_data(const data<Ty,Tx>&)=0;
     virtual void do_clear()=0;
     virtual data_set<Ty,Tx>* do_clone()const=0;
 
@@ -164,9 +166,9 @@ namespace opt_utilities
     {
       return do_size();
     }
-    void push_back(const data<Ty,Tx>& d)
+    void add_data(const data<Ty,Tx>& d)
     {
-      return do_push_back(d);
+      return do_add_data(d);
     }
     void clear()
     {
@@ -200,12 +202,12 @@ namespace opt_utilities
   private:
     Tstr name;
     //bool frozen;
-    typename element_type_trait<Tp>::element_type default_value;
+    typename element_type_trait<Tp>::element_type value;
     
   public:
     param_info(const Tstr& _name,
 	       const typename element_type_trait<Tp>::element_type& _v)
-      :name(_name),default_value(_v){}
+      :name(_name),value(_v){}
 
     param_info()
       :name()
@@ -214,13 +216,13 @@ namespace opt_utilities
     param_info(const param_info& rhs)
       :name(rhs.name)
     {
-      opt_eq(default_value,rhs.default_value);
+      opt_eq(value,rhs.value);
     }
     
     param_info& operator=(const param_info& rhs)
     {
       name=rhs.name;
-      opt_eq(default_value,rhs.default_value);
+      opt_eq(value,rhs.value);
       return *this;
     }
 
@@ -229,14 +231,14 @@ namespace opt_utilities
       return this->name;
     }
 
-    const typename element_type_trait<Tp>::element_type& get_default_value()const
+    const typename element_type_trait<Tp>::element_type& get_value()const
     {
-      return default_value;
+      return value;
     }
 
-    void set_default_value(const typename element_type_trait<Tp>::element_type& x)
+    void set_value(const typename element_type_trait<Tp>::element_type& x)
     {
-      opt_eq(default_value,x);
+      opt_eq(value,x);
     }
 
     void set_name(const Tstr& _name)
@@ -385,8 +387,8 @@ namespace opt_utilities
       resize(result,param_info_list.size());
       for(size_t i=0;i<param_info_list.size();++i)
 	{
-	  //opt_eq(get_element(result,i),param_info_list[i].get_default_value());
-	  set_element(result,i,param_info_list[i].get_default_value());
+	  //opt_eq(get_element(result,i),param_info_list[i].get_value());
+	  set_element(result,i,param_info_list[i].get_value());
 	  //get_element((Tp)result,i);
 	}
       return result;
@@ -416,7 +418,7 @@ namespace opt_utilities
 	{
 	  if(i->get_name()==pname)
 	    {
-	      i->set_default_value(v);
+	      i->set_value(v);
 	      return;
 	    }
 	}
@@ -428,7 +430,7 @@ namespace opt_utilities
     {
       for(size_t i=0;i<param_info_list.size();++i)
 	{
-	  param_info_list[i].set_default_value(get_element(param,i));
+	  param_info_list[i].set_value(get_element(param,i));
 	}
     }
 
@@ -742,7 +744,7 @@ namespace opt_utilities
 	{
 	  throw model_undefined();
 	}
-      return p_model->get_param_info(pname).get_default_value();
+      return p_model->get_param_info(pname).get_value();
     }
 
     const param_info<Tp,Tstr>& get_param_info(const Tstr& pname)const

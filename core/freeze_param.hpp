@@ -81,8 +81,8 @@ namespace opt_utilities
 	      //std::cout<<"frozen:"<<pinf.get_name()
 	      //	       <<i<<"\t"<<j
 	      //       <<std::endl;
-	      //opt_eq(get_element(reformed_p,i),pinf.get_default_value());
-	      set_element(reformed_p,i,pinf.get_default_value());
+	      //opt_eq(get_element(reformed_p,i),pinf.get_value());
+	      set_element(reformed_p,i,pinf.get_value());
 	    }
 	  else
 	    {

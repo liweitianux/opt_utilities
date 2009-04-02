@@ -94,7 +94,7 @@ namespace opt_utilities
 	  data<Ty,Tx> d;
 	  d=origin_data_set.get_data(i);
 	  d.set_y(rand_norm(d.get_y(),(d.get_y_upper_err()+d.get_y_lower_err())/2));
-	  current_data_set.push_back(d);
+	  current_data_set.add_data(d);
 	}
       p_fitter->load_data(current_data_set);
       p_fitter->set_param_value(origin_param);

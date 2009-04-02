@@ -30,7 +30,7 @@ private:
     return data_vec.size();
   }
   
-  void do_push_back(const data<Ty,Tx>& d)
+  void do_add_data(const data<Ty,Tx>& d)
   {
     data_vec.push_back(d);
   }

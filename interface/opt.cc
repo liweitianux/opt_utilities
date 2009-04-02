@@ -72,7 +72,7 @@ void load_data_(const int& nfit,const int& ndatas,double* x,double* y,double* yl
     {
       data<double,double> d(x[i],y[i],yl[i],(yu==0?yl[i]:yu[i]),(xl==0?0:xl[i]),(xu==0?0:xu[i]));
       //  cout<<x[i]<<" "<<y[i]<<endl;
-      ds.push_back(d);
+      ds.add_data(d);
     }
   iter->second.fit.load_data(ds);
 }
