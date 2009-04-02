@@ -33,7 +33,7 @@ namespace opt_utilities
       for(int i=0;i<np1;++i)
 	{
 	  param_info<Tp,Tstr> p(m1.get_param_info(i));
-	  //param_info<Tp,Tstr> p1(p.get_name(),p.get_default_value());
+	  //param_info<Tp,Tstr> p1(p.get_name(),p.get_value());
 	  this->push_param_info(p);
 	}
     }
@@ -49,7 +49,7 @@ namespace opt_utilities
 	  for(int i=0;i<np1;++i)
 	    {
 	      param_info<Tp,Tstr> p(rhs.pm1->get_param_info(i));
-	      param_info<Tp,Tstr> p1(p.get_name()+"1",p.get_default_value());
+	      param_info<Tp,Tstr> p1(p.get_name()+"1",p.get_value());
 	      this->push_param_info(p1);
 	    }
 	}
@@ -76,7 +76,7 @@ namespace opt_utilities
 	  for(int i=0;i<np1;++i)
 	    {
 	      param_info<Tp,Tstr> p(rhs.pm1->get_param_info(i));
-	      // param_info<Tp,Tstr> p1(p.get_name()+"1",p.get_default_value());
+	      // param_info<Tp,Tstr> p1(p.get_name()+"1",p.get_value());
 	      this->push_param_info(p);
 	    }
 	}
