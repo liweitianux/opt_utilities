@@ -1,6 +1,7 @@
 #ifndef POW_MODEL_H_
 #define POW_MODEL_H_
 #include <core/fitter.hpp>
+#include <core/opt_traits.hpp>
 #include <cmath>
 
 namespace opt_utilities
@@ -21,11 +22,11 @@ namespace opt_utilities
 
   private:
     model<Ty,Tx,Tp,Tstr>* pm1;
-    typename value_type_trait<Tp>::value_type idx;
+    typename element_type_trait<Tp>::value_type idx;
 
   public:
     pow_model(const model<Ty,Tx,Tp,Tstr>& m1,
-	      const typename value_type_trait<Tp>::value_type& index)
+	      const typename element_type_trait<Tp>::value_type& index)
       :pm1(m1.clone()),idx(index)
     {
       int np1=m1.get_num_params();
@@ -108,7 +109,8 @@ namespace opt_utilities
   
   template <typename Ty,typename Tx,typename Tp,typename Tstr>
   pow_model<Ty,Tx,Tp,Tstr> pow(const model<Ty,Tx,Tp,Tstr>& m1,
-			  const typename value_type_trait<Tp>::value_type& idx)
+			       const typename element_type_trait<Tp>::
+			       value_type& idx)
   {
     return pow_model<Ty,Tx,Tp,Tstr>(m1,idx);
   }
