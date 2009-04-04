@@ -22,11 +22,11 @@ namespace opt_utilities
 
   private:
     model<Ty,Tx,Tp,Tstr>* pm1;
-    typename element_type_trait<Tp>::value_type idx;
+    typename element_type_trait<Tp>::element_type idx;
 
   public:
     pow_model(const model<Ty,Tx,Tp,Tstr>& m1,
-	      const typename element_type_trait<Tp>::value_type& index)
+	      const typename element_type_trait<Tp>::element_type& index)
       :pm1(m1.clone()),idx(index)
     {
       int np1=m1.get_num_params();
@@ -110,7 +110,7 @@ namespace opt_utilities
   template <typename Ty,typename Tx,typename Tp,typename Tstr>
   pow_model<Ty,Tx,Tp,Tstr> pow(const model<Ty,Tx,Tp,Tstr>& m1,
 			       const typename element_type_trait<Tp>::
-			       value_type& idx)
+			       element_type& idx)
   {
     return pow_model<Ty,Tx,Tp,Tstr>(m1,idx);
   }
