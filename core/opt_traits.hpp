@@ -27,7 +27,9 @@ namespace opt_utilities
   };
   
   template <typename T>
-  inline typename return_type_trait<typename element_type_trait<T>::element_type>::const_reference_type get_element(const T& x,size_t i)
+  inline typename 
+  return_type_trait<typename element_type_trait<T>::element_type>::
+  const_reference_type get_element(const T& x,size_t i)
   {
     return x[i];
   }
