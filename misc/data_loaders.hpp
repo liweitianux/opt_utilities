@@ -1,7 +1,7 @@
 #ifndef DATA_LOADERS_H
 #define DATA_LOADERS_H
 #include <core/fitter.hpp>
-#include <core/default_data_set.hpp>
+#include <data_sets/default_data_set.hpp>
 #include <iostream>
 #include <fstream>
 #include <cmath>
