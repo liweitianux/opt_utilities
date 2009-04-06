@@ -6,7 +6,7 @@
 #include <iostream>
 #include <utility>
 #include <algorithm>
-#include <core/default_data_set.hpp>
+#include <data_sets/default_data_set.hpp>
 using std::cout;
 namespace opt_utilities
 {
