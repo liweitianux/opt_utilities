@@ -2,7 +2,7 @@
 #define OPT_TYPES_HPP
 #include <core/optimizer.hpp>
 #include <core/fitter.hpp>
-#include <core/default_data_set.hpp>
+#include <data_sets/default_data_set.hpp>
 #include <methods/powell/powell_method.hpp>
 #include <statistics/chisq.hpp>
 #include <statistics/leastsq.hpp>

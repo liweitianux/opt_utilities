@@ -1,6 +1,6 @@
 #ifndef DEFAULT_DATA_SET
 #define DEFAULT_DATA_SET
-#include "fitter.hpp"
+#include "core/fitter.hpp"
 #include <vector>
 
 

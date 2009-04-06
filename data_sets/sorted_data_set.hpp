@@ -1,6 +1,6 @@
 #ifndef SORTED_DATA_SET
 #define SORTED_DATA_SET
-#include "fitter.hpp"
+#include "core/fitter.hpp"
 #include <vector>
 #include <algorithm>
 
