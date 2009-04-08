@@ -41,7 +41,7 @@ namespace opt_utilities
 	"S=S0*(1+(r/rc)^2)^(-3*beta+0.5)\n";
     }
   };
-};
+}
 
 
 

@@ -59,7 +59,7 @@ namespace opt_utilities
       return ostr.str();
     }
   };
-};
+}
 
 
 

@@ -34,7 +34,7 @@ namespace opt_utilities
 	"y=k*x+b\n";
     }
   };
-};
+}
 
 
 

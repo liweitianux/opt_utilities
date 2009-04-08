@@ -52,7 +52,7 @@ namespace opt_utilities
       return bkg+S0*pow(1+r,-3*beta+static_cast<T>(.5));
     }
   };
-};
+}
 
 
 

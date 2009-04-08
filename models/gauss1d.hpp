@@ -39,7 +39,7 @@ namespace opt_utilities
 	"y=N*exp(-(x-x0)^2/sigma^2\n";
     }
   };
-};
+}
 
 
 

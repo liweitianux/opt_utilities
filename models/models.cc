@@ -173,4 +173,5 @@ model<double,vecn<double,2>,std::vector<double>,std::string>& get_2dmodel_by_nam
   }model2d_map_keeper;
 
 
-};
+}
+

@@ -54,7 +54,7 @@ namespace opt_utilities
 	"S=beta(S01,beta1,rc1)+beta(S02,beta2,rc2)\n";
     }
   };
-};
+}
 
 
 

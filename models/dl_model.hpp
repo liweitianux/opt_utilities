@@ -169,7 +169,7 @@ namespace opt_utilities
 	"Should be loaded from an shared object file\n";
     }
   };
-};
+}
 
 
 

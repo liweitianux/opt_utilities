@@ -53,10 +53,7 @@ namespace opt_utilities
     os<<']';
     return os;
   }
-
-
-  
-};
+}
 
 #endif
 //EOF

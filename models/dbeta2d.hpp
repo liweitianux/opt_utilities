@@ -83,7 +83,7 @@ namespace opt_utilities
 	S02*pow(1+r2,-3*beta2+static_cast<T>(.5));
     }
   };
-};
+}
 
 
 

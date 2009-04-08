@@ -197,7 +197,7 @@ namespace opt_utilities
     return freeze_param<Ty,Tx,Tp,Tstr>(name);
   }
 
-};
+}
 
 
 #endif

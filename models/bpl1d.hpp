@@ -48,7 +48,7 @@ namespace opt_utilities
 	"y=y_b*(x/x_b)^gamma2 otherwise\n";
     }
   };
-};
+}
 
 
 

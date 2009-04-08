@@ -48,7 +48,7 @@ namespace opt_utilities
 	"y=k2*(x-x_b)+y_b otherwise\n";
     }
   };
-};
+}
 
 
 

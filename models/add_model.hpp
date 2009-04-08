@@ -161,7 +161,7 @@ namespace opt_utilities
   {
     return add_model<Ty,Tx,Tp,Tstr>(m1,m2);
   }
-};
+}
 
 
 

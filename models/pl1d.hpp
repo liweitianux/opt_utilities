@@ -35,7 +35,7 @@ namespace opt_utilities
 	"y=A*x^gamma\n";
     }
   };
-};
+}
 
 
 

@@ -65,7 +65,7 @@ namespace opt_utilities
 
 
   };
-};
+}
 
 
 

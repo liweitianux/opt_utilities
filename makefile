@@ -18,8 +18,8 @@ export CC=gcc
 export AR = ar rv
 export RANLIB = ranlib
 export RM=rm -f
-export CFLAGS=-DNDEBUG -g -O2 -Wall -c -I . 
-export CPPFLAGS=-DNDEBUG -g -O2 -Wall -c -I . --ansi -DHAVE_X_ERROR
+export CFLAGS=-DNDEBUG -ansi -pedantic -g -O2 -Wall -c -I .
+export CPPFLAGS=-DNDEBUG -ansi -pedantic -g -O2 -Wall -c -I . -DHAVE_X_ERROR
 
 
 INC=-I. -I/usr/include/gsl/

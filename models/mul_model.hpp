@@ -163,7 +163,7 @@ namespace opt_utilities
     return mul_model<Ty,Tx,Tp,Tstr>(m1,m2);
   }
 
-};
+}
 
 
 

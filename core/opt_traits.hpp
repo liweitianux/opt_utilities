@@ -59,7 +59,7 @@ namespace opt_utilities
   {
     return (lhs=rhs);
   }
-};
+}
 
 
 

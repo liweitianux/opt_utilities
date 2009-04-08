@@ -49,7 +49,7 @@ namespace opt_utilities
       return "Wrapper for necked C function\n";
     }
   };
-};
+}
 
 
 

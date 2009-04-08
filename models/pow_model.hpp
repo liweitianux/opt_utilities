@@ -114,7 +114,7 @@ namespace opt_utilities
   {
     return pow_model<Ty,Tx,Tp,Tstr>(m1,idx);
   }
-};
+}
 
 
 

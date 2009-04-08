@@ -143,7 +143,7 @@ namespace opt_utilities
 
   };
   
-};
+}
 
 #endif
 //EOF

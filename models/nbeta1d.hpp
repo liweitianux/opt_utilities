@@ -41,7 +41,7 @@ namespace opt_utilities
 	"n=n0*(1+(r/rc)^2)^(-1.5*beta)\n";
     }
   };
-};
+}
 
 
 

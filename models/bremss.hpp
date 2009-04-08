@@ -36,7 +36,7 @@ namespace opt_utilities
 	"flux=norm*kT^0.5*e^{-E/kT}\n";
     }
   };
-};
+}
 
 
 

@@ -99,7 +99,7 @@ namespace opt_utilities
     {}
   };
 
-};
+}
 
 
 #endif

@@ -37,7 +37,7 @@ namespace opt_utilities
 	"y=rho0/(r/rs*(1+r/rs)^2\n";
     }
   };
-};
+}
 
 
 
