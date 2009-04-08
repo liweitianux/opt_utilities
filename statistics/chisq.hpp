@@ -107,6 +107,7 @@ namespace opt_utilities
 #ifdef HAVE_X_ERROR
 	  Tx x1=this->datas().get_data(i).get_x()-this->datas().get_data(i).get_x_lower_err();
 	  Tx x2=this->datas().get_data(i).get_x()+this->datas().get_data(i).get_x_upper_err();
+	  Tx x=this->datas().get_data(i).get_x()+this->datas().get_data(i).get_x();
 	  Ty errx1=(eval_model(x1,p)-eval_model(x,p));
 	  Ty errx2=(eval_model(x2,p)-eval_model(x,p));
 	  //Ty errx=0;
