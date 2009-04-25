@@ -685,7 +685,7 @@ namespace opt_utilities
 	}
     }
 	
-    const data_set<Ty,Tx>& datas()const
+    const data_set<Ty,Tx>& get_data_set()const
     {
       if(p_data_set==0)
 	{
@@ -935,13 +935,13 @@ namespace opt_utilities
     }
 
 		
-    const data_set<Ty,Tx>& datas()const
+    const data_set<Ty,Tx>& get_data_set()const
     {
       if(p_fitter==0)
 	{
 	  throw fitter_unset();
 	}
-      return p_fitter->datas();
+      return p_fitter->get_data_set();
     }
 
   };

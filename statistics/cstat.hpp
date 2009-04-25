@@ -35,10 +35,10 @@ namespace opt_utilities
     Ts do_eval(const Tp& p)
     {
       Ts result(0);
-      for(int i=(this->datas()).size()-1;i>=0;--i)
+      for(int i=(this->get_data_set()).size()-1;i>=0;--i)
 	{
-	  Ty model_y=eval_model(this->datas().get_data(i).get_x(),p);
-	  result+=model_y-this->datas().get_data(i).get_y()*log(model_y)+lnfrac(this->datas().get_data(i).get_y());
+	  Ty model_y=eval_model(this->get_data_set().get_data(i).get_x(),p);
+	  result+=model_y-this->get_data_set().get_data(i).get_y()*log(model_y)+lnfrac(this->get_data_set().get_data(i).get_y());
 	}
 
       if(verb)

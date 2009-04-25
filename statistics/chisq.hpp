@@ -37,9 +37,9 @@ namespace opt_utilities
     Ts do_eval(const Tp& p)
     {
       Ts result(0);
-      for(int i=(this->datas()).size()-1;i>=0;--i)
+      for(int i=(this->get_data_set()).size()-1;i>=0;--i)
 	{
-	  Ty chi=(this->datas().get_data(i).get_y()-eval_model(this->datas().get_data(i).get_x(),p))/this->datas().get_data(i).get_y_upper_err();
+	  Ty chi=(this->get_data_set().get_data(i).get_y()-eval_model(this->get_data_set().get_data(i).get_x(),p))/this->get_data_set().get_data(i).get_y_upper_err();
 	  result+=chi*chi;
 
 	}
@@ -101,13 +101,13 @@ namespace opt_utilities
     Ty do_eval(const Tp& p)
     {
       Ty result(0);
-      for(int i=(this->datas()).size()-1;i>=0;--i)
+      for(int i=(this->get_data_set()).size()-1;i>=0;--i)
 	{
 
 #ifdef HAVE_X_ERROR
-	  Tx x1=this->datas().get_data(i).get_x()-this->datas().get_data(i).get_x_lower_err();
-	  Tx x2=this->datas().get_data(i).get_x()+this->datas().get_data(i).get_x_upper_err();
-	  Tx x=this->datas().get_data(i).get_x();
+	  Tx x1=this->get_data_set().get_data(i).get_x()-this->get_data_set().get_data(i).get_x_lower_err();
+	  Tx x2=this->get_data_set().get_data(i).get_x()+this->get_data_set().get_data(i).get_x_upper_err();
+	  Tx x=this->get_data_set().get_data(i).get_x();
 	  Ty errx1=(eval_model(x1,p)-eval_model(x,p));
 	  Ty errx2=(eval_model(x2,p)-eval_model(x,p));
 	  //Ty errx=0;
@@ -116,8 +116,8 @@ namespace opt_utilities
 	  Ty errx2=0;
 #endif
 
-	  Ty y_model=eval_model(this->datas().get_data(i).get_x(),p);
-	  Ty y_obs=this->datas().get_data(i).get_y();
+	  Ty y_model=eval_model(this->get_data_set().get_data(i).get_x(),p);
+	  Ty y_obs=this->get_data_set().get_data(i).get_y();
 	  Ty y_err;
 	  
 	  Ty errx=0;
@@ -147,22 +147,22 @@ namespace opt_utilities
 
 	  if(y_model>y_obs)
 	    {
-	      y_err=this->datas().get_data(i).get_y_upper_err();
+	      y_err=this->get_data_set().get_data(i).get_y_upper_err();
 	    }
 	  else
 	    {
-	      y_err=this->datas().get_data(i).get_y_lower_err();
+	      y_err=this->get_data_set().get_data(i).get_y_lower_err();
 	    }
 
 	  Ty chi=(y_obs-y_model)/std::sqrt(y_err*y_err+errx*errx);
 
-	  //	  Ty chi=(this->datas().get_data(i).get_y()-eval_model(this->datas().get_data(i).get_x(),p));
+	  //	  Ty chi=(this->get_data_set().get_data(i).get_y()-eval_model(this->get_data_set().get_data(i).get_x(),p));
 	  //	  cerr<<chi<<"\n";
 	  result+=chi*chi;
 	  //std::cerr<<chi<<std::endl;
-	  //cerr<<eval_model(this->datas()[i].x,p)<<endl;
-	  //cerr<<this->datas()[i].y_upper_err<<endl;
-	  //	  cerr<<this->datas()[i].x<<"\t"<<this->datas()[i].y<<"\t"<<eval_model(this->datas()[i].x,p)<<endl;
+	  //cerr<<eval_model(this->get_data_set()[i].x,p)<<endl;
+	  //cerr<<this->get_data_set()[i].y_upper_err<<endl;
+	  //	  cerr<<this->get_data_set()[i].x<<"\t"<<this->get_data_set()[i].y<<"\t"<<eval_model(this->get_data_set()[i].x,p)<<endl;
 	}
       if(verb)
 	{
