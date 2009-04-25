@@ -694,7 +694,7 @@ namespace opt_utilities
       return *(this->p_data_set);
     }
 
-    model<Ty,Tx,Tp,Tstr>& model()
+    model<Ty,Tx,Tp,Tstr>& get_model()
     {
       if(p_model==0)
 	{
@@ -703,7 +703,7 @@ namespace opt_utilities
       return *(this->p_model);
     }
 
-    statistic<Ty,Tx,Tp,Ts,Tstr>& statistic()
+    statistic<Ty,Tx,Tp,Ts,Tstr>& get_statistic()
     {
       if(p_statistic==0)
 	{
@@ -712,7 +712,7 @@ namespace opt_utilities
       return *(this->p_statistic);
     }
 
-    opt_method<Ts,Tp>& method()
+    opt_method<Ts,Tp>& get_method()
     {
       return optengine.method();
     }
