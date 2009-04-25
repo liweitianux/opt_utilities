@@ -45,7 +45,7 @@ namespace opt_utilities
     {
       param_pool.clear();
       p_fitter=&pf;
-      origin_data_set=dynamic_cast<const default_data_set<Ty,Tx>&>(pf.datas());
+      origin_data_set=dynamic_cast<const default_data_set<Ty,Tx>&>(pf.get_data_set());
       origin_param=pf.get_all_params();
     }
     
