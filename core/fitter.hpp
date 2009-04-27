@@ -496,6 +496,11 @@ namespace opt_utilities
       return do_eval(x,reform_param(p));
     }
 
+    Ty eval_raw(const Tx& x,const Tp& p)
+    {
+      return do_eval(x,reform_param(p));
+    }
+
     virtual Ty do_eval(const Tx& x,const Tp& p)=0;
 
   private:
@@ -590,6 +595,15 @@ namespace opt_utilities
 	  throw model_undefined();
 	}
       return p_model->eval(x,p);
+    }
+
+    Ty eval_model_raw(const Tx& x,const Tp& p)
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->eval_raw(x,p);
     }
     
 
