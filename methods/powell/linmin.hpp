@@ -14,7 +14,9 @@ namespace opt_utilities
     const pT p1,xi1;
     const func_obj<rT,pT>* pfoo;
     func_adaptor(){}
-    func_adaptor(const func_adaptor&){}
+    func_adaptor(const func_adaptor&)
+      :p1(),xi1(),pfoo(0)
+    {}
     
   public:
     /*

@@ -9,7 +9,7 @@
 
 using namespace std;
 using namespace opt_utilities;
-const static int max_fit_space_num=100;
+static const int max_fit_space_num=100;
 struct fit_space;
 static map<int,fit_space> fit_space_map;
 struct fit_space
@@ -128,6 +128,7 @@ void freeze_param_(const int& nfit,const char* pname)
     }
   catch(opt_exception& e)
     {
+      (void)e;
       iter->second.fit.set_param_modifier(fp);
     }
 }
@@ -147,6 +148,7 @@ void thaw_param_(const int& nfit,const char* pname)
     }
   catch(opt_exception& e)
     {
+      (void)e;
       //iter->second.fit.set_param_modifier(fp);
     }
 }
