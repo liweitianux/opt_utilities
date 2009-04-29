@@ -43,7 +43,7 @@ test:${OPT_OBJ} bin/test.o
 	$(CPP) bin/test.o models/strmodel1d.o models/models.o version_ctrl.o -o $@ ${LIB}
 
 test_dl.so:models/dlmodel_template.c
-	gcc $< --shared -o $@
+	$(CC) $< --shared -o $@
 
 
 models/strmodel1d.o:models/strmodel1d.cc models/strmodel1d.hpp
