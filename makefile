@@ -18,8 +18,8 @@ LDL=-ldl
 export AR = ar rv
 export RANLIB = ranlib
 export RM=rm -f
-export CFLAGS=-DNDEBUG -ansi -pedantic -g -O2 -Wall -c -I .
-export CPPFLAGS=-DNDEBUG -ansi -pedantic -g -O2 -Wall -c -I . -DHAVE_X_ERROR
+export CCFLAGS=-DNDEBUG -ansi -pedantic -g -O2 -Wall -c -I .
+export CXXFLAGS=-DNDEBUG -ansi -pedantic -g -O2 -Wall -c -I . -DHAVE_X_ERROR
 
 
 INC=-I. -I/usr/include/gsl/
@@ -31,13 +31,13 @@ TARGET=liboptcall test_dl.so models/strmodel1d.o models/models.o
 all: $(TARGET)
 
 models/models.o:models/models.cc ${OPT_HEADS}
-	$(CXX) -c $< -o $@ ${INC} ${CPPFLAGS}
+	$(CXX) -c $< -o $@ ${INC} ${CXXFLAGS}
 
 version_ctrl.o:version_ctrl.cc
-	$(CXX) -c $< ${CPPFLAGS}
+	$(CXX) -c $< ${CXXFLAGS}
 
 bin/test.o:test.cc ${OPT_HEADS}
-	$(CXX) -c $< -o $@ ${INC} ${CPPFLAGS} --ansi
+	$(CXX) -c $< -o $@ ${INC} ${CXXFLAGS} --ansi
 
 test:${OPT_OBJ} bin/test.o
 	$(CXX) bin/test.o models/strmodel1d.o models/models.o version_ctrl.o -o $@ ${LIB}
@@ -47,7 +47,7 @@ test_dl.so:models/dlmodel_template.c
 
 
 models/strmodel1d.o:models/strmodel1d.cc models/strmodel1d.hpp
-	$(CXX) -c $< -o $@ -I./muparser $(INC) $(CPPFLAGS)
+	$(CXX) -c $< -o $@ -I./muparser $(INC) $(CXXFLAGS)
 
 
 libmuparser:

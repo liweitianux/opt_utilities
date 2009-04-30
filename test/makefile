@@ -3,7 +3,7 @@ targets=test_optimizer
 all:$(targets)
 
 test_optimizer:test_optimizer.cpp
-	g++ $< -o $@ -I .. -O3
+	$(CXX) $< -o $@ -I .. -O3
 
 
 clean:

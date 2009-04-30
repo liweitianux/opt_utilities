@@ -8,7 +8,7 @@ libmuparser.a:$(MUP_OBJ)
 	$(AR) $@ *.o
 
 .cpp.o:
-	$(CPP) $< $(CPPFLAGS)
+	$(CXX) $< $(CXXFLAGS)
 
 clean:
 	$(RM) *.o

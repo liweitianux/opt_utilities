@@ -5,7 +5,7 @@ libopt.a:opt.o
 	$(AR) $@ opt.o
 
 opt.o:opt.cc opt.h
-	$(CPP) $< -o $@ $(INC) $(CPPFLAGS)
+	$(CXX) $< -o $@ $(INC) $(CXXFLAGS)
 
 
 clean:
