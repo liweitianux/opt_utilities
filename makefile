@@ -13,8 +13,8 @@ OPT_HEADS=models/beta1d.hpp  statistics/chisq.hpp    models/lin1d.hpp\
 
 LDL=-ldl
 
-export CPP=g++
-export CC=gcc
+#export CXX=g++
+#export CC=gcc
 export AR = ar rv
 export RANLIB = ranlib
 export RM=rm -f
@@ -31,23 +31,23 @@ TARGET=liboptcall test_dl.so models/strmodel1d.o models/models.o
 all: $(TARGET)
 
 models/models.o:models/models.cc ${OPT_HEADS}
-	$(CPP) -c $< -o $@ ${INC} ${CPPFLAGS}
+	$(CXX) -c $< -o $@ ${INC} ${CPPFLAGS}
 
 version_ctrl.o:version_ctrl.cc
-	$(CPP) -c $< ${CPPFLAGS}
+	$(CXX) -c $< ${CPPFLAGS}
 
 bin/test.o:test.cc ${OPT_HEADS}
-	$(CPP) -c $< -o $@ ${INC} ${CPPFLAGS} --ansi
+	$(CXX) -c $< -o $@ ${INC} ${CPPFLAGS} --ansi
 
 test:${OPT_OBJ} bin/test.o
-	$(CPP) bin/test.o models/strmodel1d.o models/models.o version_ctrl.o -o $@ ${LIB}
+	$(CXX) bin/test.o models/strmodel1d.o models/models.o version_ctrl.o -o $@ ${LIB}
 
 test_dl.so:models/dlmodel_template.c
 	$(CC) $< --shared -o $@
 
 
 models/strmodel1d.o:models/strmodel1d.cc models/strmodel1d.hpp
-	$(CPP) -c $< -o $@ -I./muparser $(INC) $(CPPFLAGS)
+	$(CXX) -c $< -o $@ -I./muparser $(INC) $(CPPFLAGS)
 
 
 libmuparser:
