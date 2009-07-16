@@ -156,9 +156,9 @@ namespace opt_utilities
     }
   };
 
-  template <typename Ty,typename Tx,typename Tp>
+  template <typename Ty,typename Tx,typename Tp,typename Tstr>
   mul_model<Ty,Tx,Tp,Tstr> operator*(const model<Ty,Tx,Tp,Tstr>& m1,
-				const model<Ty,Tx,Tp,Tstr>& m2)
+				     const model<Ty,Tx,Tp,Tstr>& m2)
   {
     return mul_model<Ty,Tx,Tp,Tstr>(m1,m2);
   }
