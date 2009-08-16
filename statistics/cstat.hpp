@@ -7,19 +7,17 @@ using std::cout;using std::endl;
 namespace opt_utilities
 {
   template<typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr>
-  class cstat_poisson
+  class cstat
     :public statistic<Ty,Tx,Tp,Ts,Tstr>
   {
   private:
     bool verb;
     int n;
-
-    Ty lnfrac(Ty y)const
-    {
-      return y*log(y)-y;
-    }
-    
   public:
+    cstat()
+      :verb(true)
+    {}
+
     void verbose(bool v)
     {
       verb=v;
@@ -29,7 +27,7 @@ namespace opt_utilities
     statistic<Ty,Tx,Tp,Ts,Tstr>* do_clone()const
     {
       // return const_cast<statistic<Ty,Tx,Tp>*>(this);
-      return new cstat_poisson<Ty,Tx,Tp,Ts,Tstr>(*this);
+      return new cstat<Ty,Tx,Tp,Ts,Tstr>(*this);
     }
 
     Ts do_eval(const Tp& p)
@@ -38,7 +36,7 @@ namespace opt_utilities
       for(int i=(this->get_data_set()).size()-1;i>=0;--i)
 	{
 	  Ty model_y=eval_model(this->get_data_set().get_data(i).get_x(),p);
-	  result+=model_y-this->get_data_set().get_data(i).get_y()*log(model_y)+lnfrac(this->get_data_set().get_data(i).get_y());
+	  result-=this->get_data_set().get_data(i).get_y()*std::log(model_y);
 	}
 
       if(verb)
@@ -46,7 +44,7 @@ namespace opt_utilities
 	  n++;
 	  if(n%10==0)
 	    {
-	      cout<<result/this->p_fitter->get_dof()<<"\t";
+	      cout<<"a:"<<result<<"\t";
 	      for(int i=0;i<get_size(p);++i)
 		{
 		  cout<<get_element(p,i)<<",";
