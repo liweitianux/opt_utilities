@@ -206,8 +206,13 @@ namespace opt_utilities
     {
       resize(start_point,get_size(p));
       opt_eq(start_point,p);
-      
     }
+
+    void do_set_lower_limit(const array1d_type& p)
+    {}
+
+    void do_set_upper_limit(const array1d_type& p)
+    {}
 
     void do_set_precision(rT t)
     {

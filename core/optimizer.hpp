@@ -78,6 +78,8 @@ namespace opt_utilities
     virtual void do_set_precision(rT)=0;
     virtual pT do_optimize()=0;
     virtual void do_set_start_point(const pT& p)=0;
+    virtual void do_set_lower_limit(const pT& p){};
+    virtual void do_set_upper_limit(const pT& p){};
     virtual opt_method<rT,pT>* do_clone()const=0;
 
     virtual void do_destroy()
@@ -98,6 +100,16 @@ namespace opt_utilities
     void set_start_point(const pT& p)
     {
       do_set_start_point(p);
+    }
+
+    void set_lower_limit(const pT& p)
+    {
+      do_set_lower_limit(p);
+    }
+
+    void set_upper_limit(const pT& p)
+    {
+      do_set_upper_limit(p);
     }
     
     pT optimize()
@@ -245,6 +257,25 @@ namespace opt_utilities
       p_opt_method->set_start_point(x);
     }
     
+    void set_lower_limit(const pT& x)
+    {
+      if(p_opt_method==0)
+	{
+	  throw opt_method_undefined();
+	}
+      p_opt_method->set_lower_limit(x);
+    }
+
+    void set_upper_limit(const pT& x)
+    {
+      if(p_opt_method==0)
+	{
+	  throw opt_method_undefined();
+	}
+      p_opt_method->set_upper_limit(x);
+    }
+    
+
     ////////////Just call the eval function in the target function object///
     ////////////In case the pointer to a target function is uninitialed/////
     ////////////a zero-value is returned////////////////////////////////////

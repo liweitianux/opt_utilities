@@ -203,11 +203,16 @@ namespace opt_utilities
     Tstr name;
     //bool frozen;
     typename element_type_trait<Tp>::element_type value;
+    typename element_type_trait<Tp>::element_type lower_limit;
+    typename element_type_trait<Tp>::element_type upper_limit;
     
   public:
     param_info(const Tstr& _name,
-	       const typename element_type_trait<Tp>::element_type& _v)
-      :name(_name),value(_v){}
+	       const typename element_type_trait<Tp>::element_type& _v,
+	       const typename element_type_trait<Tp>::element_type& _l=0,
+	       const typename element_type_trait<Tp>::element_type& _u=0
+	       )
+      :name(_name),value(_v),lower_limit(_l),upper_limit(_u){}
 
     param_info()
       :name()
@@ -217,12 +222,16 @@ namespace opt_utilities
       :name(rhs.name)
     {
       opt_eq(value,rhs.value);
+      opt_eq(lower_limit,rhs.lower_limit);
+      opt_eq(upper_limit,rhs.upper_limit);
     }
     
     param_info& operator=(const param_info& rhs)
     {
       name=rhs.name;
       opt_eq(value,rhs.value);
+      opt_eq(lower_limit,rhs.lower_limit);
+      opt_eq(upper_limit,rhs.upper_limit);
       return *this;
     }
 
@@ -236,9 +245,31 @@ namespace opt_utilities
       return value;
     }
 
+    const typename element_type_trait<Tp>::element_type& get_lower_limit()const
+    {
+      return lower_limit;
+    }
+
+    const typename element_type_trait<Tp>::element_type& get_upper_limit()const
+    {
+      return upper_limit;
+    }
+
+
+
     void set_value(const typename element_type_trait<Tp>::element_type& x)
     {
       opt_eq(value,x);
+    }
+
+    void set_lower_limit(const typename element_type_trait<Tp>::element_type& x)
+    {
+      opt_eq(lower_limit,x);
+    }
+
+    void set_upper_limit(const typename element_type_trait<Tp>::element_type& x)
+    {
+      opt_eq(upper_limit,x);
     }
 
     void set_name(const Tstr& _name)
@@ -394,6 +425,32 @@ namespace opt_utilities
       return result;
     }
 
+    Tp get_all_lower_limits()const
+    {
+      Tp result;
+      resize(result,param_info_list.size());
+      for(size_t i=0;i<param_info_list.size();++i)
+	{
+	  //opt_eq(get_element(result,i),param_info_list[i].get_value());
+	  set_element(result,i,param_info_list[i].get_lower_limit());
+	  //get_element((Tp)result,i);
+	}
+      return result;
+    }
+
+    Tp get_all_upper_limits()const
+    {
+      Tp result;
+      resize(result,param_info_list.size());
+      for(size_t i=0;i<param_info_list.size();++i)
+	{
+	  //opt_eq(get_element(result,i),param_info_list[i].get_value());
+	  set_element(result,i,param_info_list[i].get_upper_limit());
+	  //get_element((Tp)result,i);
+	}
+      return result;
+    }
+
   
     size_t get_num_params()const
     {
@@ -426,6 +483,42 @@ namespace opt_utilities
       throw param_not_found();
     }
 
+    
+    void set_param_lower_limit(const Tstr& pname,
+			       const typename element_type_trait<Tp>::element_type& v)
+    {
+      //int porder=0;
+      for(typename std::vector<param_info<Tp,Tstr> >::iterator i=param_info_list.begin();
+	  i!=param_info_list.end();++i)
+	{
+	  if(i->get_name()==pname)
+	    {
+	      i->set_lower_limit(v);
+	      return;
+	    }
+	}
+      std::cerr<<"param "<<pname<<" unfound"<<std::endl;
+      throw param_not_found();
+    }
+
+    void set_param_upper_limit(const Tstr& pname,
+			       const typename element_type_trait<Tp>::element_type& v)
+    {
+      //int porder=0;
+      for(typename std::vector<param_info<Tp,Tstr> >::iterator i=param_info_list.begin();
+	  i!=param_info_list.end();++i)
+	{
+	  if(i->get_name()==pname)
+	    {
+	      i->set_upper_limit(v);
+	      return;
+	    }
+	}
+      std::cerr<<"param "<<pname<<" unfound"<<std::endl;
+      throw param_not_found();
+    }
+    
+
     void set_param_value(const Tp& param)
     {
       for(size_t i=0;i<param_info_list.size();++i)
@@ -433,6 +526,24 @@ namespace opt_utilities
 	  param_info_list[i].set_value(get_element(param,i));
 	}
     }
+
+    void set_param_lower_limit(const Tp& param)
+    {
+      for(size_t i=0;i<param_info_list.size();++i)
+	{
+	  param_info_list[i].set_lower_limit(get_element(param,i));
+	}
+    }
+    
+    void set_param_upper_limit(const Tp& param)
+    {
+      for(size_t i=0;i<param_info_list.size();++i)
+	{
+	  param_info_list[i].set_upper_limit(get_element(param,i));
+	}
+    }
+
+
 
     size_t get_param_order(const Tstr& pname)const
     {
@@ -743,6 +854,27 @@ namespace opt_utilities
       p_model->set_param_value(pname,v);
     }
 
+    void set_param_lower_limit(const Tstr& pname,
+			       const typename element_type_trait<Tp>::element_type& v)
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      p_model->set_param_lower_limit(pname,v);
+    }
+
+    void set_param_upper_limit(const Tstr& pname,
+			       const typename element_type_trait<Tp>::element_type& v)
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      p_model->set_param_upper_limit(pname,v);
+    }
+    
+
     void set_param_value(const Tp& param)
     {
       if(p_model==0)
@@ -750,6 +882,24 @@ namespace opt_utilities
 	  throw model_undefined();
 	}
       p_model->set_param_value(param);
+    }
+
+    void set_param_lower_limit(const Tp& param)
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      p_model->set_param_lower_limit(param);
+    }
+
+    void set_param_upper_limit(const Tp& param)
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      p_model->set_param_upper_limit(param);
     }
 
     typename element_type_trait<Tp>::element_type get_param_value(const Tstr& pname)const
@@ -760,6 +910,26 @@ namespace opt_utilities
 	}
       return p_model->get_param_info(pname).get_value();
     }
+
+    typename element_type_trait<Tp>::element_type get_param_lower_limit(const Tstr& pname)const
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->get_param_info(pname).get_lower_limit();
+    }
+    
+    typename element_type_trait<Tp>::element_type get_param_upper_limit(const Tstr& pname)const
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->get_param_info(pname).get_upper_limit();
+    }
+
+    
 
     const param_info<Tp,Tstr>& get_param_info(const Tstr& pname)const
     {
@@ -844,9 +1014,18 @@ namespace opt_utilities
 
       optengine.set_func_obj(*p_statistic);
       Tp current_param;
+      Tp current_lower_limits;
+      Tp current_upper_limits;
       opt_eq(current_param,p_model->get_all_params());
+      opt_eq(current_lower_limits,p_model->get_all_lower_limits());
+      opt_eq(current_upper_limits,p_model->get_all_upper_limits());
       Tp start_point;
+      Tp upper_limits;
+      Tp lower_limits;
       opt_eq(start_point,p_model->deform_param(current_param));
+      opt_eq(upper_limits,p_model->deform_param(current_upper_limits));
+      opt_eq(lower_limits,p_model->deform_param(current_lower_limits));
+
       //      std::cout<<start_point.size()<<std::endl;
       
       
@@ -862,6 +1041,8 @@ namespace opt_utilities
 	  return p_model->get_all_params();
 	}
       optengine.set_start_point(start_point);
+      optengine.set_lower_limit(lower_limits);
+      optengine.set_upper_limit(upper_limits);
       
       Tp result;
       opt_eq(result,optengine.optimize());
