@@ -4,7 +4,7 @@
 #include <cmath>
 #include <sstream>
 #include <cassert>
-#include <muparser/muParser.h>
+#include <muParser/muParser.h>
 #include <vector>
 #include <string>
 

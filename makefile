@@ -18,12 +18,12 @@ LDL=-ldl
 export AR = ar rv
 export RANLIB = ranlib
 export RM=rm -f
-export CCFLAGS=-DNDEBUG -ansi -pedantic -g -O2 -Wall -c -I .
-export CXXFLAGS=-DNDEBUG -ansi -pedantic -g -O2 -Wall -c -I . -DHAVE_X_ERROR
+export CCFLAGS=-DNDEBUG -ansi -pedantic -g -O2 -Wall -c -I . -g
+export CXXFLAGS=-DNDEBUG -ansi -pedantic -g -O2 -Wall -c -I . -g
 
 
 INC=-I. -I/usr/include/gsl/
-LIB= -L./muparser  $(LDL) -lmuparser -g -lgsl -lgslcblas
+LIB=-lgsl -lgslcblas
 OPT_OBJ=models/models.o version_ctrl.o models/strmodel1d.o
 
 TARGET=liboptcall test_dl.so models/strmodel1d.o models/models.o
@@ -47,11 +47,8 @@ test_dl.so:models/dlmodel_template.c
 
 
 models/strmodel1d.o:models/strmodel1d.cc models/strmodel1d.hpp
-	$(CXX) -c $< -o $@ -I./muparser $(INC) $(CXXFLAGS)
+	$(CXX) -c $< -o $@ $(CXXFLAGS)
 
-
-libmuparser:
-	make -C muparser
 
 liboptcall:
 	make -C interface
@@ -59,8 +56,6 @@ liboptcall:
 clean:
 	rm -f `find .|grep \~`
 	rm -f `find .|grep '\.o'`
-	rm -f muparser/libmuparser.a
-	make -C muparser clean
 	make -C interface clean
 
 distclean:clean
