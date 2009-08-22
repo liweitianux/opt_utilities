@@ -1,3 +1,7 @@
+/**
+   \file powell_method.hpp
+ */
+
 #ifndef POWELL_METHOD
 #define POWELL_METHOD
 #include <core/optimizer.hpp>
@@ -7,21 +11,15 @@
 #include <cmath>
 #include "linmin.hpp"
 #include <algorithm>
-/*
- *
-*/
 #include <iostream>
 
 namespace opt_utilities
 {
-  /*
-  template <typename T>
-  T tabs(T x)
-  {
-    return x<0?-x:x;
-  }
-  */
-
+  /**
+     Impliment of an optimization method
+     \tparam rT return type of the object function
+     \tparam pT parameter type of the object function
+   */
   template <typename rT,typename pT>
   class powell_method
     :public opt_method<rT,pT>

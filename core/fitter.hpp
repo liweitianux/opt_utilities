@@ -897,6 +897,7 @@ namespace opt_utilities
       return do_eval(x,reform_param(p));
     }
 
+  private:
     virtual Ty do_eval(const Tx& x,const Tp& p)=0;
 
   private:
@@ -908,21 +909,35 @@ namespace opt_utilities
   };
 
 
-
+  /**
+     class to perform the model fitting
+     \tparam Ty the type of the model return type
+     \tparam Tx the type of the model self-var
+     \tparam Tp the type of the model param
+     \tparam Ts statistic type
+     \tparam Tstr the type of string used
+   */
   template<typename Ty,typename Tx,typename Tp,typename Ts=Ty,typename Tstr=std::string>
   class fitter
   {
-  public:
+  private:
     model<Ty,Tx,Tp,Tstr>* p_model;
     statistic<Ty,Tx,Tp,Ts,Tstr>* p_statistic;
     data_set<Ty,Tx>* p_data_set;
     optimizer<Ts,Tp> optengine;
   public:
+    
+    /**
+       default construct function
+    */
     fitter()
       :p_model(0),p_statistic(0),p_data_set(0),optengine()
     {}
 
     
+    /**
+       copy construct function
+     */
     fitter(const fitter& rhs)
       :p_model(0),p_statistic(0),p_data_set(0),optengine()
     {
@@ -942,6 +957,10 @@ namespace opt_utilities
       optengine=rhs.optengine;
     }
     
+
+    /**
+       assignment operator
+     */
     fitter& operator=(const fitter& rhs)
     {
       if(this==&rhs)
@@ -964,6 +983,10 @@ namespace opt_utilities
       return *this;
     }
     
+
+    /**
+       destruct function
+     */
     virtual ~fitter()
     {
       if(p_model!=0)
@@ -984,6 +1007,9 @@ namespace opt_utilities
     }
     
 
+    /**
+       evaluate the model
+     */
     Ty eval_model(const Tx& x,const Tp& p)
     {
       if(p_model==0)
@@ -1004,6 +1030,11 @@ namespace opt_utilities
     
 
   public:
+
+    /**
+       set the model
+       \param m model to be used
+     */
     void set_model(const model<Ty,Tx,Tp,Tstr>& m)
     {
       if(p_model!=0)
@@ -1015,12 +1046,12 @@ namespace opt_utilities
       //p_model=&m;
       //  current_param.resize(m.get_num_params());
     }
-    /*
-    void set(const model<Ty,Tx,Tp>& m)
-    {
-      set_model(m);
-    }
-    */
+
+
+    /**
+       set the statistic (e.g., chi square, least square c-statistic etc.)
+       \param s statistic to be used
+     */
     void set_statistic(const statistic<Ty,Tx,Tp,Ts,Tstr>& s)
     {
       if(p_statistic!=0)
@@ -1032,13 +1063,11 @@ namespace opt_utilities
       //p_statistic=&s;
       p_statistic->set_fitter(*this);
     }
-    /*
-    void set(const statistic<Ty,Tx,Tp>& s)
-    {
-      set_statistic(s);
-    }
-    */
 
+    /**
+       set parameter modifier
+       \param pm parameter modifier to be used
+     */
     void set_param_modifier(const param_modifier<Ty,Tx,Tp,Tstr>& pm)
     {
       if(p_model==0)
@@ -1048,6 +1077,9 @@ namespace opt_utilities
       p_model->set_param_modifier(pm);
     }
 
+    /**
+       clear the param modifier
+    */
     void set_param_modifier()
     {
       if(p_model==0)
@@ -1057,6 +1089,11 @@ namespace opt_utilities
       p_model->set_param_modifier();
     }
 
+
+    /**
+       Get the inner kept param modifier
+       \return the reference of param_modifier
+     */
     param_modifier<Ty,Tx,Tp,Tstr>& get_param_modifier()
     {
       if(p_model==0)
@@ -1066,6 +1103,11 @@ namespace opt_utilities
       return p_model->get_param_modifier();
     }
 
+    /**
+       report the status of a parameter
+       \param s the name of a parameter
+       \return string used to describe the parameter
+     */
     Tstr report_param_status(const Tstr& s)const
     {
       if(p_model==0)
@@ -1075,11 +1117,9 @@ namespace opt_utilities
       return p_model->report_param_status(s);
     }
     
-    /*
-    void set(const param_modifier<Ty,Tx,Tp>& pm)
-    {
-      set_param_modifier(pm);
-    }
+    /**
+       load the data set
+       \param da a data set
     */
     void load_data(const data_set<Ty,Tx>& da)
     {
@@ -1095,6 +1135,11 @@ namespace opt_utilities
 	}
     }
 	
+
+    /**
+       get the data set that have been loaded
+       \return the const reference of inner data_set
+     */
     const data_set<Ty,Tx>& get_data_set()const
     {
       if(p_data_set==0)
@@ -1104,6 +1149,10 @@ namespace opt_utilities
       return *(this->p_data_set);
     }
 
+    /**
+       Get the model used
+       \return the reference of model used
+     */
     model<Ty,Tx,Tp,Tstr>& get_model()
     {
       if(p_model==0)
@@ -1113,6 +1162,10 @@ namespace opt_utilities
       return *(this->p_model);
     }
 
+    /**
+       Get the statistic used
+       \return the reference of the statistic used
+     */
     statistic<Ty,Tx,Tp,Ts,Tstr>& get_statistic()
     {
       if(p_statistic==0)
@@ -1121,7 +1174,11 @@ namespace opt_utilities
 	}
       return *(this->p_statistic);
     }
-
+    
+    /**
+       Get the optimization method that used
+       \return the reference of the opt_method
+     */
     opt_method<Ts,Tp>& get_method()
     {
       return optengine.method();
@@ -1129,6 +1186,11 @@ namespace opt_utilities
     
 
   public:
+    /**
+       set the value of a parameter
+       \param pname the name of the parameter
+       \param v the value of the parameter
+    */
     void set_param_value(const Tstr& pname,
 			 const typename element_type_trait<Tp>::element_type& v)
     {
@@ -1139,6 +1201,11 @@ namespace opt_utilities
       p_model->set_param_value(pname,v);
     }
 
+    /**
+       set the lower limit of a parameter
+       \param pname the name of the parameter
+       \param v the lower limit of the parameter       
+     */
     void set_param_lower_limit(const Tstr& pname,
 			       const typename element_type_trait<Tp>::element_type& v)
     {
@@ -1149,6 +1216,11 @@ namespace opt_utilities
       p_model->set_param_lower_limit(pname,v);
     }
 
+    /**
+       set the upper limit of a parameter
+       \param pname the name of the parameter
+       \param v the upper limit of the parameter       
+     */
     void set_param_upper_limit(const Tstr& pname,
 			       const typename element_type_trait<Tp>::element_type& v)
     {
@@ -1160,6 +1232,11 @@ namespace opt_utilities
     }
     
 
+    /**
+       set the values of all parameters
+       \param param the vector containing the value of all parameters
+     */
+
     void set_param_value(const Tp& param)
     {
       if(p_model==0)
@@ -1169,6 +1246,10 @@ namespace opt_utilities
       p_model->set_param_value(param);
     }
 
+    /**
+       set the lower limits of all parameters
+       \param param the vector containing the lower limits of all parameters
+    */
     void set_param_lower_limit(const Tp& param)
     {
       if(p_model==0)
@@ -1178,6 +1259,10 @@ namespace opt_utilities
       p_model->set_param_lower_limit(param);
     }
 
+    /**
+       set the upper limits of all parameters
+       \param param the vector containing the upper limits of all parameters
+    */
     void set_param_upper_limit(const Tp& param)
     {
       if(p_model==0)
@@ -1187,6 +1272,12 @@ namespace opt_utilities
       p_model->set_param_upper_limit(param);
     }
 
+
+    /**
+       get the parameter value
+       \param pname the name of the parameter
+       \return the value of the parameter
+     */
     typename element_type_trait<Tp>::element_type get_param_value(const Tstr& pname)const
     {
       if(p_model==0)
@@ -1196,6 +1287,11 @@ namespace opt_utilities
       return p_model->get_param_info(pname).get_value();
     }
 
+    /**
+       get the lower limit of a parameter
+       \param pname the name of a parameter
+       \return the lower limit of a parameter
+     */
     typename element_type_trait<Tp>::element_type get_param_lower_limit(const Tstr& pname)const
     {
       if(p_model==0)
@@ -1205,6 +1301,11 @@ namespace opt_utilities
       return p_model->get_param_info(pname).get_lower_limit();
     }
     
+    /**
+       get the upper limit of a parameter
+       \param pname the name of a parameter
+       \return the upper limit of a parameter
+     */
     typename element_type_trait<Tp>::element_type get_param_upper_limit(const Tstr& pname)const
     {
       if(p_model==0)
@@ -1215,7 +1316,11 @@ namespace opt_utilities
     }
 
     
-
+    /**
+       get the param_info of a parameter
+       \param pname the name of the parameter
+       \return the const reference of a param_info object
+     */
     const param_info<Tp,Tstr>& get_param_info(const Tstr& pname)const
     {
       if(p_model==0)
@@ -1224,7 +1329,12 @@ namespace opt_utilities
 	}
       return p_model->get_param_info(pname);
     }
-
+    
+    /**
+       get the param_info of a parameter by its order
+       \param n the order of the parameter
+       \return the const reference of a param_info object
+     */
     const param_info<Tp,Tstr>& get_param_info(size_t n)const
     {
       if(p_model==0)
@@ -1234,6 +1344,11 @@ namespace opt_utilities
       return p_model->get_param_info(n);
     }
 
+    /**
+       get the order of a parameter by its name
+       \param pname the name of the parameter
+       \return the order of the parameter
+     */
     size_t get_param_order(const Tstr& pname)const
     {
       if(p_model==0)
@@ -1243,6 +1358,10 @@ namespace opt_utilities
       return p_model->get_param_order(pname);
     }
 
+    /**
+       get the number of parameters
+       \return the number of parameters
+     */
     size_t get_num_params()const
     {
       if(p_model==0)
@@ -1252,6 +1371,10 @@ namespace opt_utilities
       return p_model->get_num_params();
     }
 
+    /**
+       get all params
+       \return the vector containing the values of all parameters
+     */
     Tp get_all_params()const
     {
       if(p_model==0)
@@ -1262,22 +1385,29 @@ namespace opt_utilities
       return p_model->get_all_params();
     }
 
+    /**
+       set the optimization method used to perform the model fitting
+       \param pm the opt_method to be used
+    */
     void set_method(const opt_method<Ts,Tp>& pm)
     {
       //assert(p_optimizer!=0);
       optengine.set_opt_method(pm);
     }
-    /*
-    void set(const opt_method<Ty,Tp>& pm)
-    {
-      set_method(pm);
-    }
-    */
+
+    /**
+       set the precision
+       \param y the precision
+     */
     void set_precision(typename element_type_trait<Tp>::element_type y)
     {
       optengine.set_precision(y);
     }
 
+
+    /**
+       perform the fitting
+     */
     Tp fit()
     {
       //      assert(p_model!=0);
@@ -1345,11 +1475,20 @@ namespace opt_utilities
   };
 
 
+
+  /**
+     virtual class representing a statistic
+     \tparam Ty the type of the model return type
+     \tparam Tx the type of the model self-var
+     \tparam Tp the type of the model param
+     \tparam Ts statistic type
+     \tparam Tstr the type of string used
+  */
   template<typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr=std::string>
   class statistic
     :public func_obj<Ts,Tp>
   {
-  public:
+  private:
     fitter<Ty,Tx,Tp,Ts,Tstr>* p_fitter;
   
   private:
@@ -1361,23 +1500,40 @@ namespace opt_utilities
     }
 
   public:
+    /**
+       clone the existing object
+       \return the clone of self
+     */
     statistic<Ty,Tx,Tp,Ts,Tstr>* clone()const
     {
       return this->do_clone();
     }
     
+    /**
+       destroy the cloned object
+     */
     void destroy()
     {
       return do_destroy();
     }
+
+    /**
+       default construct
+     */
     statistic()
       :p_fitter(0)
     {}
     
+    /**
+       copy construct
+     */
     statistic(const statistic& rhs)
       :p_fitter(rhs.p_fitter)
     {}
 
+    /**
+       assignment operator
+     */
     statistic& operator=(const statistic& rhs)
     {
       if(this==&rhs)
@@ -1388,14 +1544,27 @@ namespace opt_utilities
       return *this;
     }
     
+
+    /**
+       destructure function
+     */
     virtual ~statistic()
     {}
 
+    /**
+       set the fitter
+       \param pfitter the fitter to be linked
+    */
     virtual void set_fitter(fitter<Ty,Tx,Tp,Ts,Tstr>& pfitter)
     {
       p_fitter=&pfitter;
     }
 
+
+    /**
+       get the attached fitter
+       \return the const reference of the fitter object
+     */
     virtual const fitter<Ty,Tx,Tp,Ts,Tstr>& get_fitter()const
     {
       if(p_fitter==0)
@@ -1405,6 +1574,12 @@ namespace opt_utilities
       return *p_fitter;
     }
 		
+    /**
+       evaluating the model
+       \param x the self-var
+       \param p the parameter
+       \return the evaluated model value
+     */
     Ty eval_model(const Tx& x,const Tp& p)
     {
       if(p_fitter==0)
@@ -1414,7 +1589,10 @@ namespace opt_utilities
       return p_fitter->eval_model(x,p);
     }
 
-		
+    /**
+       get the data_set object managed by the fitter object
+       \return the const reference of the data_set object
+     */
     const data_set<Ty,Tx>& get_data_set()const
     {
       if(p_fitter==0)
@@ -1426,41 +1604,71 @@ namespace opt_utilities
 
   };
 
+
+  /**
+     Used to modify the parameter, e.g., freezing, bind
+     \tparam Ty the type of the model return type
+     \tparam Tx the type of the model self-var
+     \tparam Tp the type of the model param
+     \tparam Tstr the type of string used
+  */
   template <typename Ty,typename Tx,typename Tp,typename Tstr=std::string>
   class param_modifier
   {
   private:
     model<Ty,Tx,Tp,Tstr>* p_model;
   public:
+    /**
+       constructing full parameter list from the free parameters
+     */
     Tp reform(const Tp& p)const
     {
       return do_reform(p);
     }
+
+    /**
+       constructing the free parameter from the full parameters
+     */
     Tp deform(const Tp& p)const
     {
       return do_deform(p);
     }
 
+    /**
+       return the clone of self
+       \return the clone of self
+     */
     param_modifier<Ty,Tx,Tp,Tstr>* clone()const
     {
       return do_clone();
     }
-
+    
+    /**
+       destroy the cloned object
+     */
     void destroy()
     {
       do_destroy();
     }
 
   public:
-
+    /**
+       the default construct function
+     */
     param_modifier()
       :p_model(0)
     {}
     
+    /**
+       copy construct function
+     */
     param_modifier(const param_modifier& rhs)
       :p_model(rhs.p_model)
     {}
 
+    /**
+       assignment operator
+     */
     param_modifier& operator=(const param_modifier& rhs)
     {
       if(this==&rhs)
@@ -1472,12 +1680,21 @@ namespace opt_utilities
     }
     
   public:
+    
+    /**
+       Attach the fitter object
+       \param pf the fitter to be attached
+     */
     void set_model(model<Ty,Tx,Tp,Tstr>& pf)
     {
       p_model=&pf;
       update();
     }
 
+    /**
+       get the model attached
+       \return the const reference of the model
+     */
     const model<Ty,Tx,Tp,Tstr>& get_model()const
     {
       if(p_model==0)
@@ -1488,17 +1705,27 @@ namespace opt_utilities
       return *(this->p_model);
     }
 
+    /**
+       calculate the number of free parameters
+     */
     size_t get_num_free_params()const
     {
       return do_get_num_free_params();
     }
 
+    /**
+       report the status of parameters
+       \param pname parameter name
+       \return the string used to describe the parameter
+     */
     Tstr report_param_status(const Tstr& name)const
     {
       return do_report_param_status(name);
     }
 
-
+    /**
+       destruct function
+     */
     virtual ~param_modifier(){}
   private:
     virtual Tp do_reform(const Tp& p)const=0;
@@ -1515,9 +1742,6 @@ namespace opt_utilities
     }
 
   };
-  
-
-  
 }
 
 

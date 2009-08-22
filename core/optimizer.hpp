@@ -17,6 +17,9 @@
 using namespace std;
 #endif
 
+/**
+   The root namespace of the opt_utilities library
+ */
 namespace opt_utilities
 {
   /////////Forward declare///////////////////////////////////

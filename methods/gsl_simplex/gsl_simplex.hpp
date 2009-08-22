@@ -1,3 +1,7 @@
+/**
+   \file gsl_simplex.hpp
+ */
+
 #ifndef GSL_SIMPLEX_METHOD
 #define GSL_SIMPLEX_METHOD
 #include <core/optimizer.hpp>
@@ -8,14 +12,15 @@
 #include <cmath>
 #include <algorithm>
 #include <gsl_multimin.h>
-/*
- *
-*/
 #include <iostream>
 
 
 namespace opt_utilities
 {
+
+  /**
+     object function of the gsl simplex function
+   */
   template <typename rT,typename pT>
   double gsl_func_adapter(const gsl_vector* v,void* params)
   {
@@ -29,6 +34,11 @@ namespace opt_utilities
   }
 
 
+  /**
+     wrapper for the gsl simplex optimization method
+     \tparam return type of the object function
+     \tparam param type of the object function
+  */
   template <typename rT,typename pT>
   class gsl_simplex
     :public opt_method<rT,pT>

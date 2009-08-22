@@ -1,3 +1,7 @@
+/**
+   \file freeze_param.hpp
+*/
+
 #ifndef FREEZE_PARAM_HPP
 #define FREEZE_PARAM_HPP
 #include "fitter.hpp"
@@ -6,6 +10,13 @@
 
 namespace opt_utilities
 {
+  /**
+     freeze a set of parameter in model fitting
+     \tparam Ty the return type of a model
+     \tparam Tx the type of the self-var
+     \tparam Tp the type of the model parameter
+     \tparam Tstr the type of string used
+   */
   template <typename Ty,typename Tx,typename Tp,typename Tstr=std::string>
   class freeze_param
     :public param_modifier<Ty,Tx,Tp,Tstr>
@@ -16,11 +27,17 @@ namespace opt_utilities
     size_t num_free;
     
   public:
+    /**
+       the default construct function
+     */
     freeze_param()
     {
-      
     }
-
+    
+    /**
+       construct function
+       \param name the name of the parameter to be frozen
+     */
     freeze_param(const Tstr& name)
     {
       param_names.insert(name);
@@ -33,7 +50,10 @@ namespace opt_utilities
     }
     
     
-
+    /**
+       update the parameter information
+       should be called by the library, rather than the user
+     */
     void update()
     {
       param_num.clear();
@@ -133,6 +153,12 @@ namespace opt_utilities
     }
 
   public:
+    
+    /**
+       plus operator, used to combine a list of freeze_param objects
+       \param fp another freeze_param object
+       \return the combined freeze_param object
+     */
     freeze_param operator+(const freeze_param& fp)const
     {
       freeze_param result(*this);
@@ -145,6 +171,10 @@ namespace opt_utilities
       return result;
     }
 
+    /**
+       += operator
+       like the plus operator
+     */
     freeze_param& operator+=(const freeze_param& fp)
     {
       //param_names.insert(param_names.end(),
@@ -167,6 +197,12 @@ namespace opt_utilities
       return *this;
     }
 
+
+    /**
+       un-freeze a parameter to a list of pre-frozen parameter list
+       \param fp the parameter to be un-frozen
+       \return the reference to the operated freeze_param object
+     */
     freeze_param& operator-=(const freeze_param& fp)
     {
       //param_names.insert(param_names.end(),
@@ -191,6 +227,11 @@ namespace opt_utilities
 
   };
 
+  /**
+     help function to create a freeze_param object
+     \param name the name to be frozen
+     \return the created freeze_param object
+   */
   template <typename Ty,typename Tx,typename Tp,typename Tstr>
   freeze_param<Ty,Tx,Tp,Tstr> freeze(const Tstr& name)
   {

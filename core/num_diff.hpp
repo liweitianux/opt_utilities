@@ -1,3 +1,8 @@
+/**
+   \file num_diff.hpp
+ */
+
+
 #ifndef NUMDIFF_HPP
 #define NUMDIFF_HPP
 
@@ -9,6 +14,12 @@
 
 namespace opt_utilities
 {
+
+  /**
+     differentiable function
+     \tparam rT the return type
+     \tparam the parameter type
+   */
   template <typename rT,typename pT>
   class dfunc_obj
     :public func_obj<rT,pT>
@@ -17,12 +28,22 @@ namespace opt_utilities
     virtual pT do_diff(const pT& p)=0;
     
   public:
+    /**
+       calculate the differentiation
+       \param p the self-var
+       \return the gradient at p
+     */
     pT diff(const pT& p)
     {
       return do_diff(p);
     }
   };
   
+
+  /**
+     When trying to diff an object function, when it is not differentiable,
+     this exception will be thrown.
+   */
   class underivable
     :public opt_exception
   {
@@ -32,6 +53,9 @@ namespace opt_utilities
     {}
   };
 
+  /**
+     calculate the numerical differential of a func_obj
+   */
   template <typename rT,typename pT>
     pT numdiff(func_obj<rT,pT>& f,const pT& p)
   {
@@ -68,6 +92,13 @@ namespace opt_utilities
     return result;
   }
 
+
+  /**
+     Help function to calculate the gradient of an objection function 
+     func_obj, whether it is differentiable or not. If it is differentiable, 
+     the gradient will be calculated by calling the diff member in the func_obj,
+     or a numerical calculation will be performed.
+   */
   template <typename rT,typename pT>
     pT diff(func_obj<rT,pT>& f,const pT& p)
   {
