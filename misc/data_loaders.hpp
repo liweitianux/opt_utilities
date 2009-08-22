@@ -1,3 +1,8 @@
+/**
+   \file data_loaders.hpp
+   a set of classes used to load data_set from std::istream
+ */
+
 #ifndef DATA_LOADERS_H
 #define DATA_LOADERS_H
 #include <core/fitter.hpp>
@@ -17,15 +22,22 @@ namespace opt_utilities
   template <typename Ty,typename Tx>
   class dl_x_xe_y_ye;
 
+
   template <typename Ty,typename Tx>
   std::istream& operator>>(std::istream& ifs,dl_x_xe_y_ye<Ty,Tx>& dl);
+
 
   template <typename Ty,typename Tx>
   class dl_x_xu_xl_y_yu_yl;
   
+
   template <typename Ty,typename Tx>
   std::istream& operator>> (std::istream& ifs,dl_x_xu_xl_y_yu_yl<Ty,Tx>& dl);
 
+
+  /**
+     loading data from file in format [x] [y] [y error]
+   */
   template <typename Ty,typename Tx>
   class dl_x_y_ye
   {
@@ -67,6 +79,11 @@ namespace opt_utilities
     //friend std::istream& operator>> <>(std::istream& ifs,dl_x_y_ye<Ty,Tx>& dl);
   };
 
+
+
+  /**
+     stream operator
+   */
   template <typename Ty,typename Tx>
   std::istream& operator>>(std::istream& ifs,dl_x_y_ye<Ty,Tx>& dl)
   {
@@ -75,6 +92,11 @@ namespace opt_utilities
   }
 
 
+  /**
+     loading data from stream with file 
+
+     [x] [x error] [y] [y error]
+   */
   template <typename Ty,typename Tx>
   class dl_x_xe_y_ye
   {
@@ -113,6 +135,10 @@ namespace opt_utilities
     }
   };
 
+
+  /**
+     stream operator
+   */
   template <typename Ty,typename Tx>
   std::istream& operator>>(std::istream& ifs,dl_x_xe_y_ye<Ty,Tx>& dl)
   {
@@ -120,6 +146,12 @@ namespace opt_utilities
     return ifs;
   }
 
+
+  /**
+     loading data from stream with format 
+
+     [x] [x lower error] [x upper error] [y] [y lower error] [y upper error]
+   */
   template <typename Ty,typename Tx>
   class dl_x_xu_xl_y_yu_yl
   {
@@ -164,6 +196,10 @@ namespace opt_utilities
     }
   };
 
+
+  /**
+     stream operator
+   */
   template <typename Ty,typename Tx>
   std::istream& operator>> (std::istream& ifs,dl_x_xu_xl_y_yu_yl<Ty,Tx>& dl)
   {
