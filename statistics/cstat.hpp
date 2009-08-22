@@ -1,3 +1,7 @@
+/**
+   \file cstat.hpp
+ */
+
 #ifndef CSTAT_HPP
 #define CSTAT_HPP
 #include <core/fitter.hpp>
@@ -6,6 +10,15 @@
 using std::cout;using std::endl;
 namespace opt_utilities
 {
+
+  /**
+     c-statistic, max-likelihood method
+     \tparam Ty the return type of model
+     \tparam Tx the type of the self-var
+     \tparam Tp the type of model parameter
+     \tparam Ts the type of the statistic
+     \tparam Tstr the type of the string used
+   */
   template<typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr>
   class cstat
     :public statistic<Ty,Tx,Tp,Ts,Tstr>

@@ -1,3 +1,7 @@
+/**
+   \file leastsq.hpp
+ */
+
 #ifndef LEAST_SQ_HPP
 #define LeAST_SQ_HPP
 #include <core/fitter.hpp>
@@ -8,6 +12,15 @@ using std::cerr;using std::endl;
 
 namespace opt_utilities
 {
+
+   /**
+     least-square statistic
+     \tparam Ty the return type of model
+     \tparam Tx the type of the self-var
+     \tparam Tp the type of model parameter
+     \tparam Ts the type of the statistic
+     \tparam Tstr the type of the string used
+   */
   template<typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr>
   class leastsq
     :public statistic<Ty,Tx,Tp,Ts,Tstr>

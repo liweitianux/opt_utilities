@@ -1,3 +1,7 @@
+/**
+   \file default_data_set.hpp
+ */
+
 #ifndef DEFAULT_DATA_SET
 #define DEFAULT_DATA_SET
 #include "core/fitter.hpp"
@@ -7,6 +11,11 @@
 namespace opt_utilities
 {
 
+  /**
+     default implement of the data set
+     \tparam Ty type of y
+     \tparam Tx type of x
+   */
   template <typename Ty,typename Tx>
   class default_data_set
     :public data_set<Ty,Tx>

@@ -1,3 +1,7 @@
+/**
+   \file sorted_data_set.hpp
+*/
+
 #ifndef SORTED_DATA_SET
 #define SORTED_DATA_SET
 #include "core/fitter.hpp"
@@ -14,6 +18,12 @@ namespace opt_utilities
   }
 
 
+
+  /**
+     automatically sorting data set
+     \tparam Ty type of y
+     \tparam Tx type of x
+   */
   template <typename Ty,typename Tx>
   class sorted_data_set
     :public data_set<Ty,Tx>

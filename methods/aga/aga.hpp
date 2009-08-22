@@ -1,3 +1,8 @@
+/**
+   \file aga.hpp
+   asexual genetic algorithm method
+*/
+
 #ifndef AGA_METHOD
 #define AGA_METHOD
 #include <core/optimizer.hpp>
@@ -37,6 +42,14 @@ namespace opt_utilities
     }
   };
 
+
+  /**
+     Implement of the asexual genetic algorithm
+     2009A&A...501.1259C
+     http://adsabs.harvard.edu/abs/2009arXiv0905.3712C
+     \tparam rT return type of the object function
+     \tparam pT parameter type of the object function
+   */
   template <typename rT,typename pT>
   class aga_method
     :public opt_method<rT,pT>
