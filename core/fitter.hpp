@@ -1,3 +1,7 @@
+/**
+   \file fitter.hpp
+ */
+
 #ifndef FITTER_HPP
 #define FITTER_HPP
 #include "opt_exception.hpp"
@@ -21,6 +25,11 @@ namespace opt_utilities
   class param_modifier;
 
 
+  /**
+     representing a single data point
+     \tparam Ty the type of y
+     \tparam Tx the type of x
+   */
   template<typename Ty,typename Tx>
   class data
   {
@@ -28,6 +37,15 @@ namespace opt_utilities
     Tx x,x_lower_err,x_upper_err;
     Ty y,y_lower_err,y_upper_err;
   public:
+    /**
+       construct function
+       \param _x x
+       \param _y y
+       \param _y_lower_err lower y error
+       \param _y_upper_err upper y error
+       \param _x_lower_err lower x error
+       \param _x_upper_err upper x error
+     */
     data(const Tx& _x,const Ty& _y,
 	 const Ty& _y_lower_err,
 	 const Ty& _y_upper_err,const Tx& _x_lower_err,const Tx& _x_upper_err)
@@ -41,6 +59,10 @@ namespace opt_utilities
  
     }
 
+    
+    /**
+       default construct
+     */
     data()
       :x(),
        x_lower_err(),
@@ -50,6 +72,10 @@ namespace opt_utilities
        y_upper_err()
     {}
 
+    
+    /**
+       copy construct
+     */
     data(const data& rhs)
     {
       opt_eq(x,rhs.x);
@@ -60,6 +86,10 @@ namespace opt_utilities
       opt_eq(y_upper_err,rhs.y_upper_err);
     }
 
+
+    /**
+       Assignment operator
+     */
     data& operator=(const data& rhs)
     {
       opt_eq(x,rhs.x);
@@ -72,30 +102,52 @@ namespace opt_utilities
     }
 
   public:
+
+    /**
+       set x
+       \return x
+     */
     const Tx& get_x()const
     {
       return x;
     }
     
+    /**
+       \return x lower error
+     */
     const Tx& get_x_lower_err()const
     {
       return x_lower_err;
     }
     
+    /**
+       \return x upper error
+     */
     const Tx& get_x_upper_err()const
     {
       return x_upper_err;
     }
 
+    /**
+       \return y
+     */
     const Ty& get_y()const
     {
       return y;
     }
     
+
+    /**
+       \return y lower error
+     */
     const Ty& get_y_lower_err()const
     {
       return y_lower_err;
     }
+
+    /**
+       \return y upper error
+     */
     
     const Ty& get_y_upper_err()const
     {
@@ -103,31 +155,59 @@ namespace opt_utilities
     }
 
 
+    /**
+       set x
+       \param _x x
+     */
+
     void set_x(const Tx& _x)
     {
       opt_eq(x,_x);
     }
     
+    /**
+       set x lower error
+       \param _x x lower error
+     */
     void set_x_lower_err(const Tx& _x)
     {
       opt_eq(x_lower_err,_x);
     }
     
+
+    /**
+       set x upper error
+       \param _x x upper error
+     */
     void set_x_upper_err(const Tx& _x)
     {
       opt_eq(x_upper_err,_x);
     }
 
+
+    /**
+       set y 
+       \param _y y
+     */
     void set_y(const Ty& _y)
     {
       opt_eq(y,_y);
     }
     
+
+    /**
+       set y lower error
+       \param _y y lower error
+     */
     void set_y_lower_err(const Ty& _y)
     {
       opt_eq(y_lower_err,_y);
     }
     
+    /**
+       set y upper error
+       \param _y y upper error
+     */
     void set_y_upper_err(const Ty& _y)
     {
       opt_eq(y_upper_err,_y);
@@ -136,12 +216,11 @@ namespace opt_utilities
 
   };
 
-  ////////////////////////////////////
-  ///class data_set///////////////////
-  ///contain a set of data////////////
-  ////////////////////////////////////
-  
-  
+  /**
+     virtual class representing a set of data
+     \tparam Ty type of y
+     \tparam Tx type of x
+   */  
   template <typename Ty,typename Tx>
   class data_set
   {
@@ -158,44 +237,75 @@ namespace opt_utilities
       delete this;
     }
   public:
+    /**
+       get data
+       \param i the order of the data point
+       \return the const reference of a class data point
+     */
     const data<Ty,Tx>& get_data(size_t i)const
     {
       return this->do_get_data(i);
     }
+
+    /**
+       \return the size of the data set
+     */
     size_t size()const
     {
       return do_size();
     }
+
+    /**
+       add data point
+       \param d data point
+     */
     void add_data(const data<Ty,Tx>& d)
     {
       return do_add_data(d);
     }
+
+    /**
+       clear the data set
+     */
     void clear()
     {
       do_clear();
     }
     
+
+    /**
+       clone self
+       \return a clone of self
+     */
     data_set<Ty,Tx>* clone()const
     {
       return this->do_clone();
     }
+
+    /**
+       destroy the cloned object
+     */
 
     void destroy()
     {
       do_destroy();
     }
 
+    /**
+       destruct function
+     */
+
     virtual ~data_set(){}
       
   };
 
-  ///////////////////////////////////////////////
-  /////class param_info//////////////////////////
-  /////record the information of one parameter///
-  /////including the name, default value/////////
-  ///////////////////////////////////////////////
-
   
+
+  /**
+     the information of a model parameter
+     \tparam Tp type of model param type
+     \tparam Tstr the type of string type used
+   */
   template <typename Tp,typename Tstr=std::string>
   class param_info
   {
@@ -207,6 +317,14 @@ namespace opt_utilities
     typename element_type_trait<Tp>::element_type upper_limit;
     
   public:
+
+    /**
+       construct function
+       \param _name the name of the param
+       \param _v the value of the param
+       \param _l the lower boundary of the param
+       \param _u the upper boundary of the param
+     */
     param_info(const Tstr& _name,
 	       const typename element_type_trait<Tp>::element_type& _v,
 	       const typename element_type_trait<Tp>::element_type& _l=0,
@@ -214,10 +332,17 @@ namespace opt_utilities
 	       )
       :name(_name),value(_v),lower_limit(_l),upper_limit(_u){}
 
+    /**
+       default construct
+     */
     param_info()
       :name()
     {}
 
+
+    /**
+       copy construct function
+     */
     param_info(const param_info& rhs)
       :name(rhs.name)
     {
@@ -225,7 +350,11 @@ namespace opt_utilities
       opt_eq(lower_limit,rhs.lower_limit);
       opt_eq(upper_limit,rhs.upper_limit);
     }
+
     
+    /**
+       assignment operator
+     */
     param_info& operator=(const param_info& rhs)
     {
       name=rhs.name;
@@ -235,42 +364,72 @@ namespace opt_utilities
       return *this;
     }
 
+
+    /**
+       \return the name of the parameter
+     */
     const Tstr& get_name()const
     {
       return this->name;
     }
 
+    /**
+       \return the current value of the parameter
+     */
     const typename element_type_trait<Tp>::element_type& get_value()const
     {
       return value;
     }
 
+    /**
+       \return the lower boundary
+     */
     const typename element_type_trait<Tp>::element_type& get_lower_limit()const
     {
       return lower_limit;
     }
 
+    /**
+       \return the upper boundary
+     */
     const typename element_type_trait<Tp>::element_type& get_upper_limit()const
     {
       return upper_limit;
     }
 
-
-
+    
+    /**
+       set the value
+       \param x the value of the parameter
+     */
     void set_value(const typename element_type_trait<Tp>::element_type& x)
     {
       opt_eq(value,x);
     }
 
+
+    /**
+       set the lower boundary
+       \param x the lower boundary
+     */
     void set_lower_limit(const typename element_type_trait<Tp>::element_type& x)
     {
       opt_eq(lower_limit,x);
     }
 
+    /**
+       set the upper limit
+       \param x the upper boundary
+     */
     void set_upper_limit(const typename element_type_trait<Tp>::element_type& x)
     {
       opt_eq(upper_limit,x);
     }
+
+    /**
+       set the name of the parameter
+       \param _name the name of the parameter
+     */
 
     void set_name(const Tstr& _name)
     {
@@ -281,7 +440,13 @@ namespace opt_utilities
 
 
 
-
+  /**
+     virtual class representing a model
+     \tparam Ty the type of the returned value of the model
+     \tparam Tx the type of the self-var
+     \tparam Tp the type of the model param
+     \tparam Tstr the type of the string used
+   */
   template <typename Ty,typename Tx,typename Tp,typename Tstr=std::string>
   class model
   {
@@ -298,20 +463,35 @@ namespace opt_utilities
       delete this;
     }
   public:
+
+    /**
+       \return the cloned object
+     */
     model<Ty,Tx,Tp,Tstr>* clone()const
     {
       return do_clone();
     }
 
+    /**
+       destroy the cloned object
+     */
     void destroy()
     {
       do_destroy();
     }
   public:
+
+    /**
+       default construct function
+     */
     model()
       :p_param_modifier(0)
     {}
     
+
+    /**
+       copy construct
+     */
     model(const model& rhs)
       :p_param_modifier(0)
     {
@@ -324,6 +504,10 @@ namespace opt_utilities
       
     }
     
+
+    /**
+       assignment operator
+     */
     model& operator=(const model& rhs)
     {
       if(this==&rhs)
@@ -339,6 +523,10 @@ namespace opt_utilities
       return *this;
     }
     
+
+    /**
+       destructure function
+     */
     virtual ~model()
     {
       if(p_param_modifier)
@@ -348,6 +536,11 @@ namespace opt_utilities
 	}
     }
     
+
+    /**
+       set the param modifier
+       \param pm param modifier
+     */
     void set_param_modifier(const param_modifier<Ty,Tx,Tp,Tstr>& pm)
     {
       if(p_param_modifier!=0)
@@ -359,6 +552,9 @@ namespace opt_utilities
       p_param_modifier->set_model(*this);
     }
 
+    /**
+       clear the param modifier
+     */
     void set_param_modifier()
     {
       if(p_param_modifier!=0)
@@ -369,6 +565,10 @@ namespace opt_utilities
       p_param_modifier=0;
     }
     
+
+    /**
+       \return the param_modifier
+     */
     param_modifier<Ty,Tx,Tp,Tstr>& get_param_modifier()
     {
       if(p_param_modifier==0)
@@ -378,6 +578,11 @@ namespace opt_utilities
       return *p_param_modifier;
     }
 
+
+    /**
+       report the param status
+       \return the param status
+     */
     Tstr report_param_status(const Tstr& s)const
     {
       if(p_param_modifier==0)
@@ -390,6 +595,10 @@ namespace opt_utilities
     }
     
 
+    /**
+       \param pname the name of the param
+       \return the param info
+    */
     const param_info<Tp,Tstr>& get_param_info(const Tstr& pname)
     {
       for(typename std::vector<param_info<Tp,Tstr> >::iterator i=param_info_list.begin();
@@ -406,12 +615,20 @@ namespace opt_utilities
       return null_param;
     }
 
+
+    /**
+       \param n the order of the parameter
+       \return the param info
+     */
     const param_info<Tp,Tstr>& get_param_info(size_t n)const
     {
       return param_info_list[n%get_num_params()];
     }
 
     
+    /**
+       \return the full parameter vector
+     */
     Tp get_all_params()const
     {
       Tp result;
@@ -425,6 +642,10 @@ namespace opt_utilities
       return result;
     }
 
+
+    /**
+       \return the lower limit
+     */
     Tp get_all_lower_limits()const
     {
       Tp result;
@@ -438,6 +659,9 @@ namespace opt_utilities
       return result;
     }
 
+    /**
+       \return the upper limit
+     */
     Tp get_all_upper_limits()const
     {
       Tp result;
@@ -452,11 +676,18 @@ namespace opt_utilities
     }
 
   
+    /**
+       \return the number of parameters
+     */
     size_t get_num_params()const
     {
       return param_info_list.size();
     }
 
+
+    /**
+       \return the number of free parameters
+     */
     size_t get_num_free_params()const
     {
       if(p_param_modifier)
@@ -466,6 +697,11 @@ namespace opt_utilities
       return get_num_params();
     }
 
+
+    /**
+       \param pname the name of the parameter
+       \param v the value of the pearameter
+    */
     void set_param_value(const Tstr& pname,
 			 const typename element_type_trait<Tp>::element_type& v)
     {
@@ -484,6 +720,11 @@ namespace opt_utilities
     }
 
     
+    /**
+       set the lower limit
+       \param pname the parameter name
+       \param v the value of the lower limit
+     */
     void set_param_lower_limit(const Tstr& pname,
 			       const typename element_type_trait<Tp>::element_type& v)
     {
@@ -501,6 +742,12 @@ namespace opt_utilities
       throw param_not_found();
     }
 
+
+    /**
+       set the upper limit
+       \param pname the parameter name
+       \param v the value of the upper limit
+    */
     void set_param_upper_limit(const Tstr& pname,
 			       const typename element_type_trait<Tp>::element_type& v)
     {
@@ -519,6 +766,10 @@ namespace opt_utilities
     }
     
 
+    /**
+       set param 
+       \param param the values of the parameter
+     */
     void set_param_value(const Tp& param)
     {
       for(size_t i=0;i<param_info_list.size();++i)
@@ -527,6 +778,11 @@ namespace opt_utilities
 	}
     }
 
+
+    /**
+       set lower limit 
+       \param param the lower limit of the parameter
+    */
     void set_param_lower_limit(const Tp& param)
     {
       for(size_t i=0;i<param_info_list.size();++i)
@@ -535,6 +791,11 @@ namespace opt_utilities
 	}
     }
     
+
+    /**
+       set upper limit 
+       \param param the upper limit of the parameter
+    */
     void set_param_upper_limit(const Tp& param)
     {
       for(size_t i=0;i<param_info_list.size();++i)
@@ -544,7 +805,11 @@ namespace opt_utilities
     }
 
 
-
+    /**
+       get the order of a parameter
+       \param pname the name of the parameter
+       \return the order of the parameter
+     */
     size_t get_param_order(const Tstr& pname)const
     {
       for(size_t i=0;i<param_info_list.size();++i)
@@ -563,12 +828,20 @@ namespace opt_utilities
 
 		
   protected:
+
+    /**
+       add param info
+       \param pinfo the param info to be added
+     */
     void push_param_info(const param_info<Tp,Tstr>& pinfo)
     {
       param_info_list.push_back(pinfo);
       //      this->num_free_params++;
     }
     
+    /**
+       clear the param information list
+     */
     void clear_param_info()
     {
       //      this->num_free_params=0;
@@ -578,11 +851,17 @@ namespace opt_utilities
 
 
   public:
+
+    /**
+       \return the description of the model
+     */
     Tstr to_string()const
     {
       return do_to_string();
     }
 
+
+    
     Tp reform_param(const Tp& p)const
     {
       if(p_param_modifier==0)
@@ -601,11 +880,17 @@ namespace opt_utilities
       return p_param_modifier->deform(p);
     }
 
-    
+    /**
+       evaluate the model
+       \param x the self var
+       \param p the parameter
+       \return the model value
+     */
     Ty eval(const Tx& x,const Tp& p)
     {
       return do_eval(x,reform_param(p));
     }
+
 
     Ty eval_raw(const Tx& x,const Tp& p)
     {
