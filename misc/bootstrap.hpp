@@ -1,3 +1,8 @@
+/**
+   \file bootstrap.hpp
+*/
+
+
 #ifndef BOOT_STRIP
 #define BOOT_STRIP
 #include <core/fitter.hpp>
@@ -10,6 +15,15 @@
 using std::cout;
 namespace opt_utilities
 {
+
+  /**
+     using bootstrap method to estimate confidence interval
+     \tparam Ty the return type of a model
+     \tparam Tx the type of self-var
+     \tparam Tp the type of model parameters
+     \tparam Ts the type of statistic
+     \tparam Tstr the type of string used
+   */
   template <typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr=std::string>
   class bootstrap
   {
@@ -32,15 +46,27 @@ namespace opt_utilities
     fitter<Ty,Tx,Tp,Ts,Tstr>* p_fitter;
     Tp origin_param;
   public:
+
+    /**
+       default construct
+     */
     bootstrap()
       :p_fitter(NULL)
     {}
 
+    /**
+       destructure
+     */
     ~bootstrap()
     {
       reset();
     }
 
+
+    /**
+       set a fitter
+       \param pf the fitter, the confidence interval of which will be estimated
+     */
     void set_fitter(fitter<Ty,Tx,Tp,Ts,Tstr>& pf)
     {
       param_pool.clear();
@@ -49,6 +75,11 @@ namespace opt_utilities
       origin_param=pf.get_all_params();
     }
     
+    /**
+       reset the estimation
+       reload the data
+       restore the parameters
+     */
     void reset()
     {
       if(p_fitter!=NULL)
@@ -58,6 +89,11 @@ namespace opt_utilities
 	}
     }
 
+
+    /**
+       resample n times
+       \param n the times to sample
+     */
     void sample(int n)
     {
       if(p_fitter!=NULL)
@@ -76,6 +112,11 @@ namespace opt_utilities
 	}
     }
 
+    /**
+       get the param of i-th sampling
+       \param i the order of parameter
+       \return the parameter
+     */
     const Tp& get_param(int i)const
     {
       return param_pool.at(i);
@@ -108,6 +149,13 @@ namespace opt_utilities
     }
     
   public:
+
+    /**
+       Calculate the confdence interval for one parameter under given level
+       \param param_name the name of the parameter to be estimated
+       \param level the confidence level
+       \return a std::pair containing the lower and upper boundaries of the confidence interval
+     */
     std::pair<typename element_type_trait<Tp>::element_type,typename element_type_trait<Tp>::element_type>
     interval(const Tstr& param_name,double level)
     {
