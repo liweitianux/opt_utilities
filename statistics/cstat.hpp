@@ -12,7 +12,7 @@ namespace opt_utilities
 {
 
   /**
-     c-statistic, max-likelihood method
+     \brief c-statistic, max-likelihood method
      \tparam Ty the return type of model
      \tparam Tx the type of the self-var
      \tparam Tp the type of model parameter

@@ -19,7 +19,7 @@ namespace opt_utilities
 {
 
   /**
-     object function of the gsl simplex function
+     \brief object function of the gsl simplex function
    */
   template <typename rT,typename pT>
   double gsl_func_adapter(const gsl_vector* v,void* params)
@@ -35,7 +35,7 @@ namespace opt_utilities
 
 
   /**
-     wrapper for the gsl simplex optimization method
+     \brief wrapper for the gsl simplex optimization method
      \tparam return type of the object function
      \tparam param type of the object function
   */

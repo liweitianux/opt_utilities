@@ -14,7 +14,7 @@ namespace opt_utilities
 {
 
   /**
-     chi-square statistic
+     \brief chi-square statistic
      \tparam Ty the return type of model
      \tparam Tx the type of the self-var
      \tparam Tp the type of model parameter

@@ -12,7 +12,7 @@ namespace opt_utilities
 {
 
   /**
-     default implement of the data set
+     \brief default implement of the data set
      \tparam Ty type of y
      \tparam Tx type of x
    */

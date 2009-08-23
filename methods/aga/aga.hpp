@@ -1,6 +1,6 @@
 /**
    \file aga.hpp
-   asexual genetic algorithm method
+   \brief asexual genetic algorithm method
 */
 
 #ifndef AGA_METHOD
@@ -44,7 +44,7 @@ namespace opt_utilities
 
 
   /**
-     Implement of the asexual genetic algorithm
+     \brief Implement of the asexual genetic algorithm
      2009A&A...501.1259C
      http://adsabs.harvard.edu/abs/2009arXiv0905.3712C
      \tparam rT return type of the object function

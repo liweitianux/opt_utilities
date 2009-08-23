@@ -20,7 +20,7 @@ namespace opt_utilities
 
 
   /**
-     automatically sorting data set
+     \brief automatically sorting data set
      \tparam Ty type of y
      \tparam Tx type of x
    */

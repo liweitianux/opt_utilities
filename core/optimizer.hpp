@@ -33,7 +33,7 @@ namespace opt_utilities
   class opt_method;
 
   /**
-     Virtual class representing an object function.
+     \brief Virtual class representing an object function.
      \tparam rT the return type
      \tparam pT the self-varible type
    */
@@ -104,7 +104,7 @@ namespace opt_utilities
   
 
   /**
-     virtual class representing optimization methods
+     \brief virtual class representing optimization methods
      \tparam rT the return type
      \tparam pT the self-varible type
    */
@@ -234,7 +234,7 @@ namespace opt_utilities
   
   
   /**
-     The manager for performing the manager
+     \brief The manager for performing the manager
      \tparam rT the return type
      \tparam pT the self-varible type
   */

@@ -9,7 +9,7 @@
 namespace opt_utilities
 {
   /**
-     the root class of exception used in opt_utilities
+     \brief the root class of exception used in opt_utilities
    */
   class opt_exception
     :public std::exception

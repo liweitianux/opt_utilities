@@ -19,7 +19,7 @@ namespace opt_utilities
   }
   
   /**
-     Trait class, in which the types of elements in an array are defined
+     \brief Trait class, in which the types of elements in an array are defined
      \tparam the type of the array object
    */
   template <typename T>
@@ -34,7 +34,7 @@ namespace opt_utilities
 
   
   /**
-     The return type trait of some certain data types.
+     \brief The return type trait of some certain data types.
   */
   template <typename T>
   class return_type_trait

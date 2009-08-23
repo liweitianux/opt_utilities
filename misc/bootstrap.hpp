@@ -17,7 +17,7 @@ namespace opt_utilities
 {
 
   /**
-     using bootstrap method to estimate confidence interval
+     \brief using bootstrap method to estimate confidence interval
      \tparam Ty the return type of a model
      \tparam Tx the type of self-var
      \tparam Tp the type of model parameters

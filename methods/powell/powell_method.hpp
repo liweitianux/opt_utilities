@@ -16,7 +16,7 @@
 namespace opt_utilities
 {
   /**
-     Impliment of an optimization method
+     \brief Impliment of an optimization method
      \tparam rT return type of the object function
      \tparam pT parameter type of the object function
    */

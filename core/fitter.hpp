@@ -26,7 +26,7 @@ namespace opt_utilities
 
 
   /**
-     representing a single data point
+     \brief representing a single data point
      \tparam Ty the type of y
      \tparam Tx the type of x
    */
@@ -217,7 +217,7 @@ namespace opt_utilities
   };
 
   /**
-     virtual class representing a set of data
+     \brief virtual class representing a set of data
      \tparam Ty type of y
      \tparam Tx type of x
    */  
@@ -302,7 +302,7 @@ namespace opt_utilities
   
 
   /**
-     the information of a model parameter
+     \brief the information of a model parameter
      \tparam Tp type of model param type
      \tparam Tstr the type of string type used
    */
@@ -441,7 +441,7 @@ namespace opt_utilities
 
 
   /**
-     virtual class representing a model
+     \brief virtual class representing a model
      \tparam Ty the type of the returned value of the model
      \tparam Tx the type of the self-var
      \tparam Tp the type of the model param
@@ -910,7 +910,7 @@ namespace opt_utilities
 
 
   /**
-     class to perform the model fitting
+     \brief class to perform the model fitting
      \tparam Ty the type of the model return type
      \tparam Tx the type of the model self-var
      \tparam Tp the type of the model param
@@ -1477,7 +1477,7 @@ namespace opt_utilities
 
 
   /**
-     virtual class representing a statistic
+     \brief virtual class representing a statistic
      \tparam Ty the type of the model return type
      \tparam Tx the type of the model self-var
      \tparam Tp the type of the model param
@@ -1606,7 +1606,7 @@ namespace opt_utilities
 
 
   /**
-     Used to modify the parameter, e.g., freezing, bind
+     \brief Used to modify the parameter, e.g., freezing, bind
      \tparam Ty the type of the model return type
      \tparam Tx the type of the model self-var
      \tparam Tp the type of the model param

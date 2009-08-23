@@ -16,7 +16,7 @@ namespace opt_utilities
 {
 
   /**
-     differentiable function
+     \brief differentiable function
      \tparam rT the return type
      \tparam the parameter type
    */
