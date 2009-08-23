@@ -1,6 +1,7 @@
 #ifndef BAS_UTIL
 #define BAS_UTIL
 #include <core/opt_traits.hpp>
+#include <algorithm>
 namespace opt_utilities
 {
   template <typename T>
@@ -31,15 +32,15 @@ namespace opt_utilities
     opt_eq(b,c);
     opt_eq(c,d);
   }
-  template <typename T>  
-  void swap(T& ax,T& bx)
-  {
+  //  template <typename T>  
+  //  void swap(T& ax,T& bx)
+  //{
     //  swap(ax,bx);
-    T temp;
-    opt_eq(temp,ax);
-    opt_eq(ax,bx);
-    opt_eq(bx=temp);
-  }
+    //    T temp;
+    //opt_eq(temp,ax);
+    //opt_eq(ax,bx);
+    //opt_eq(bx,temp);
+    //}
   
   template <typename T>
   T sign(const T& a,const T& b)

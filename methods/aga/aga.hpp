@@ -146,7 +146,6 @@ namespace opt_utilities
 			  uni_rand(get_element(lower_bound,j),
 				   get_element(upper_bound,j))
 			  );
-	      
 	    }
 	}
       
@@ -186,7 +185,7 @@ namespace opt_utilities
 	  sum+=samples[i].v;
 	}
       
-      std::sort(samples.begin(),samples.end(),vp_comp<double,std::vector<double> >());
+      std::sort(samples.begin(),samples.end(),vp_comp<rT,pT>());
       if(sum2/samples.size()-pow(sum/samples.size(),2)<threshold)
 	{
 	  return false;
@@ -240,16 +239,17 @@ namespace opt_utilities
       buffer.resize(n2);
       double n_per_dim=pow((double)n0,1./get_size(lower_bound));
       resize(reproduction_box,get_size(lower_bound));
+      
       for(int i=0;i<get_size(lower_bound);++i)
 	{
-	
+
 	  set_element(reproduction_box,i,
 		      (get_element(upper_bound,i)-
 		      get_element(lower_bound,i))/n_per_dim);
 	}
-
+      
       while(iter()){}
-
+      
       return samples.begin()->p;
     }
 
