@@ -55,6 +55,9 @@ int main()
   std::cout<<"optimization result:"<<
     p[0]<<" "<<p[1]<<" "<<p[2]<<std::endl;
 
+
+  /////////////////////////////////////////////
+
   //Let's change another method
   op.set_opt_method(opt_utilities::aga_method<double,std::vector<double> >());
   //define the lower and upper limit
