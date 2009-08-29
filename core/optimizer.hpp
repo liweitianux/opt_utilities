@@ -441,7 +441,7 @@ namespace opt_utilities
     {
       if(p_func_obj==0)
 	{
-	  throw target_function_undefined();
+	  throw object_function_undefined();
 	}
       return p_func_obj->eval(x);
     }
@@ -460,7 +460,7 @@ namespace opt_utilities
 	}
       if(p_func_obj==0)
 	{
-	  throw target_function_undefined();
+	  throw object_function_undefined();
 	}
       return p_opt_method->optimize();
     }

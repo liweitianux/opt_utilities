@@ -37,12 +37,12 @@ namespace opt_utilities
      When objection is not defined in optimizer, and optimizion is performing,
      this exception will be thrown
    */
-  class target_function_undefined
+  class object_function_undefined
     :public opt_exception
   {
   public:
-    target_function_undefined()
-      :opt_exception("target function undefined")
+    object_function_undefined()
+      :opt_exception("object function undefined")
     {}
   };
 
