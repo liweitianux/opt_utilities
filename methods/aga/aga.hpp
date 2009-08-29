@@ -191,12 +191,21 @@ namespace opt_utilities
 	{
 	  return false;
 	}
-
+      pT lb(get_size(samples[0].p));
+      pT ub(get_size(samples[0].p));
       for(int i=0;i<n2;++i)
 	{
 	  pT p(samples[i].p);
 	  for(int j=0;j<get_size(p);++j)
 	    {
+	      if(i==0)
+		{
+		  ub[j]=p[j];
+		  lb[j]=p[j];
+		}
+	      ub[j]=std::max(ub[j],p[j]);
+	      lb[j]=std::min(lb[j],p[j]);
+	      
 	      set_element(p,j,
 			  get_element(p,j)+
 			  uni_rand(-get_element(reproduction_box,j),
@@ -209,7 +218,6 @@ namespace opt_utilities
 		{
 		  set_element(p,j,get_element(lower_bound,j));
 		}
-		  
 	    }
 	  buffer[i]=p;
 	}
@@ -223,17 +231,26 @@ namespace opt_utilities
 		  set_element(samples[i*n2+j+n1].p,k,
 			      (get_element(samples[i].p,k)+
 			       get_element(buffer[j],k))/2.);
+		  
+
+		  ub[k]=std::max(ub[k],samples[i*n2+j+n1].p[k]);
+		  lb[k]=std::min(lb[k],samples[i*n2+j+n1].p[k]);
 		}
 	    }
 	}
+      double n_per_dim=pow((double)n0,1./get_size(lower_bound));
       for(int i=0;i<get_size(reproduction_box);++i)
 	{
+	  //	  set_element(reproduction_box,i,
+	  //get_element(reproduction_box,i)*decay_factor);
 	  set_element(reproduction_box,i,
-		      get_element(reproduction_box,i)*decay_factor);
+		      (get_element(ub,i)-
+		       get_element(ub,i))/n_per_dim);
+	  
 	}
       return true;
     }
-    
+      
     pT do_optimize()
     {
       srand(time(0));
@@ -243,10 +260,10 @@ namespace opt_utilities
       
       for(int i=0;i<get_size(lower_bound);++i)
 	{
-
+	  
 	  set_element(reproduction_box,i,
 		      (get_element(upper_bound,i)-
-		      get_element(lower_bound,i))/n_per_dim);
+		       get_element(lower_bound,i))/n_per_dim);
 	}
       
       while(iter()){}
