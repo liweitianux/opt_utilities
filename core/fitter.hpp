@@ -1455,9 +1455,9 @@ namespace opt_utilities
 	  //return start_point;
 	  return p_model->get_all_params();
 	}
-      optengine.set_start_point(start_point);
       optengine.set_lower_limit(lower_limits);
       optengine.set_upper_limit(upper_limits);
+      optengine.set_start_point(start_point);
       
       Tp result;
       opt_eq(result,optengine.optimize());

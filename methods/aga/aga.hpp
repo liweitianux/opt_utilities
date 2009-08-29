@@ -140,6 +140,7 @@ namespace opt_utilities
 	{
 	  //  cout<<i<<" ";
 	  resize(samples[i].p,get_size(p));
+	  //	  std::cout<<samples[i].p.size()<<std::endl;;
 	  for(int j=0;j<get_size(p);++j)
 	    {
 	      set_element(samples[i].p,j,
