@@ -1,5 +1,6 @@
 #ifndef POWER_LAW_MODEL_H_
 #define POWER_LAW_MODEL_H_
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <cmath>
 

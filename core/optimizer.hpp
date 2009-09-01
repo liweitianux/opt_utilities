@@ -4,9 +4,9 @@
  */
 
 
-#ifndef OPTIMZER_H_
-#define OPTIMZER_H_
-//#define DEBUG
+#ifndef OPTIMZER_HPP
+#define OPTIMZER_HPP
+#define OPT_HEADER
 #include <cstddef>
 #include "opt_traits.hpp"
 #include "opt_exception.hpp"

@@ -1,5 +1,6 @@
 #ifndef MNBRAK_HPP
 #define MNBRAK_HPP 
+#define OPT_HEADER
 //#include "optimizer.hpp"
 #include "bas_util.hpp"
 namespace opt_utilities

@@ -1,5 +1,6 @@
 #ifndef NBETA_MODEL_H_
 #define NBETA_MODEL_H_
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <cmath>
 #include <iostream>

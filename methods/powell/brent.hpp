@@ -1,5 +1,6 @@
 #ifndef BRENT_HPP
 #define BRENT_HPP
+#define OPT_HEADER
 #include <iostream>
 #include "bas_util.hpp"
 //#include "optimizer.hpp"

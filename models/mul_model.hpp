@@ -1,5 +1,6 @@
-#ifndef MUL_MODEL_H_
-#define MUL_MODEL_H_
+#ifndef MUL_MODEL_HPP
+#define MUL_MODEL_HPP
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <cmath>
 

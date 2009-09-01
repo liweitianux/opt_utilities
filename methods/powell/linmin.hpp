@@ -1,5 +1,6 @@
 #ifndef LINMIN_HPP
 #define LINMIN_HPP
+#define OPT_HEADER
 #include "mnbrak.hpp"
 #include "brent.hpp"
 #include <core/opt_traits.hpp>

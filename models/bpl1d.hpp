@@ -1,5 +1,6 @@
 #ifndef BROKEN_POWER_LAW_MODEL_H_
 #define BROKEN_POWER_LAW_MODEL_H_
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <cmath>
 

@@ -4,6 +4,7 @@
 
 #ifndef FREEZE_PARAM_HPP
 #define FREEZE_PARAM_HPP
+#define OPT_HEADER
 #include "fitter.hpp"
 #include <vector>
 #include <set>

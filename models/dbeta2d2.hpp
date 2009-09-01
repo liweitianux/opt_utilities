@@ -1,5 +1,6 @@
 #ifndef DDBETA_OOOMODEL2d2_H_
 #define DDBETA_OOOMODEL2d2_H_
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <cmath>
 #include <cassert>

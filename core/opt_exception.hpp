@@ -4,6 +4,7 @@
 
 #ifndef OPT_EXCEPTION
 #define OPT_EXCEPTION
+#define OPT_HEADER
 #include <string>
 #include <exception>
 namespace opt_utilities

@@ -1,5 +1,6 @@
 #ifndef POW_MODEL_H_
 #define POW_MODEL_H_
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <core/opt_traits.hpp>
 #include <cmath>

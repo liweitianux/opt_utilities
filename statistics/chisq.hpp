@@ -4,6 +4,7 @@
 
 #ifndef CHI_SQ_HPP
 #define CHI_SQ_HPP
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <iostream>
 #include <vector>

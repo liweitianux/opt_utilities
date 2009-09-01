@@ -5,7 +5,7 @@
 
 #ifndef NUMDIFF_HPP
 #define NUMDIFF_HPP
-
+#define OPT_HEADER
 #include <core/optimizer.hpp>
 #include <core/opt_traits.hpp>
 #include <algorithm>

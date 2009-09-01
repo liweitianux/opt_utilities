@@ -5,6 +5,7 @@
 
 #ifndef AGA_METHOD
 #define AGA_METHOD
+#define OPT_HEADER
 #include <core/optimizer.hpp>
 //#include <blitz/array.h>
 #include <limits>

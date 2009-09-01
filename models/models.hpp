@@ -1,6 +1,6 @@
 #ifndef MODELS_HPP
 #define MODELS_HPP
-
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <map>
 #include <string>

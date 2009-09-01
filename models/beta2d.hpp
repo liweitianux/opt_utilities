@@ -1,5 +1,6 @@
 #ifndef BETA_MODEL2d_H_
 #define BETA_MODEL2d_H_
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <cmath>
 #include <cassert>

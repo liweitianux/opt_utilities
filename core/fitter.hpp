@@ -4,6 +4,7 @@
 
 #ifndef FITTER_HPP
 #define FITTER_HPP
+#define OPT_HEADER
 #include "opt_exception.hpp"
 #include "optimizer.hpp"
 #include <vector>

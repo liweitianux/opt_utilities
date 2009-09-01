@@ -4,6 +4,7 @@
 
 #ifndef ARRAY_OPERATION
 #define ARRAY_OPERATION
+#define OPT_HEADER
 #include <cstddef>
 namespace opt_utilities
 {

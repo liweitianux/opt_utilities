@@ -1,5 +1,6 @@
 #ifndef STRMODEL1D_HPP
 #define STRMODEL1D_HPP
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <cmath>
 #include <sstream>

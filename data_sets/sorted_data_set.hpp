@@ -4,6 +4,7 @@
 
 #ifndef SORTED_DATA_SET
 #define SORTED_DATA_SET
+#define OPT_HEADER
 #include "core/fitter.hpp"
 #include <vector>
 #include <algorithm>

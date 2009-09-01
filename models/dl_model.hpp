@@ -1,7 +1,8 @@
 #ifdef __linux__
 
-#ifndef DL_MODEL_H_
-#define DL_MODEL_H_
+#ifndef DL_MODEL_HPP
+#define DL_MODEL_HPP
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <cmath>
 #include <iostream>

@@ -4,6 +4,7 @@
 
 #ifndef DEFAULT_DATA_SET
 #define DEFAULT_DATA_SET
+#define OPT_HEADER
 #include "core/fitter.hpp"
 #include <vector>
 

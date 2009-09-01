@@ -5,6 +5,7 @@
 
 #ifndef BOOT_STRIP
 #define BOOT_STRIP
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <vector>
 #include <cstdlib>

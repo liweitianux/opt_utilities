@@ -1,5 +1,6 @@
 #ifndef VECN_HPP
 #define VECN_HPP
+#define OPT_HEADER
 #include <iostream>
 namespace opt_utilities
 {

@@ -4,6 +4,7 @@
 
 #ifndef CSTAT_HPP
 #define CSTAT_HPP
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <iostream>
 

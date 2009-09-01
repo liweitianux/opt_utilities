@@ -4,6 +4,7 @@
 
 #ifndef GSL_SIMPLEX_METHOD
 #define GSL_SIMPLEX_METHOD
+#define OPT_HEADER
 #include <core/optimizer.hpp>
 //#include <blitz/array.h>
 #include <vector>

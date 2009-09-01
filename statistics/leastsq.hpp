@@ -3,7 +3,8 @@
  */
 
 #ifndef LEAST_SQ_HPP
-#define LeAST_SQ_HPP
+#define LEAST_SQ_HPP
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <iostream>
 #include <vector>

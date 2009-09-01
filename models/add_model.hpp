@@ -1,5 +1,6 @@
 #ifndef ADD_MODEL_H_
 #define ADD_MODEL_H_
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <cmath>
 

@@ -1,5 +1,6 @@
 #ifndef OPT_TYPES_HPP
 #define OPT_TYPES_HPP
+#define OPT_HEADER
 #include <core/optimizer.hpp>
 #include <core/fitter.hpp>
 #include <data_sets/default_data_set.hpp>

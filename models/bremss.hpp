@@ -1,5 +1,6 @@
 #ifndef BREMSS_MODEL_H_
 #define BREMSS_MODEL_H_
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <cmath>
 

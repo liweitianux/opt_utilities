@@ -5,6 +5,7 @@
 
 #ifndef DATA_LOADERS_H
 #define DATA_LOADERS_H
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <data_sets/default_data_set.hpp>
 #include <iostream>

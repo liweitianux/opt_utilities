@@ -1,5 +1,6 @@
 #ifndef BAS_UTIL
 #define BAS_UTIL
+#define OPT_HEADER
 #include <core/opt_traits.hpp>
 #include <algorithm>
 namespace opt_utilities

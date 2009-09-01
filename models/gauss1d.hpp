@@ -1,5 +1,6 @@
 #ifndef GAUSS_MODEL_H_
 #define GAUSS_MODEL_H_
+#define OPT_HEADER
 #include <core/fitter.hpp>
 #include <cmath>
 
