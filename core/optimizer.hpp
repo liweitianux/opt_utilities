@@ -441,7 +441,7 @@ namespace opt_utilities
      */
     const opt_method<rT,pT>& get_opt_method()const
     {
-      if(p_opt_method=0)
+      if(p_opt_method==0)
 	{
 	  throw opt_method_undefined();
 	}
