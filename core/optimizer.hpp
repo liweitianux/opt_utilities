@@ -122,6 +122,12 @@ namespace opt_utilities
        \param th threshold
      */
     virtual void do_set_precision(rT th)=0;
+
+    /**
+       get the precision
+       \return threshold
+     */
+    virtual rT do_get_precision()const=0;
     /**
        perform the optimization
        \return final optimized parameter.
@@ -139,6 +145,25 @@ namespace opt_utilities
        \param p the upper limit
      */
     virtual void do_set_upper_limit(const pT& p){};
+
+    /**
+       \return start point
+     */
+    virtual pT do_get_start_point()const=0;
+    /**
+       \return the lower limit
+     */
+    virtual pT do_get_lower_limit()const
+    {
+      return pT();
+    };
+    /**
+       \return the upper limit
+     */
+    virtual pT do_get_upper_limit()const
+    {
+      return pT();
+    };
     /**
        \return the clone of current object
      */
@@ -168,6 +193,15 @@ namespace opt_utilities
     {
       do_set_precision(x);
     }
+    
+    /**
+       \return precision
+     */
+    
+    rT get_precision()const
+    {
+      return do_get_precision();
+    }
 
     /**
        Interface function to set start point
@@ -176,6 +210,14 @@ namespace opt_utilities
     void set_start_point(const pT& p)
     {
       do_set_start_point(p);
+    }
+    
+    /**
+       \return start point
+     */
+    pT get_start_point()const
+    {
+      return do_get_start_point();
     }
 
     /**
@@ -189,6 +231,15 @@ namespace opt_utilities
     }
 
     /**
+       \return lower limit
+     */
+
+    pT get_lower_limit()const
+    {
+      return do_get_lower_limit();
+    }
+
+    /**
        Interface function to set upper limit
        \param p upper limit
      */
@@ -196,6 +247,15 @@ namespace opt_utilities
     void set_upper_limit(const pT& p)
     {
       do_set_upper_limit(p);
+    }
+
+    /**
+       \return upper limit
+     */
+    
+    pT get_upper_limit()const
+    {
+      return do_get_upper_limit();
     }
 
     /**
@@ -366,9 +426,22 @@ namespace opt_utilities
     /**
        \return a reference of internally kept optimization method
      */
-    opt_method<rT,pT>& method()
+    opt_method<rT,pT>& get_opt_method()
     {
       if(p_opt_method==0)
+	{
+	  throw opt_method_undefined();
+	}
+      return *(this->p_opt_method);
+    }
+
+    
+    /**
+       \return a const reference of internally kept optimization method
+     */
+    const opt_method<rT,pT>& get_opt_method()const
+    {
+      if(p_opt_method=0)
 	{
 	  throw opt_method_undefined();
 	}
@@ -389,6 +462,19 @@ namespace opt_utilities
       p_opt_method->set_precision(x);
     }
 
+    /**
+       \return precision
+     */
+
+    rT get_precision()const
+    {
+      if(p_opt_method==0)
+	{
+	  throw opt_method_undefined();
+	}
+      return p_opt_method->get_precision();
+    }
+    
     
     /**
        set start point
@@ -401,6 +487,19 @@ namespace opt_utilities
 	  throw opt_method_undefined();
 	}
       p_opt_method->set_start_point(x);
+    }
+
+    /**
+       \return start point
+     */
+    
+    pT get_start_point()const
+    {
+      if(p_opt_method==0)
+	{
+	  throw opt_method_undefined();
+	}
+      return p_opt_method->get_start_point();
     }
     
 
@@ -419,6 +518,19 @@ namespace opt_utilities
 
 
     /**
+       \return lower limit
+     */
+    pT get_lower_limit()const
+    {
+      if(p_opt_method==0)
+	{
+	  throw opt_method_undefined();
+	}
+      return p_opt_method->get_lower_limit();
+    }
+    
+
+    /**
        set upper limit
        \param x upper limit
      */
@@ -429,6 +541,19 @@ namespace opt_utilities
 	  throw opt_method_undefined();
 	}
       p_opt_method->set_upper_limit(x);
+    }
+
+    /**
+       \return upper limit
+     */
+
+    pT get_upper_limit()const
+    {
+      if(p_opt_method==0)
+	{
+	  throw opt_method_undefined();
+	}
+      return p_opt_method->get_upper_limit();
     }
     
 
@@ -468,11 +593,40 @@ namespace opt_utilities
     /**
        \return the pointer to the inner object function
      */
+
     func_obj<rT,pT>* ptr_func_obj()
     {
+      if(p_func_obj==0)
+	{
+	  throw object_function_undefined();
+	}
       return p_func_obj;
     }
+
+
+    /**
+       \return the reference of the internal kept func_obj object
+     */
+    func_obj<rT,pT>& get_func_obj()
+    {
+      if(p_func_obj==0)
+	{
+	  throw object_function_undefined();
+	}
+      return *p_func_obj;
+    }
     
+    /**
+       \return the const reference of the internal kept func_obj object
+    */
+    const func_obj<rT,pT>& get_func_obj()const
+    {
+      if(p_func_obj==0)
+	{
+	  throw object_function_undefined();
+	}
+      return *p_func_obj;
+    }
   };
 }
   

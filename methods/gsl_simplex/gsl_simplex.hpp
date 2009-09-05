@@ -106,9 +106,19 @@ namespace opt_utilities
       
     }
 
+    array1d_type do_get_start_point()const
+    {
+      return start_point;
+    }
+
     void do_set_precision(rT t)
     {
       threshold=t;
+    }
+
+    rT do_get_precision()const
+    {
+      return threshold;
     }
 
     void do_set_optimizer(optimizer<rT,pT>& o)

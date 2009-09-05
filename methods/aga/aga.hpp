@@ -152,22 +152,41 @@ namespace opt_utilities
 	}
       
     }
+
+    array1d_type do_get_start_point()const
+    {
+      return array1d_type();
+    }
     
     void do_set_lower_limit(const array1d_type& p)
     {
       opt_eq(lower_bound,p);
     }
 
+    array1d_type do_get_lower_limit()const
+    {
+      return lower_bound;
+    }
     
     void do_set_upper_limit(const array1d_type& p)
     {
       opt_eq(upper_bound,p);
+    }
+
+    array1d_type do_get_upper_limit()const
+    {
+      return upper_bound;
     }
     
 
     void do_set_precision(rT t)
     {
       threshold=t;
+    }
+
+    rT do_get_precision()const
+    {
+      return threshold;
     }
 
     void do_set_optimizer(optimizer<rT,pT>& o)

@@ -207,6 +207,11 @@ namespace opt_utilities
       opt_eq(start_point,p);
     }
 
+    array1d_type do_get_start_point()const
+    {
+      return start_point;
+    }
+
     void do_set_lower_limit(const array1d_type& p)
     {}
 
@@ -216,6 +221,11 @@ namespace opt_utilities
     void do_set_precision(rT t)
     {
       threshold=t;
+    }
+
+    rT do_get_precision()const
+    {
+      return threshold;
     }
 
     void do_set_optimizer(optimizer<rT,pT>& o)
