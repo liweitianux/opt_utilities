@@ -555,8 +555,8 @@ namespace opt_utilities
 
     /**
        clear the param modifier
-     */
-    void set_param_modifier()
+    */
+    void clear_param_modifier()
     {
       if(p_param_modifier!=0)
 	{
@@ -579,6 +579,17 @@ namespace opt_utilities
       return *p_param_modifier;
     }
 
+    /**
+       \return the param_modifier
+    */
+    const param_modifier<Ty,Tx,Tp,Tstr>& get_param_modifier()const
+    {
+      if(p_param_modifier==0)
+	{
+	  throw param_modifier_undefined();
+	}
+      return *p_param_modifier;
+    }
 
     /**
        report the param status
@@ -600,9 +611,9 @@ namespace opt_utilities
        \param pname the name of the param
        \return the param info
     */
-    const param_info<Tp,Tstr>& get_param_info(const Tstr& pname)
+    const param_info<Tp,Tstr>& get_param_info(const Tstr& pname)const
     {
-      for(typename std::vector<param_info<Tp,Tstr> >::iterator i=param_info_list.begin();
+      for(typename std::vector<param_info<Tp,Tstr> >::const_iterator i=param_info_list.begin();
 	  i!=param_info_list.end();++i)
 	{
 	  if(i->get_name()==pname)
@@ -1081,13 +1092,13 @@ namespace opt_utilities
     /**
        clear the param modifier
     */
-    void set_param_modifier()
+    void clear_param_modifier()
     {
       if(p_model==0)
 	{
 	  throw model_undefined();
 	}
-      p_model->set_param_modifier();
+      p_model->clear_param_modifier();
     }
 
 
@@ -1096,6 +1107,19 @@ namespace opt_utilities
        \return the reference of param_modifier
      */
     param_modifier<Ty,Tx,Tp,Tstr>& get_param_modifier()
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->get_param_modifier();
+    }
+
+    /**
+       Get the inner kept param modifier
+       \return the reference of param_modifier
+     */
+    const param_modifier<Ty,Tx,Tp,Tstr>& get_param_modifier()const
     {
       if(p_model==0)
 	{
@@ -1136,6 +1160,19 @@ namespace opt_utilities
 	}
     }
 	
+    /**
+       get the data set that have been loaded
+       \return the const reference of inner data_set
+    */
+    data_set<Ty,Tx>& get_data_set()
+    {
+      if(p_data_set==0)
+	{
+	  throw data_unloaded();
+	}
+      return *(this->p_data_set);
+    }
+
 
     /**
        get the data set that have been loaded
@@ -1164,10 +1201,36 @@ namespace opt_utilities
     }
 
     /**
+       Get the model used
+       \return the reference of model used
+    */
+    const model<Ty,Tx,Tp,Tstr>& get_model()const
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return *(this->p_model);
+    }
+
+    /**
        Get the statistic used
        \return the reference of the statistic used
      */
     statistic<Ty,Tx,Tp,Ts,Tstr>& get_statistic()
+    {
+      if(p_statistic==0)
+	{
+	  throw statistic_undefined();
+	}
+      return *(this->p_statistic);
+    }
+
+    /**
+       Get the statistic used
+       \return the reference of the statistic used
+     */
+    const statistic<Ty,Tx,Tp,Ts,Tstr>& get_statistic()const
     {
       if(p_statistic==0)
 	{
@@ -1180,11 +1243,19 @@ namespace opt_utilities
        Get the optimization method that used
        \return the reference of the opt_method
      */
-    opt_method<Ts,Tp>& get_method()
+    opt_method<Ts,Tp>& get_opt_method()
     {
       return optengine.method();
     }
     
+    /**
+       Get the optimization method that used
+       \return the reference of the opt_method
+     */
+    const opt_method<Ts,Tp>& get_opt_method()const
+    {
+      return optengine.method();
+    }
 
   public:
     /**
@@ -1390,7 +1461,7 @@ namespace opt_utilities
        set the optimization method used to perform the model fitting
        \param pm the opt_method to be used
     */
-    void set_method(const opt_method<Ts,Tp>& pm)
+    void set_opt_method(const opt_method<Ts,Tp>& pm)
     {
       //assert(p_optimizer!=0);
       optengine.set_opt_method(pm);

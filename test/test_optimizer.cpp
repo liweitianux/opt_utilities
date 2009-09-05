@@ -1,3 +1,5 @@
+#define private public
+#include <cassert>
 #include <core/optimizer.hpp>
 #include <methods/powell/powell_method.hpp>
 //#include <methods/gsl_simplex/gsl_simplex.hpp>
@@ -120,8 +122,10 @@ void test_opt(const func_obj<double,vector<double> >& fo,
 {
   const int problem_size=5;
   optimizer<double,vector<double> > opt;
-  opt.set_opt_method(optm);
+  
   opt.set_func_obj(fo);
+  opt.set_opt_method(optm);
+
   vector<double> p(problem_size);
   for(int i=0;i<p.size();++i)
     {

@@ -596,10 +596,6 @@ namespace opt_utilities
 
     func_obj<rT,pT>* ptr_func_obj()
     {
-      if(p_func_obj==0)
-	{
-	  throw object_function_undefined();
-	}
       return p_func_obj;
     }
 
