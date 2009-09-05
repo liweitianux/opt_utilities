@@ -49,7 +49,41 @@ namespace opt_utilities
     {
       data_vec.clear();
     }
-  
+
+  public:
+    default_data_set()
+    {}
+    
+    default_data_set(const default_data_set<Ty,Tx>& rhs)
+      :data_vec(rhs.data_vec)
+    {}
+
+    default_data_set(const data_set<Ty,Tx>& rhs)
+    {
+      data_vec.resize(rhs.size());
+      for(int i=0;i<data_vec.size();++i)
+	{
+	  data_vec[i](rhs.get_data(i));
+	}
+    }
+
+    default_data_set& operator=(const default_data_set<Ty,Tx>& rhs)
+    {
+      data_vec=rhs.data_vec;
+      return *this;
+    }
+
+    default_data_set& operator=(const data_set<Ty,Tx>& rhs)
+    {
+      data_vec.resize(rhs.size());
+      for(int i=0;i<data_vec.size();++i)
+	{
+	  data_vec[i](rhs.get_data(i));
+	}
+      return *this;
+    }
+
+    
   };
 }
 
