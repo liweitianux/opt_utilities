@@ -709,6 +709,25 @@ namespace opt_utilities
       return get_num_params();
     }
 
+    /**
+       \param pinfo param information being set
+     */
+    void set_param_info(const param_info<Tp,Tstr>& pinfo)
+    {
+      for(typename std::vector<param_info<Tp,Tstr> >::iterator i=param_info_list.begin();
+	  i!=param_info_list.end();++i)
+	{
+	  if(i->get_name()==pinfo.get_name())
+	    {
+	      i->set_value(pinfo.get_value());
+	      i->set_lower_limit(pinfo.get_lower_limit());
+	      i->set_upper_limit(pinfo.get_upper_limit());
+	      return;
+	    }
+	}
+      throw param_not_found();
+    }
+    
 
     /**
        \param pname the name of the parameter
@@ -1385,6 +1404,20 @@ namespace opt_utilities
 	  throw model_undefined();
 	}
       return p_model->get_param_info(pname).get_upper_limit();
+    }
+
+
+    /**
+       \param pinfo the param information being set
+     */
+
+    void set_param_info(const param_info<Tp,Tstr>& pinfo)
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      p_model->set_param_info(pinfo);
     }
 
     

@@ -61,6 +61,44 @@ namespace opt_utilities
       data_vec.clear();
     }
     
+  public:
+    sorted_data_set()
+    {}
+
+    sorted_data_set(const sorted_data_set<Ty,Tx>& rhs)
+      :data_vec(rhs.data_vec)
+    {}
+
+    sorted_data_set& operator=(const sorted_data_set<Ty,Tx>& rhs)
+    {
+      data_vec=rhs.data_vec;
+      return *this;
+    }
+
+    sorted_data_set(const data_set<Ty,Tx>& rhs)
+    {
+      for(int i=0;i<rhs.size();++i)
+	{
+	  typename std::vector<data<Ty,Tx> >::iterator p
+	    =std::lower_bound(data_vec.begin(),data_vec.end(),rhs.get_data(i),comp_data<Ty,Tx>);
+	  //data_vec.push_back(d);
+	  data_vec.insert(p,rhs.get_data(i));
+	}
+    }
+
+    sorted_data_set& operator=(const data_set<Ty,Tx>& rhs)
+    {
+      data_vec.clear();
+      for(int i=0;i<rhs.size();++i)
+	{
+	  typename std::vector<data<Ty,Tx> >::iterator p
+	    =std::lower_bound(data_vec.begin(),data_vec.end(),rhs.get_data(i),comp_data<Ty,Tx>);
+	  //data_vec.push_back(d);
+	  data_vec.insert(p,rhs.get_data(i));
+	}
+      return *this;
+    }
+    
   };
 }
 
