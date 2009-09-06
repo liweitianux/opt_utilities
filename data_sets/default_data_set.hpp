@@ -21,7 +21,8 @@ namespace opt_utilities
   class default_data_set
     :public data_set<Ty,Tx>
   {
-  private:
+    //  private:
+  public:
     std::vector<data<Ty,Tx> > data_vec;
     
     data_set<Ty,Tx>* do_clone()const
