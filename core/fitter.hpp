@@ -979,7 +979,7 @@ namespace opt_utilities
       if(rhs.p_statistic!=0)
 	{
 	  set_statistic(*(rhs.p_statistic));
-	  assert(p_statistic->p_fitter!=0);
+	  //assert(p_statistic->p_fitter!=0);
 	}
       if(rhs.p_data_set!=0)
 	{
@@ -1264,7 +1264,7 @@ namespace opt_utilities
      */
     opt_method<Ts,Tp>& get_opt_method()
     {
-      return optengine.method();
+      return optengine.get_opt_method();
     }
     
     /**
@@ -1273,7 +1273,7 @@ namespace opt_utilities
      */
     const opt_method<Ts,Tp>& get_opt_method()const
     {
-      return optengine.method();
+      return optengine.get_opt_method();
     }
 
   public:
