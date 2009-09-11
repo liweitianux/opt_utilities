@@ -12,6 +12,7 @@
 #include "opt_exception.hpp"
 #include <cstdlib>
 #include <functional>
+#include <typeinfo>
 #ifdef DEBUG
 #include <iostream>
 using namespace std;
@@ -59,6 +60,15 @@ namespace opt_utilities
       delete this;
     }
 
+    /**
+       \return the type name of self
+     */
+
+    virtual const char* do_get_type_name()const
+    {
+      return typeid(*this).name();
+    }
+
   public:
     /**
        Interface function to perform the clone
@@ -77,6 +87,10 @@ namespace opt_utilities
       do_destroy();
     }
 
+    const char* get_type_name()const
+    {
+      return this->do_get_type_name();
+    }
 
     /**
        Makes the class object like a real function.
@@ -174,6 +188,15 @@ namespace opt_utilities
     virtual void do_destroy()
     {
       delete this;
+    }
+    
+    /**
+       \return the type name of self
+    */
+    
+    virtual const char* do_get_type_name()const
+    {
+      return typeid(*this).name();
     }
   public:
     /**
@@ -284,6 +307,15 @@ namespace opt_utilities
     void destroy()
     {
       do_destroy();
+    }
+
+    /**
+       \return the type name of self
+     */
+
+    virtual const char* get_type_name()const
+    {
+      return this->do_get_type_name();
     }
 
     /**

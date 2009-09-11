@@ -232,7 +232,15 @@ namespace opt_utilities
     virtual void do_add_data(const data<Ty,Tx>&)=0;
     virtual void do_clear()=0;
     virtual data_set<Ty,Tx>* do_clone()const=0;
+    /**
+       \return the type name of self
+     */
 
+    virtual const char* do_get_type_name()const
+    {
+      return typeid(*this).name();
+    }
+    
     virtual void do_destroy()
     {
       delete this;
@@ -282,6 +290,12 @@ namespace opt_utilities
     {
       return this->do_clone();
     }
+
+    const char* get_type_name()const
+    {
+      return this->do_get_type_name();
+    }
+    
 
     /**
        destroy the cloned object
@@ -463,6 +477,15 @@ namespace opt_utilities
     {
       delete this;
     }
+
+    /**
+       \return the type name of self
+    */
+    
+    virtual const char* do_get_type_name()const
+    {
+      return typeid(*this).name();
+    }
   public:
 
     /**
@@ -472,6 +495,12 @@ namespace opt_utilities
     {
       return do_clone();
     }
+
+    const char* get_type_name()const
+    {
+      return this->do_get_type_name();
+    }
+
 
     /**
        destroy the cloned object
@@ -1604,6 +1633,15 @@ namespace opt_utilities
       delete this;
     }
 
+    /**
+       \return the type name of self
+    */
+    
+    virtual const char* do_get_type_name()const
+    {
+      return typeid(*this).name();
+    }
+    
   public:
     /**
        clone the existing object
@@ -1612,6 +1650,11 @@ namespace opt_utilities
     statistic<Ty,Tx,Tp,Ts,Tstr>* clone()const
     {
       return this->do_clone();
+    }
+
+    const char* get_type_name()const
+    {
+      return this->do_get_type_name();
     }
     
     /**
@@ -1747,6 +1790,12 @@ namespace opt_utilities
     {
       return do_clone();
     }
+
+    const char* get_type_name()const
+    {
+      return this->do_get_type_name();
+    }
+
     
     /**
        destroy the cloned object
@@ -1754,6 +1803,15 @@ namespace opt_utilities
     void destroy()
     {
       do_destroy();
+    }
+
+    /**
+       \return the type name of self
+    */
+    
+    virtual const char* do_get_type_name()const
+    {
+      return typeid(*this).name();
     }
 
   public:
