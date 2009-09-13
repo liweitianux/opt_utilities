@@ -59,7 +59,7 @@ namespace opt_utilities
 	  if(n%10==0)
 	    {
 	      cout<<"a:"<<result<<"\t";
-	      for(int i=0;i<get_size(p);++i)
+	      for(size_t i=0;i<get_size(p);++i)
 		{
 		  cout<<get_element(p,i)<<",";
 		}

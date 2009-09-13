@@ -87,16 +87,18 @@ namespace opt_utilities
 
   public:
     aga_method(int _n1,int _n2)
-      :threshold(1e-4),p_fo(0),p_optimizer(0),
-       n1(_n1),n2(_n2),samples(n1*n2+n1),n0(n1*n2+n1),
-       decay_factor(.999)
+      :n1(_n1),n2(_n2),n0(n1*n2+n1),
+       p_fo(0),p_optimizer(0),threshold(1e-4),
+       decay_factor(.999),
+       samples(n1*n2+n1)      
     {
     }
     
     aga_method()
-      :threshold(1e-4),p_fo(0),p_optimizer(0),
-       n1(50),n2(20),samples(n1*n2+n1),n0(n1*n2+n1),
-       decay_factor(.999)
+      :n1(50),n2(20),n0(n1*n2+n1),
+       p_fo(0),p_optimizer(0),threshold(1e-4),
+       decay_factor(.999),
+       samples(n1*n2+n1)      
     {
     }
     
@@ -106,10 +108,11 @@ namespace opt_utilities
     };
     
     aga_method(const aga_method<rT,pT>& rhs)
-      :threshold(rhs.threshold),
+      :n1(rhs.n1),n2(rhs.n2),n0(rhs.n0),
        p_fo(rhs.p_fo),p_optimizer(rhs.p_optimizer),
-       n1(rhs.n1),n2(rhs.n2),
-       samples(rhs.samples),n0(rhs.n0)
+       threshold(rhs.threshold),
+       decay_factor(rhs.decay_factor),
+       samples(rhs.samples)
     {
     }
 
@@ -137,12 +140,12 @@ namespace opt_utilities
     
     void do_set_start_point(const array1d_type& p)
     {
-      for(int i=0;i<samples.size();++i)
+      for(size_t i=0;i<samples.size();++i)
 	{
 	  //  cout<<i<<" ";
 	  resize(samples[i].p,get_size(p));
 	  //	  std::cout<<samples[i].p.size()<<std::endl;;
-	  for(int j=0;j<get_size(p);++j)
+	  for(size_t j=0;j<get_size(p);++j)
 	    {
 	      set_element(samples[i].p,j,
 			  uni_rand(get_element(lower_bound,j),
@@ -199,7 +202,7 @@ namespace opt_utilities
     {
       rT sum2=0;
       rT sum=0;
-      for(int i=0;i<samples.size();++i)
+      for(size_t i=0;i<samples.size();++i)
 	{
 	  samples[i].v=func(samples[i].p);
 	  sum2+=samples[i].v*samples[i].v;
@@ -216,7 +219,7 @@ namespace opt_utilities
       for(int i=0;i<n2;++i)
 	{
 	  pT p(samples[i].p);
-	  for(int j=0;j<get_size(p);++j)
+	  for(size_t j=0;j<get_size(p);++j)
 	    {
 	      if(i==0)
 		{
@@ -246,7 +249,7 @@ namespace opt_utilities
 	  for(int j=0;j<n2;++j)
 	    {
 	      pT p(samples[i].p);
-	      for(int k=0;k<get_size(p);++k)
+	      for(size_t k=0;k<get_size(p);++k)
 		{
 		  set_element(samples[i*n2+j+n1].p,k,
 			      (get_element(samples[i].p,k)+
@@ -259,7 +262,7 @@ namespace opt_utilities
 	    }
 	}
       double n_per_dim=pow((double)n0,1./get_size(lower_bound));
-      for(int i=0;i<get_size(reproduction_box);++i)
+      for(size_t i=0;i<get_size(reproduction_box);++i)
 	{
 	  //	  set_element(reproduction_box,i,
 	  //get_element(reproduction_box,i)*decay_factor);
@@ -278,7 +281,7 @@ namespace opt_utilities
       double n_per_dim=pow((double)n0,1./get_size(lower_bound));
       resize(reproduction_box,get_size(lower_bound));
       
-      for(int i=0;i<get_size(lower_bound);++i)
+      for(size_t i=0;i<get_size(lower_bound);++i)
 	{
 	  
 	  set_element(reproduction_box,i,

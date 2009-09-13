@@ -131,7 +131,7 @@ namespace opt_utilities
 	  throw fitter_unset();
 	}
       current_data_set=default_data_set<Ty,Tx>();
-      for(int i=0;i<origin_data_set.size();++i)
+      for(size_t i=0;i<origin_data_set.size();++i)
 	{
 	  data<Ty,Tx> d;
 	  d=origin_data_set.get_data(i);
