@@ -330,7 +330,7 @@ namespace opt_utilities
     typename element_type_trait<Tp>::element_type value;
     typename element_type_trait<Tp>::element_type lower_limit;
     typename element_type_trait<Tp>::element_type upper_limit;
-    
+    Tstr description;
   public:
 
     /**
@@ -343,15 +343,17 @@ namespace opt_utilities
     param_info(const Tstr& _name,
 	       const typename element_type_trait<Tp>::element_type& _v,
 	       const typename element_type_trait<Tp>::element_type& _l=0,
-	       const typename element_type_trait<Tp>::element_type& _u=0
-	       )
-      :name(_name),value(_v),lower_limit(_l),upper_limit(_u){}
+	       const typename element_type_trait<Tp>::element_type& _u=0,
+	       const Tstr& desc=Tstr())
+      :name(_name),value(_v),lower_limit(_l),
+       upper_limit(_u),description(desc)
+    {}
 
     /**
        default construct
      */
     param_info()
-      :name()
+      :name(),description()
     {}
 
 
@@ -359,7 +361,7 @@ namespace opt_utilities
        copy construct function
      */
     param_info(const param_info& rhs)
-      :name(rhs.name)
+      :name(rhs.name),description(rhs.description)
     {
       opt_eq(value,rhs.value);
       opt_eq(lower_limit,rhs.lower_limit);
@@ -373,6 +375,7 @@ namespace opt_utilities
     param_info& operator=(const param_info& rhs)
     {
       name=rhs.name;
+      description=rhs.description;
       opt_eq(value,rhs.value);
       opt_eq(lower_limit,rhs.lower_limit);
       opt_eq(upper_limit,rhs.upper_limit);
@@ -412,6 +415,10 @@ namespace opt_utilities
       return upper_limit;
     }
 
+    const Tstr& get_description()const
+    {
+      return description;
+    }
     
     /**
        set the value
@@ -450,6 +457,12 @@ namespace opt_utilities
     {
       name=_name;
     }
+
+    void set_description(const Tstr& desc)
+    {
+      description=desc;
+    }
+
   };
 
 
@@ -1624,7 +1637,7 @@ namespace opt_utilities
   {
   private:
     fitter<Ty,Tx,Tp,Ts,Tstr>* p_fitter;
-  
+
   private:
     virtual statistic<Ty,Tx,Tp,Ts,Tstr>* do_clone()const=0;
 
@@ -1633,6 +1646,10 @@ namespace opt_utilities
       delete this;
     }
 
+    virtual Tstr do_to_string()const
+    {
+      return Tstr();
+    }
     /**
        \return the type name of self
     */
@@ -1663,6 +1680,11 @@ namespace opt_utilities
     void destroy()
     {
       return do_destroy();
+    }
+
+    Tstr to_string()const
+    {
+      return do_to_string();
     }
 
     /**
