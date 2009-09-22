@@ -228,6 +228,10 @@ namespace opt_utilities
   private:
     
     virtual const data<Ty,Tx>& do_get_data(size_t i)const=0;
+    virtual void do_set_data(size_t i,const data<Ty,Tx>& d)
+    {
+      throw data_unsetable();
+    }
     virtual size_t do_size()const=0;
     virtual void do_add_data(const data<Ty,Tx>&)=0;
     virtual void do_clear()=0;
@@ -256,6 +260,11 @@ namespace opt_utilities
       return this->do_get_data(i);
     }
 
+    void set_data(size_t i,const data<Ty,Tx>& d)
+    {
+      do_set_data(i,d);
+    }
+    
     /**
        \return the size of the data set
      */

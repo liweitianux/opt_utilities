@@ -143,6 +143,15 @@ namespace opt_utilities
     {}
   };
 
+  class data_unsetable
+    :public opt_exception
+  {
+  public:
+    data_unsetable()
+      :opt_exception("data unsetable")
+    {}
+  };
+
 }
 
 
