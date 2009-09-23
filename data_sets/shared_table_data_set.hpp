@@ -70,6 +70,17 @@ namespace opt_utilities
       return true;
     }
 
+    bool insert_data(size_t idx,size_t n,const data<Ty,Tx>& d)
+    {
+      if(idx<0||idx>data_vec.size())
+	{
+	  return false;
+	}
+      data_vec.insert(data_vec.begin()+idx,n,d);
+      return true;
+    }
+    
+
     bool erase_data(size_t idx)
     {
       if(idx>=0&&idx<data_vec.size())
