@@ -93,7 +93,7 @@ namespace opt_utilities
 
     bool erase_data(size_t beg,size_t end)
     {
-      if(beg>=0&&beg<end&&end<data_vec.size())
+      if(beg>=0&&beg<=end&&end<=data_vec.size())
 	{
 	  data_vec.erase(data_vec.begin()+beg,data_vec.begin()+end);
 	  return true;
