@@ -1707,7 +1707,8 @@ namespace opt_utilities
        copy construct
      */
     statistic(const statistic& rhs)
-      :p_fitter(rhs.p_fitter)
+      :func_obj<Ts,Tp>(static_cast<const func_obj<Ts,Tp>& >(rhs))
+      ,p_fitter(rhs.p_fitter)
     {}
 
     /**
