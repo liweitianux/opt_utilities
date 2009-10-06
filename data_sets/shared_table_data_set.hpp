@@ -60,7 +60,7 @@ namespace opt_utilities
       data_vec.clear();
     }
 
-    bool insert_data(size_t idx,const data<Ty,Tx>& d)
+    bool insert_data(int idx,const data<Ty,Tx>& d)
     {
       if(idx<0||idx>data_vec.size())
 	{
@@ -70,7 +70,7 @@ namespace opt_utilities
       return true;
     }
 
-    bool insert_data(size_t idx,size_t n,const data<Ty,Tx>& d)
+    bool insert_data(int idx,size_t n,const data<Ty,Tx>& d)
     {
       if(idx<0||idx>data_vec.size())
 	{
@@ -132,6 +132,11 @@ namespace opt_utilities
 	  data_vec[i](rhs.get_data(i));
 	}
       return *this;
+    }
+
+    void reserve(size_t n)
+    {
+      data_vec.reserve(n);
     }
 
     
