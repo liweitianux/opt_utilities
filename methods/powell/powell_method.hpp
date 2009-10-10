@@ -175,7 +175,7 @@ namespace opt_utilities
     };
 
     powell_method(const powell_method<rT,pT>& rhs)
-      :p_fo(rhs.p_fo),p_optimizer(rhs.p_optimizer),
+      :opt_method<rT,pT>(rhs),p_fo(rhs.p_fo),p_optimizer(rhs.p_optimizer),
        start_point(rhs.start_point),
        end_point(rhs.end_point),
        ncom(rhs.ncom),

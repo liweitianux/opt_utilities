@@ -547,11 +547,11 @@ namespace opt_utilities
     model(const model& rhs)
       :p_param_modifier(0)
     {
+      param_info_list=rhs.param_info_list;
       if(rhs.p_param_modifier!=0)
 	{
 	  set_param_modifier(*(rhs.p_param_modifier));
 	}
-      param_info_list=rhs.param_info_list;
       null_param=rhs.null_param;
       
     }
@@ -901,7 +901,6 @@ namespace opt_utilities
 	      return i;
 	    }
 	}
-      //      std::cerr<<"param name invalid!"<<std::endl;
       // assert(false);
       throw param_not_found();
       return -1;
@@ -1061,6 +1060,7 @@ namespace opt_utilities
 	{
 	  load_data(*(rhs.p_data_set));
 	}
+
       optengine=rhs.optengine;
       return *this;
     }
