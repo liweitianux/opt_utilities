@@ -1628,8 +1628,15 @@ namespace opt_utilities
       return p_model->get_all_params();
     }
 
+    /**
+       stop the fitting
+    */
+    void stop()
+    {
+      optengine.stop();
+    }
+    
   };
-
 
 
   /**

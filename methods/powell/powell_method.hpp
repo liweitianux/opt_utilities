@@ -31,7 +31,7 @@ namespace opt_utilities
   private:
     func_obj<rT,pT>* p_fo;
     optimizer<rT,pT>* p_optimizer;
-    
+    mutable bool bstop;
     //typedef blitz::Array<rT,2> array2d_type;
     
     
@@ -99,13 +99,13 @@ namespace opt_utilities
       array1d_type ptt(n);
       array1d_type xit(n);
       fret=p_fo->eval(p);
-      
+
       for(j=0;j<n;++j)
 	{
 	  //get_element(pt,j)=get_element(p,j);
 	  set_element(pt,j,get_element(p,j));
 	}
-      for(iter=0;;++iter)
+      for(iter=0;!bstop;++iter)
 	{
 	  fp=fret;
 	  ibig=0;
@@ -238,7 +238,7 @@ namespace opt_utilities
     
     pT do_optimize()
     {
-
+      bstop=false;
       init_xi((int)get_size(start_point));
 
 
@@ -255,7 +255,13 @@ namespace opt_utilities
       rT fret;
       powell(end_point,threshold,iter,fret);
       return end_point;
-    } 
+    }
+    
+    void do_stop()
+    {
+      bstop=true;
+    }
+
   };
 
 }

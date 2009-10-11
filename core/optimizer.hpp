@@ -198,6 +198,13 @@ namespace opt_utilities
     {
       return typeid(*this).name();
     }
+
+    /**
+       interrupting the optimization
+     */
+    virtual void do_stop()
+    {
+    }
   public:
     /**
        Interface function for seting optimizer
@@ -300,6 +307,13 @@ namespace opt_utilities
       return do_clone();
     }
 
+    /**
+       stop the optimization
+     */
+    void stop()
+    {
+      do_stop();
+    }
 
     /**
        destroy the cloned object.
@@ -620,6 +634,17 @@ namespace opt_utilities
 	  throw object_function_undefined();
 	}
       return p_opt_method->optimize();
+    }
+
+    /**
+       stop the optimize
+     */
+    void stop()
+    {
+      if(p_opt_method)
+	{
+	  p_opt_method->stop();
+	}
     }
     
     /**

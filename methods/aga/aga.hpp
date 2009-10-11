@@ -69,7 +69,7 @@ namespace opt_utilities
     pT reproduction_box;
     std::vector<vp_pair<rT,pT> > samples;
     std::vector<pT> buffer;
-
+    mutable bool bstop;
   private:
     typename element_type_trait<pT>::element_type uni_rand
     (typename element_type_trait<pT>::element_type x1,
@@ -216,7 +216,7 @@ namespace opt_utilities
 	}
       pT lb(get_size(samples[0].p));
       pT ub(get_size(samples[0].p));
-      for(int i=0;i<n2;++i)
+      for(int i=0;i<n2&&!bstop;++i)
 	{
 	  pT p(samples[i].p);
 	  for(size_t j=0;j<get_size(p);++j)
@@ -244,9 +244,13 @@ namespace opt_utilities
 	    }
 	  buffer[i]=p;
 	}
-      for(int i=0;i<n1;++i)
+      if(bstop)
 	{
-	  for(int j=0;j<n2;++j)
+	  return false;
+	}
+      for(int i=0;i<n1&&!bstop;++i)
+	{
+	  for(int j=0;j<n2&&!bstop;++j)
 	    {
 	      pT p(samples[i].p);
 	      for(size_t k=0;k<get_size(p);++k)
@@ -260,6 +264,10 @@ namespace opt_utilities
 		  lb[k]=std::min(lb[k],samples[i*n2+j+n1].p[k]);
 		}
 	    }
+	}
+      if(bstop)
+	{
+	  return false;
 	}
       double n_per_dim=pow((double)n0,1./get_size(lower_bound));
       for(size_t i=0;i<get_size(reproduction_box);++i)
@@ -276,6 +284,7 @@ namespace opt_utilities
       
     pT do_optimize()
     {
+      bstop=false;
       srand(time(0));
       buffer.resize(n2);
       double n_per_dim=pow((double)n0,1./get_size(lower_bound));
@@ -289,9 +298,14 @@ namespace opt_utilities
 		       get_element(lower_bound,i))/n_per_dim);
 	}
       
-      while(iter()){}
+      while(iter()&&!bstop){}
       
       return samples.begin()->p;
+    }
+    
+    void do_stop()
+    {
+      bstop=true;
     }
 
   };
