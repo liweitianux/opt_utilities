@@ -66,7 +66,7 @@ namespace opt_utilities
 	      break;
 	    }
 	  data<Ty,Tx> d(x,y,y_err,y_err,x_err,x_err);
-	  ds.push_back(d);
+	  ds.add_data(d);
 	}
       //return ifs;
     }
@@ -125,7 +125,7 @@ namespace opt_utilities
 	      break;
 	    }
 	  data<Ty,Tx> d(x,y,y_err,y_err,x_err,x_err);
-	  ds.push_back(d);
+	  ds.add_data(d);
 	}
     }
 
@@ -186,7 +186,7 @@ namespace opt_utilities
 	      break;
 	    }
 	  data<Ty,Tx> d(x,y,yl,yu,xl,xu);
-	  ds.push_back(d);
+	  ds.add_data(d);
 	}
     }
 

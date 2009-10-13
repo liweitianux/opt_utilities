@@ -13,7 +13,7 @@
 #include <utility>
 #include <algorithm>
 #include <data_sets/default_data_set.hpp>
-using std::cout;
+using std::cerr;
 namespace opt_utilities
 {
 
@@ -122,6 +122,11 @@ namespace opt_utilities
     {
       return param_pool.at(i);
     }
+
+    int get_param_pool_size()const
+    {
+      return param_pool.size();
+    }
     
   private:
     Tp sample()
@@ -143,9 +148,9 @@ namespace opt_utilities
       param_pool.push_back(p_fitter->fit());
       for(size_t i=0;i<(param_pool.back()).size();++i)
 	{
-	  cout<<param_pool.back()[i]<<",";
+	  cerr<<param_pool.back()[i]<<",";
 	}
-      std::cout<<std::endl;
+      std::cerr<<std::endl;
       return param_pool.back();
     }
     
@@ -181,7 +186,7 @@ namespace opt_utilities
 	typename std::vector<typename element_type_trait<Tp>::element_type>::iterator> 
 	itv=equal_range(_tmp.begin(),_tmp.end(),origin_param[order]);
       int current_param_position=itv.second-_tmp.begin();
-      std::cout<<_tmp.size()<<std::endl;
+      std::cerr<<_tmp.size()<<std::endl;
       return std::pair<typename element_type_trait<Tp>::element_type,
 	typename element_type_trait<Tp>::element_type>(
 				 _tmp.at((int)((1-level)*current_param_position)),
