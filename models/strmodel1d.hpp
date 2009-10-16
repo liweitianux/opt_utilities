@@ -21,6 +21,11 @@ private:
   std::string var_name;
   double x;
   void set_buildin_fun();
+
+  const char* do_get_type_name()const
+  {
+    return "parse a string as a model";
+  }
 public:
   double do_eval(const double& x,const std::vector<double>& p);
   strmodel1d();

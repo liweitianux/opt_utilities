@@ -34,7 +34,10 @@ namespace opt_utilities
     mutable bool bstop;
     //typedef blitz::Array<rT,2> array2d_type;
     
-    
+    const char* do_get_type_name()const
+    {
+      return "powell method";
+    }
   private:
     array1d_type start_point;
     array1d_type end_point;

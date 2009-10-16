@@ -21,6 +21,11 @@ namespace opt_utilities
       return new func_model<T>(*this);
     }
 
+    const char* do_get_type_name()const
+    {
+      return "function wrapping model";
+    }
+
     //  public:
   private:
     func_model()

@@ -15,6 +15,11 @@ namespace opt_utilities
     {
       return new bpl1d<T>(*this);
     }
+
+    const char* do_get_type_name()const
+    {
+      return "broken power law";
+    }
   public:
     bpl1d()
     {

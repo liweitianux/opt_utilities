@@ -36,6 +36,12 @@ namespace opt_utilities
       // return const_cast<statistic<Ty,Tx,Tp>*>(this);
       return new chisq<Ty,Tx,Tp,Ts,Tstr>(*this);
     }
+
+    const char* do_get_type_name()const
+    {
+      return "chi^2 statistic";
+    }
+    
   public:
     void verbose(bool v)
     {
@@ -99,7 +105,10 @@ namespace opt_utilities
       return new chisq<Ty,Tx,Tp,Ts,Tstr>(*this);
     }
 
-
+    const char* do_get_type_name()const
+    {
+      return "chi^2 statistics (specialized for double)";
+    }
   public:
     void verbose(bool v)
     {

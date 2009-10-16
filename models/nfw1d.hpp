@@ -15,6 +15,11 @@ namespace opt_utilities
     {
       return new nfw1d<T>(*this);
     }
+
+    const char* do_get_type_name()const
+    {
+      return "1d NFW model";
+    }
   public:
     nfw1d()
     {

@@ -15,6 +15,11 @@ namespace opt_utilities
     {
       return new bl1d<T>(*this);
     }
+    
+    const char* do_get_type_name()const
+    {
+      return "broken linear model";
+    }
   public:
     bl1d()
     {

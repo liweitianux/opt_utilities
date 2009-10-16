@@ -130,6 +130,12 @@ namespace opt_utilities
     }
 
   public:
+    const char* do_get_type_name()const
+    {
+      return "add model";
+    }
+
+  public:
     Ty do_eval(const Tx& x,const Tp& param)
     {
       if(!pm1)

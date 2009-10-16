@@ -19,6 +19,11 @@ namespace opt_utilities
     {
       return new beta2d2<T>(*this);
     }
+
+    const char* do_get_type_name()const
+    {
+      return "2d double beta model";
+    }
   public:
     beta2d2()
     {

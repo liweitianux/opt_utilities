@@ -36,6 +36,12 @@ namespace opt_utilities
       // return const_cast<statistic<Ty,Tx,Tp>*>(this);
       return new leastsq<Ty,Tx,Tp,Ts,Tstr>(*this);
     }
+
+    const char* do_get_type_name()const
+    {
+      return "least square statistic";
+    }
+    
   public:
     void verbose(bool v)
     {

@@ -15,6 +15,11 @@ namespace opt_utilities
     {
       return new bremss<T>(*this);
     }
+
+    const char* do_get_type_name()const
+    {
+      return "Bremsstrahlung emission";
+    }
   public:
     bremss()
     {

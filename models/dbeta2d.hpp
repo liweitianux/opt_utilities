@@ -19,7 +19,10 @@ namespace opt_utilities
       return new dbeta2d<T>(*this);
     }
     
-    
+    const char* do_get_type_name()const
+    {
+      return "2d double beta model";
+    }    
     
   public:
     dbeta2d()

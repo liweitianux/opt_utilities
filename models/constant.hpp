@@ -15,6 +15,10 @@ namespace opt_utilities
     {
       return new constant<T>(*this);
     }
+    const char* do_get_type_name()const
+    {
+      return "constant";
+    }
   public:
     constant()
     {

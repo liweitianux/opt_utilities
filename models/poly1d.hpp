@@ -17,6 +17,11 @@ namespace opt_utilities
     {
       return new poly1d<T,n>(*this);
     }
+
+    const char* do_get_type_name()const
+    {
+      return "polynomial";
+    }
   public:
     poly1d()
     {

@@ -27,6 +27,11 @@ namespace opt_utilities
       this->handle=NULL;
       return result;
     }
+    
+    const char* do_get_type_name()const
+    {
+      return "shared object wrapping model";
+    }
 
     //  public:
   public:

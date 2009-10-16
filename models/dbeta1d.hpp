@@ -15,6 +15,12 @@ namespace opt_utilities
     {
       return new dbeta1d<T>(*this);
     }
+    
+    const char* do_get_type_name()const
+    {
+      return "1d double beta model";
+    }
+
   public:
     dbeta1d()
     {

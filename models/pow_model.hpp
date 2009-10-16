@@ -21,6 +21,10 @@ namespace opt_utilities
     {
     }
 
+    const char* do_get_type_name()const
+    {
+      return "combine two models by power operation";
+    }
   private:
     model<Ty,Tx,Tp,Tstr>* pm1;
     typename element_type_trait<Tp>::element_type idx;

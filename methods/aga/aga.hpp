@@ -79,6 +79,11 @@ namespace opt_utilities
     }
     
   private:
+    const char* do_get_type_name()const
+    {
+      return "asexual genetic algorithm";
+    }
+    
     rT func(const pT& x)
     {
       assert(p_fo!=0);

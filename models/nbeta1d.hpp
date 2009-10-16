@@ -15,6 +15,11 @@ namespace opt_utilities
     {
       return new nbeta1d<T>(*this);
     }
+
+    const char* do_get_type_name()const
+    {
+      return "1d density beta model";
+    }
   public:
     nbeta1d()
     {

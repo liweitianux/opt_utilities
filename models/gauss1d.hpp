@@ -15,6 +15,11 @@ namespace opt_utilities
     {
       return new gauss1d<T>(*this);
     }
+
+    const char* do_get_type_name()const
+    {
+      return "1d gaussian";
+    }
   public:
     gauss1d()
     {

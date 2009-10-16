@@ -15,6 +15,11 @@ namespace opt_utilities
     {
       return new lin1d<T>(*this);
     }
+
+    const char* do_get_type_name()const
+    {
+      return "1d linear model";
+    }
   public:
     lin1d()
     {

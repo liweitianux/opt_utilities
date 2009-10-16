@@ -15,6 +15,11 @@ namespace opt_utilities
     {
       return new polar_ellipse<T>(*this);
     }
+
+    const char* do_get_type_name()const
+    {
+      return "ellipse in polar coordinate system";
+    }
   public:
     polar_ellipse()
     {

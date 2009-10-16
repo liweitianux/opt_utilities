@@ -16,6 +16,11 @@ namespace opt_utilities
     {
       return new beta1d<T>(*this);
     }
+    
+    const char* do_get_type_name()const
+    {
+      return "1d beta model";
+    }
   public:
     beta1d()
     {
