@@ -7,7 +7,7 @@ OPT_HEADS=models/beta1d.hpp  statistics/chisq.hpp    models/lin1d.hpp\
 	core/freeze_param.hpp\
 	models/gauss1d.hpp core/optimizer.hpp\
 	misc/bootstrap.hpp\
-	models/dl_model.hpp\
+	interface/optdl.hpp\
 	models/mul_model.hpp\
 	models/add_model.hpp\
 

@@ -16,7 +16,6 @@
 #include "dbeta2d2.hpp"
 #include "dbeta2d3.hpp"
 #include "dbeta2d.hpp"
-#include "dl_model.hpp"
 #include <iostream>
 using namespace std;
 
