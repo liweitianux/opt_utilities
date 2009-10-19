@@ -108,9 +108,6 @@ model<double,vecn<double,2>,std::vector<double>,std::string>& get_2dmodel_by_nam
       model_map["poly1d3"]=new poly1d<double,3>;
       model_map["poly1d4"]=new poly1d<double,4>;
       model_map["poly1d5"]=new poly1d<double,5>;
-#ifdef __linux__
-      model_map["dlmodel"]=new dl_model<double>;
-#endif
       //DECL_POLY(7)
     }
     

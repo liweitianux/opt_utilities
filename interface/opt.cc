@@ -18,7 +18,7 @@ struct fit_space
   ///  dopt::model model;
   fit_space()
   {
-    fit.set_method(dopt::powell_method());
+    fit.set_opt_method(dopt::powell_method());
     dopt::chisq cq;
     dopt::leastsq lsq;
     //  cq.verbose(true);

@@ -566,11 +566,11 @@ namespace opt_utilities
 	{
 	  return *this;
 	}
+      param_info_list=rhs.param_info_list;
       if(rhs.p_param_modifier!=0)
 	{
 	  set_param_modifier(*(rhs.p_param_modifier));
 	}
-      param_info_list=rhs.param_info_list;
       null_param=rhs.null_param;
       return *this;
     }
