@@ -1,7 +1,7 @@
 #ifdef __linux__
 
-#ifndef DL_MODEL_HPP
-#define DL_MODEL_HPP
+#ifndef OPTDL_HPP
+#define OPTDL_HPP
 #define OPT_HEADER
 #include <core/fitter.hpp>
 #include <cmath>
@@ -90,7 +90,33 @@ namespace opt_utilities
     return func_create();
   }
 
-  
+  template <typename Ty,
+	    typename Tx,
+	    typename Tp,
+	    typename Ts,
+	    typename Tstr>
+  statistic<Ty,Tx,Tp,Ts,Tstr>* load_statistic(const char* fname)
+  {
+    void* handle;
+    
+    handle=dlopen(fname,RTLD_LAZY);
+    
+    if(!handle)
+      {
+	throw opt_exception("faild loading object");
+      }
+    
+    
+    statistic<Ty,Tx,Tp,Ts,Tstr>* (*func_create)();
+    
+    func_create=(statistic<Ty,Tx,Tp,Ts,Tstr>* (*)())dlsym(handle,"create_statistic_object");
+    
+    if(!func_create)
+      {
+	throw opt_exception("symble undefined");
+      }
+    return func_create();
+  }
 
 }
 
