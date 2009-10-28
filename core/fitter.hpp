@@ -1033,7 +1033,7 @@ namespace opt_utilities
 	}
       if(rhs.p_data_set!=0)
 	{
-	  load_data(*(rhs.p_data_set));
+	  set_data_set(*(rhs.p_data_set));
 	}
       optengine=rhs.optengine;
     }
@@ -1058,7 +1058,7 @@ namespace opt_utilities
 	}
       if(rhs.p_data_set!=0)
 	{
-	  load_data(*(rhs.p_data_set));
+	  set_data_set(*(rhs.p_data_set));
 	}
 
       optengine=rhs.optengine;
@@ -1230,6 +1230,20 @@ namespace opt_utilities
 	}
     }
 	
+    void set_data_set(const data_set<Ty,Tx>& da)
+    {
+      if(p_data_set!=0)
+	{
+	  //delete p_data_set;
+	  p_data_set->destroy();
+	}
+      p_data_set=da.clone();
+      if(p_statistic!=0)
+	{
+	  p_statistic->set_fitter(*this);
+	}
+    }
+
     /**
        get the data set that have been loaded
        \return the const reference of inner data_set

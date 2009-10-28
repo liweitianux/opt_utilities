@@ -44,7 +44,7 @@ int main()
   fitter<double,double,std::vector<double>,double,std::string> f;
   f.set_model(lin1d());
   //f.set_method(powell_method<double,std::vector<double> >());
-  f.set_method(aga_method<double,std::vector<double> >());
+  f.set_opt_method(aga_method<double,std::vector<double> >());
   default_data_set<double,double> ds;
 
   for(int i=0;i<100;++i)
