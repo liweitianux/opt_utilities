@@ -8,10 +8,25 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <dlfcn.h>
+//#include <dlfcn.h>
+#include <ltdl.h>
 
 namespace opt_utilities
 {
+
+  static class dl_init
+  {
+  public:
+    dl_init()
+    {
+      lt_dlinit();
+    }
+    ~dl_init()
+    {
+      lt_dlexit();
+    }
+  }_dl_init;
+
 
   template <typename Ty,
 	    typename Tx,
@@ -19,10 +34,8 @@ namespace opt_utilities
 	    typename Tstr>
   model<Ty,Tx,Tp,Tstr>* load_model(const char* fname)
   {
-    void* handle;
-    
-    handle=dlopen(fname,RTLD_LAZY);
-    
+    lt_dlhandle handle;
+    handle=lt_dlopen(fname);
     if(!handle)
       {
 	throw opt_exception("faild loading object");
@@ -31,7 +44,7 @@ namespace opt_utilities
     
     model<Ty,Tx,Tp,Tstr>* (*func_create)();
     
-    func_create=(model<Ty,Tx,Tp,Tstr>* (*)())dlsym(handle,"create_model_object");
+    func_create=(model<Ty,Tx,Tp,Tstr>* (*)())lt_dlsym(handle,"create_model_object");
     
     if(!func_create)
       {
@@ -44,9 +57,9 @@ namespace opt_utilities
 	    typename Tp>
   opt_method<Ty,Tp>* load_opt_method(const char* fname)
   {
-    void* handle;
+    lt_dlhandle handle;
     
-    handle=dlopen(fname,RTLD_LAZY);
+    handle=lt_dlopen(fname);
     
     if(!handle)
       {
@@ -56,7 +69,7 @@ namespace opt_utilities
     
     opt_method<Ty,Tp>* (*func_create)();
     
-    func_create=(opt_method<Ty,Tp>* (*)())dlsym(handle,"create_opt_method_object");
+    func_create=(opt_method<Ty,Tp>* (*)())lt_dlsym(handle,"create_opt_method_object");
     
     if(!func_create)
       {
@@ -69,9 +82,9 @@ namespace opt_utilities
 	    typename Tp>
   func_obj<Ty,Tp>* load_func_obj(const char* fname)
   {
-    void* handle;
+    lt_dlhandle handle;
     
-    handle=dlopen(fname,RTLD_LAZY);
+    handle=lt_dlopen(fname);
     
     if(!handle)
       {
@@ -81,7 +94,7 @@ namespace opt_utilities
     
     func_obj<Ty,Tp>* (*func_create)();
     
-    func_create=(func_obj<Ty,Tp>* (*)())dlsym(handle,"create_func_obj_object");
+    func_create=(func_obj<Ty,Tp>* (*)())lt_dlsym(handle,"create_func_obj_object");
     
     if(!func_create)
       {
@@ -97,9 +110,9 @@ namespace opt_utilities
 	    typename Tstr>
   statistic<Ty,Tx,Tp,Ts,Tstr>* load_statistic(const char* fname)
   {
-    void* handle;
+    lt_dlhandle handle;
     
-    handle=dlopen(fname,RTLD_LAZY);
+    handle=lt_dlopen(fname);
     
     if(!handle)
       {
@@ -109,7 +122,7 @@ namespace opt_utilities
     
     statistic<Ty,Tx,Tp,Ts,Tstr>* (*func_create)();
     
-    func_create=(statistic<Ty,Tx,Tp,Ts,Tstr>* (*)())dlsym(handle,"create_statistic_object");
+    func_create=(statistic<Ty,Tx,Tp,Ts,Tstr>* (*)())lt_dlsym(handle,"create_statistic_object");
     
     if(!func_create)
       {
