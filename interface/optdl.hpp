@@ -1,5 +1,3 @@
-#ifdef __linux__
-
 #ifndef OPTDL_HPP
 #define OPTDL_HPP
 #define OPT_HEADER
@@ -23,7 +21,7 @@ namespace opt_utilities
     }
     ~dl_init()
     {
-      lt_dlexit();
+      //      lt_dlexit();
     }
   }_dl_init;
 
@@ -135,6 +133,5 @@ namespace opt_utilities
 
 
 
-#endif
 #endif
 //EOF
