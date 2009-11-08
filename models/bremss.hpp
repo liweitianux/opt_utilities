@@ -38,8 +38,7 @@ namespace opt_utilities
   private:
     std::string do_to_string()const
     {
-      return "Simplified bremss model\n"
-	"flux=norm*kT^0.5*e^{-E/kT}\n";
+      return "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\" class=\"equation\"><mi>f</mi><mrow><mo class=\"MathClass-open\">(</mo><mrow><mi>x</mi><mo class=\"MathClass-punc\">;</mo><mi>n</mi><mi>o</mi><mi>r</mi><mi>m</mi><mo class=\"MathClass-punc\">,</mo><mi>k</mi><mi>T</mi></mrow><mo class=\"MathClass-close\">)</mo></mrow> <mo class=\"MathClass-rel\">=</mo> <mi>n</mi><mi>o</mi><mi>r</mi><mi>m</mi><msqrt><mrow><mi>k</mi><mi>T</mi></mrow></msqrt><msup><mrow><mi>e</mi></mrow><mrow><mo class=\"MathClass-bin\">−</mo><mi>x</mi><mo class=\"MathClass-bin\">∕</mo><mi>k</mi><mi>T</mi> </mrow></msup></math>";
     }
   };
 }

@@ -34,15 +34,14 @@ namespace opt_utilities
       T N=get_element(param,0);
       T x0=get_element(param,1);
       T sigma=get_element(param,2);
-      T y=(x-x0)/sigma;
+      T y=(x-x0)/2./sigma;
       return N*exp(-y*y);
     }
 
   private:
     std::string do_to_string()const
     {
-      return "Gaussian model\n"
-	"y=N*exp(-(x-x0)^2/sigma^2\n";
+      return "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\" class=\"equation\"><mi>f</mi><mrow><mo class=\"MathClass-open\">(</mo><mrow><mi>x</mi><mo class=\"MathClass-punc\">;</mo><mi>N</mi><mo class=\"MathClass-punc\">,</mo><msub><mrow><mi>x</mi></mrow><mrow><mn>0</mn></mrow></msub><mo class=\"MathClass-punc\">,</mo><mi>σ</mi></mrow><mo class=\"MathClass-close\">)</mo></mrow> <mo class=\"MathClass-rel\">=</mo> <mi>N</mi><msup><mrow><mi>e</mi></mrow><mrow><mo class=\"MathClass-bin\">−</mo><mfrac><mrow><msup><mrow><mrow><mo class=\"MathClass-open\">(</mo><mrow><mi>x</mi><mo class=\"MathClass-bin\">−</mo><msub><mrow><mi>x</mi></mrow><mrow><mn>0</mn></mrow></msub></mrow><mo class=\"MathClass-close\">)</mo></mrow></mrow><mrow><mn>2</mn></mrow></msup></mrow><mrow><mn>2</mn><msup><mrow><mi>σ</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac>    </mrow></msup></math>";
     }
   };
 }

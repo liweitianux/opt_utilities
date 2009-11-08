@@ -36,8 +36,9 @@ namespace opt_utilities
   private:
     std::string do_to_string()const
     {
-      return "linear model\n"
-	"y=k*x+b\n";
+      return "<math><mrow> <mtext>f(x;k,b)=k x+b</mtext>		\
+    </mrow>								\
+</math>";
     }
   };
 }

@@ -49,9 +49,8 @@ namespace opt_utilities
   private:
     std::string do_to_string()const
     {
-      return "broken power law\n"
-	"y=y_b*(x/x_b)^gamma1 for x<x_b\n"
-	"y=y_b*(x/x_b)^gamma2 otherwise\n";
+      return "";
+      //return "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\" class=\"equation\"><mi>f</mi><mrow><mo class=\"MathClass-open\">(</mo><mrow><mi>x</mi><mo class=\"MathClass-punc\">;</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>b</mi></mrow></msub><mo class=\"MathClass-punc\">,</mo><msub><mrow><mi>y</mi></mrow><mrow><mi>b</mi></mrow></msub><mo class=\"MathClass-punc\">,</mo><msub><mrow><mi>γ</mi></mrow><mrow><mn>1</mn></mrow></msub><mo class=\"MathClass-punc\">,</mo><msub><mrow><mi>γ</mi></mrow><mrow><mn>2</mn></mrow></msub></mrow><mo class=\"MathClass-close\">)</mo></mrow> <mo class=\"MathClass-rel\">=</mo> <mfenced separators=\"\" open=\"{\" close=\"\"><mrow> <mtable style=\"\" equalrows=\"false\" equalcolumns=\"false\" class=\"array\"><mtr><mtd class=\"array\" columnalign=\"center\"><msub><mrow><mi>y</mi></mrow><mrow><mi>b</mi></mrow></msub> <mfrac><mrow><msup><mrow><mi>x</mi></mrow><mrow><msub><mrow><mi>γ</mi></mrow><mrow><mn>1</mn></mrow></msub></mrow></msup></mrow><mrow><msubsup><mrow><mi>x</mi></mrow><mrow><mi>b</mi></mrow><mrow><msub><mrow><mi>γ</mi></mrow><mrow><mn>1</mn></mrow></msub></mrow></msubsup></mrow></mfrac></mtd><mtd class=\"array\" columnalign=\"center\">   <mi>x</mi> <mo class=\"MathClass-rel\">&lt;</mo> <msub><mrow><mi>x</mi></mrow><mrow><mi>b</mi></mrow></msub></mtd></mtr><mtr><mtd class=\"array\" columnalign=\"center\"> <msub><mrow><mi>y</mi></mrow><mrow><mi>b</mi></mrow></msub> <mfrac><mrow><msup><mrow><mi>x</mi></mrow><mrow><msub><mrow><mi>γ</mi></mrow><mrow><mn>2</mn></mrow></msub></mrow></msup></mrow><mrow><msubsup><mrow><mi>x</mi></mrow><mrow><mi>b</mi></mrow><mrow><msub><mrow><mi>γ</mi></mrow><mrow><mn>2</mn></mrow></msub></mrow></msubsup></mrow></mfrac> </mtd><mtd class=\"array\" columnalign=\"center\"><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>w</mi><mi>i</mi><mi>s</mi><mi>e</mi></mtd></mtr><mtr><mtd class=\"array\" columnalign=\"center\">        </mtd></mtr> <!--cc--></mtable></mrow></mfenced></math>";
     }
   };
 }
