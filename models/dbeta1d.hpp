@@ -55,7 +55,7 @@ namespace opt_utilities
     }
 
   private:
-    std::string do_to_string()const
+    std::string do_get_information()const
     {
       return "double 1d beta model\n"
 	"S=beta(S01,beta1,rc1)+beta(S02,beta2,rc2)\n";

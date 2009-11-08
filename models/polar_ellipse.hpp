@@ -40,7 +40,7 @@ namespace opt_utilities
     }
 
   private:
-    std::string do_to_string()const
+    std::string do_get_information()const
     {
       return "linear model\n"
 	"y=k*x+b\n";

@@ -34,7 +34,7 @@ namespace opt_utilities
     }
 
   private:
-    std::string do_to_string()const
+    std::string do_get_information()const
     {
       return "<math><mrow> <mtext>f(x;k,b)=k x+b</mtext>		\
     </mrow>								\

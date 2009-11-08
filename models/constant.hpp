@@ -33,7 +33,7 @@ namespace opt_utilities
     }
 
   private:
-    std::string do_to_string()const
+    std::string do_get_information()const
     {
       return "Constant\n"
 	"y=C\n";

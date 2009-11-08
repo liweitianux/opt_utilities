@@ -47,7 +47,7 @@ namespace opt_utilities
     }
 
   private:
-    std::string do_to_string()const
+    std::string do_get_information()const
     {
       return "broken linear model\n"
 	"y=k1*(x-x_b)+y_b for x<x_b\n"

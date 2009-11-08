@@ -37,7 +37,7 @@ namespace opt_utilities
       return rho0/(x/rs*(1+x/rs)*(1+x/rs));
     }
 
-    std::string do_to_string()const
+    std::string do_get_information()const
     {
       return "NFW model\n"
 	"y=rho0/(r/rs*(1+r/rs)^2\n";

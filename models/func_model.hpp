@@ -50,7 +50,7 @@ namespace opt_utilities
       return func(x,&get_element(param,0));
     }
   private:
-    std::string do_to_string()const
+    std::string do_get_information()const
     {
       return "Wrapper for necked C function\n";
     }

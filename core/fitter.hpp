@@ -936,9 +936,9 @@ namespace opt_utilities
     /**
        \return the description of the model
      */
-    Tstr to_string()const
+    Tstr get_information()const
     {
-      return do_to_string();
+      return do_get_information();
     }
 
 
@@ -982,7 +982,7 @@ namespace opt_utilities
     virtual Ty do_eval(const Tx& x,const Tp& p)=0;
 
   private:
-    virtual Tstr do_to_string()const
+    virtual Tstr do_get_information()const
     {
       return Tstr();
     }
