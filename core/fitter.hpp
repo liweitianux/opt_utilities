@@ -1676,10 +1676,6 @@ namespace opt_utilities
       delete this;
     }
 
-    virtual Tstr do_to_string()const
-    {
-      return Tstr();
-    }
     /**
        \return the type name of self
     */
@@ -1710,11 +1706,6 @@ namespace opt_utilities
     void destroy()
     {
       return do_destroy();
-    }
-
-    Tstr to_string()const
-    {
-      return do_to_string();
     }
 
     /**
