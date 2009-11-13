@@ -17,6 +17,13 @@ namespace opt_utilities
     optvec(const std::vector<T>& rhs)
       :std::vector<T>(rhs)
     {}
+
+    optvec& operator=(const optvec& rhs)
+    {
+      //dynamic_cast<std::vector<T>&>(*this).operator=(rhs);
+      std::vector<T>::operator=(rhs);
+      return *this;
+    }
   public:
     operator std::vector<T>& ()
     {
