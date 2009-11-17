@@ -8,6 +8,7 @@
 #include <core/fitter.hpp>
 #include <iostream>
 #include <vector>
+#include <misc/optvec.hpp>
 #include <cmath>
 using std::cerr;using std::endl;
 
@@ -205,7 +206,55 @@ namespace opt_utilities
       return result;
     }
   };
-#endif  
+#endif
+
+  template<typename T,typename Tp,typename Ts,typename Tstr>
+  class chisq
+    :public statistic<optvec<T>,optvec<T>,Tp,Ts,Tstr>
+  {
+  private:
+    bool verb;
+    int n;
+    
+    typedef optvec<T> Tx;
+    typedef optvec<T> Ty;
+    statistic<Ty,Tx,Tp,Ts,Tstr>* do_clone()const
+    {
+      // return const_cast<statistic<Ty,Tx,Tp>*>(this);
+      return new chisq<Ty,Tx,Tp,Ts,Tstr>(*this);
+    }
+
+    const char* do_get_type_name()const
+    {
+      return "chi^2 statistic";
+    }
+    
+  public:
+    void verbose(bool v)
+    {
+      verb=v;
+    }
+  public:
+    chisq()
+      :verb(false)
+    {}
+    
+    
+
+    Ts do_eval(const Tp& p)
+    {
+      Ts result(0);
+      for(int i=(this->get_data_set()).size()-1;i>=0;--i)
+	{
+	  Ty chi=(this->get_data_set().get_data(i).get_y()-eval_model(this->get_data_set().get_data(i).get_x(),p))/this->get_data_set().get_data(i).get_y_upper_err();
+	  result+=sum(chi*chi);
+
+	}
+      return result;
+    }
+  };
+
+  
 }
 
 #endif
