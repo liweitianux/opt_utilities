@@ -208,9 +208,9 @@ namespace opt_utilities
   };
 #endif
 
-  template<typename T,typename Tp,typename Ts,typename Tstr>
-  class chisq
-    :public statistic<optvec<T>,optvec<T>,Tp,Ts,Tstr>
+  template<typename T,typename Ts,typename Tstr>
+  class chisq<optvec<T>,optvec<T>,optvec<T>,Ts,Tstr>
+    :public statistic<optvec<T>,optvec<T>,optvec<T>,Ts,Tstr>
   {
   private:
     bool verb;
@@ -218,6 +218,7 @@ namespace opt_utilities
     
     typedef optvec<T> Tx;
     typedef optvec<T> Ty;
+    typedef optvec<T> Tp;
     statistic<Ty,Tx,Tp,Ts,Tstr>* do_clone()const
     {
       // return const_cast<statistic<Ty,Tx,Tp>*>(this);

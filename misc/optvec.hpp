@@ -13,8 +13,8 @@ namespace opt_utilities
   public:
     optvec()
     {}
-
-    optvec(size_t s)
+    
+    explicit optvec(size_t s)
       :std::vector<T>(s)
     {}
 
