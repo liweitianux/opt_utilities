@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cassert>
+#include <cmath>
 
 namespace opt_utilities
 {
@@ -44,48 +45,171 @@ namespace opt_utilities
   optvec<T> operator+(const optvec<T>& x1,const optvec<T>& x2)
   {
     
-    optvec<T> result(x1);
+    optvec<T> result(x1.size());
     for(size_t i=0;i!=x1.size();++i)
       {
-	result[i]=result[i]+x2.at(i);
+	result[i]=x1[i]+x2.at(i);
       }
     return result;
+  }
+
+  template<typename T>
+  optvec<T> operator+(const optvec<T>& x1,const T& x2)
+  {
+    
+    optvec<T> result(x1.size());
+    for(size_t i=0;i!=x1.size();++i)
+      {
+	result[i]=x1[i]+x2;
+      }
+    return result;
+  }
+
+  template<typename T>
+  optvec<T>& operator+=(optvec<T>& x1,const optvec<T>& x2)
+  {
+    for(size_t i=0;i!=x1.size();++i)
+      {
+	x1[i]+=x2.at(i);
+      }
+    return x1;
   }
 
   template<typename T>
   optvec<T> operator-(const optvec<T>& x1,const optvec<T>& x2)
   {
     
-    optvec<T> result(x1);
+    optvec<T> result(x1.size());
     for(size_t i=0;i!=x1.size();++i)
       {
-	result[i]=result[i]-x2.at(i);
-      }
-    return result;
-  }
-  
-  template<typename T>
-  optvec<T> operator*(const optvec<T>& x1,const optvec<T>& x2)
-  {
-    
-    optvec<T> result(x1);
-    for(size_t i=0;i!=x1.size();++i)
-      {
-	result[i]=result[i]*x2.at(i);
+	result[i]=x1[i]-x2.at(i);
       }
     return result;
   }
 
   template<typename T>
+  optvec<T> operator-(const optvec<T>& x1,const T& x2)
+  {
+    
+    optvec<T> result(x1.size());
+    for(size_t i=0;i!=x1.size();++i)
+      {
+	result[i]=x1[i]-x2;
+      }
+    return result;
+  }
+  
+  
+  template<typename T>
+  optvec<T>& operator-=(optvec<T>& x1,const optvec<T>& x2)
+  {
+    for(size_t i=0;i!=x1.size();++i)
+      {
+	x1[i]-=x2.at(i);
+      }
+    return x1;
+  }
+
+  template<typename T>
+  optvec<T> operator*(const optvec<T>& x1,const optvec<T>& x2)
+  {
+    
+    optvec<T> result(x1.size());
+    for(size_t i=0;i!=x1.size();++i)
+      {
+	result[i]=x1[i]*x2.at(i);
+      }
+    return result;
+  }
+
+  template<typename T>
+  optvec<T> operator*(const optvec<T>& x1,const T& x2)
+  {
+    
+    optvec<T> result(x1.size());
+    for(size_t i=0;i!=x1.size();++i)
+      {
+	result[i]=x1[i]*x2;
+      }
+    return result;
+  }
+
+  template<typename T>
+  optvec<T> operator*(const T& x1,const optvec<T>& x2)
+  {
+    
+    optvec<T> result(x2.size());
+    for(size_t i=0;i!=x2.size();++i)
+      {
+	result[i]=x2[i]*x1;
+      }
+    return result;
+  }
+  
+
+  template<typename T>
+  optvec<T>& operator*=(optvec<T>& x1,const optvec<T>& x2)
+  {
+    for(size_t i=0;i!=x1.size();++i)
+      {
+	x1[i]*=x2.at(i);
+      }
+    return x1;
+  }
+
+  template<typename T>
+  optvec<T>& operator*=(optvec<T>& x1,const T& x2)
+  {
+    for(size_t i=0;i!=x1.size();++i)
+      {
+	x1[i]*=x2;
+      }
+    return x1;
+  }
+  
+
+  template<typename T>
   optvec<T> operator/(const optvec<T>& x1,const optvec<T>& x2)
   {
     
-    optvec<T> result(x1);
+    optvec<T> result(x1.size());
     for(size_t i=0;i!=x1.size();++i)
       {
-	result[i]=result[i]/x2.at(i);
+	result[i]=x1[i]/x2.at(i);
       }
     return result;
+  }
+  
+  template<typename T>
+  optvec<T> operator/(const optvec<T>& x1,const T& x2)
+  {
+    
+    optvec<T> result(x1.size());
+    for(size_t i=0;i!=x1.size();++i)
+      {
+	result[i]=x1[i]/x2;
+      }
+    return result;
+  }
+
+  template<typename T>
+  optvec<T>& operator/=(optvec<T>& x1,const optvec<T>& x2)
+  {
+    for(size_t i=0;i!=x1.size();++i)
+      {
+	x1[i]/=x2.at(i);
+      }
+    return x1;
+  }
+
+  template<typename T>
+  optvec<T>& operator/=(optvec<T>& x1,const T& x2)
+  {
+    for(size_t i=0;i!=x1.size();++i)
+      {
+	x1[i]/=x2;
+      }
+    return x1;
   }
 
   template <typename T>
@@ -111,6 +235,28 @@ namespace opt_utilities
       }
     return false;
   }
-  
+
 };
+
+
+#define DEF_VEC_FUNC(_func) template <typename T>		\
+  std::vector<T> _func(const opt_utilities::optvec<T>& x)	\
+  {								\
+    std::vector<T> result(x.size());				\
+    for(int i=0;i!=result.size();++i)				\
+      {								\
+	result[i]=_func(x[i]);					\
+      }								\
+    return result;						\
+  }
+
+namespace std
+{
+  DEF_VEC_FUNC(sin);
+  DEF_VEC_FUNC(cos);
+  DEF_VEC_FUNC(log);
+  DEF_VEC_FUNC(sqrt);
+}
+
+
 #endif
