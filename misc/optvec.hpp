@@ -97,6 +97,18 @@ namespace opt_utilities
 	result[i]=x1[i]-x2;
       }
     return result;
+  }  
+  
+  template<typename T>
+  optvec<T> operator-(const optvec<T>& x1)
+  {
+    
+    optvec<T> result(x1.size());
+    for(size_t i=0;i!=x1.size();++i)
+      {
+	result[i]=-x1[i];
+      }
+    return result;
   }
   
   
@@ -193,6 +205,18 @@ namespace opt_utilities
   }
 
   template<typename T>
+  optvec<T> operator/(const T& x1,const optvec<T>& x2)
+  {
+    
+    optvec<T> result(x1.size());
+    for(size_t i=0;i!=x1.size();++i)
+      {
+	result[i]=x1/x2[i];
+      }
+    return result;
+  }
+
+  template<typename T>
   optvec<T>& operator/=(optvec<T>& x1,const optvec<T>& x2)
   {
     for(size_t i=0;i!=x1.size();++i)
@@ -240,9 +264,9 @@ namespace opt_utilities
 
 
 #define DEF_VEC_FUNC(_func) template <typename T>		\
-  std::vector<T> _func(const opt_utilities::optvec<T>& x)	\
+  opt_utilities::optvec<T> _func(const opt_utilities::optvec<T>& x)	\
   {								\
-    std::vector<T> result(x.size());				\
+    opt_utilities::optvec<T> result(x.size());		\
     for(int i=0;i!=result.size();++i)				\
       {								\
 	result[i]=_func(x[i]);					\
@@ -256,6 +280,18 @@ namespace std
   DEF_VEC_FUNC(cos);
   DEF_VEC_FUNC(log);
   DEF_VEC_FUNC(sqrt);
+  DEF_VEC_FUNC(exp);
+  template<typename T>
+  opt_utilities::optvec<T> pow(const opt_utilities::optvec<T>& x,const T& y)
+  {
+    opt_utilities::optvec<T> result(x.size()); 
+    for(int i=0;i!=result.size();++i)	       
+      {			
+	result[i]=pow(x[i],y);
+      }
+    return result;	
+  }
+
 }
 
 
