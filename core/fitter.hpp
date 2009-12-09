@@ -39,29 +39,6 @@ namespace opt_utilities
     Ty y,y_lower_err,y_upper_err;
   public:
     /**
-       construct function
-       \param _x x
-       \param _y y
-       \param _y_lower_err lower y error
-       \param _y_upper_err upper y error
-       \param _x_lower_err lower x error
-       \param _x_upper_err upper x error
-     */
-    data(const Tx& _x,const Ty& _y,
-	 const Ty& _y_lower_err,
-	 const Ty& _y_upper_err,const Tx& _x_lower_err,const Tx& _x_upper_err)
-    {
-      opt_eq(x,_x);
-      opt_eq(x_lower_err,_x_lower_err);
-      opt_eq(x_upper_err,_x_upper_err);
-      opt_eq(y,_y);
-      opt_eq(y_lower_err,_y_lower_err);
-      opt_eq(y_upper_err,_y_upper_err);
- 
-    }
-
-    
-    /**
        default construct
      */
     data()
@@ -87,6 +64,28 @@ namespace opt_utilities
       opt_eq(y_upper_err,rhs.y_upper_err);
     }
 
+    /**
+       construct function
+       \param _x x
+       \param _y y
+       \param _y_lower_err lower y error
+       \param _y_upper_err upper y error
+       \param _x_lower_err lower x error
+       \param _x_upper_err upper x error
+     */
+    data(const Tx& _x,const Ty& _y,
+	 const Ty& _y_lower_err,
+	 const Ty& _y_upper_err,const Tx& _x_lower_err,const Tx& _x_upper_err)
+    {
+      opt_eq(x,_x);
+      opt_eq(x_lower_err,_x_lower_err);
+      opt_eq(x_upper_err,_x_upper_err);
+      opt_eq(y,_y);
+      opt_eq(y_lower_err,_y_lower_err);
+      opt_eq(y_upper_err,_y_upper_err);
+ 
+    }
+
 
     /**
        Assignment operator
@@ -103,7 +102,7 @@ namespace opt_utilities
     }
 
   public:
-
+    //get functions
     /**
        set x
        \return x
@@ -155,7 +154,8 @@ namespace opt_utilities
       return y_upper_err;
     }
 
-
+  public:
+    //set functions
     /**
        set x
        \param _x x
@@ -226,7 +226,6 @@ namespace opt_utilities
   class data_set
   {
   private:
-    
     virtual const data<Ty,Tx>& do_get_data(size_t i)const=0;
     virtual void do_set_data(size_t i,const data<Ty,Tx>& d)
     {
@@ -251,6 +250,31 @@ namespace opt_utilities
     }
   public:
     /**
+       clone self
+       \return a clone of self
+     */
+    data_set<Ty,Tx>* clone()const
+    {
+      return this->do_clone();
+    }
+    
+   /**
+       destroy the cloned object
+     */
+
+    void destroy()
+    {
+      do_destroy();
+    }
+
+    /**
+       destruct function
+     */
+
+    virtual ~data_set(){}
+  public:
+    //get functions
+    /**
        get data
        \param i the order of the data point
        \return the const reference of a class data point
@@ -260,11 +284,11 @@ namespace opt_utilities
       return this->do_get_data(i);
     }
 
-    void set_data(size_t i,const data<Ty,Tx>& d)
+    const char* get_type_name()const
     {
-      do_set_data(i,d);
-    }
-    
+      return this->do_get_type_name();
+    } 
+
     /**
        \return the size of the data set
      */
@@ -273,6 +297,14 @@ namespace opt_utilities
       return do_size();
     }
 
+  public:
+    //set functions
+
+    void set_data(size_t i,const data<Ty,Tx>& d)
+    {
+      do_set_data(i,d);
+    }
+    
     /**
        add data point
        \param d data point
@@ -289,37 +321,6 @@ namespace opt_utilities
     {
       do_clear();
     }
-    
-
-    /**
-       clone self
-       \return a clone of self
-     */
-    data_set<Ty,Tx>* clone()const
-    {
-      return this->do_clone();
-    }
-
-    const char* get_type_name()const
-    {
-      return this->do_get_type_name();
-    }
-    
-
-    /**
-       destroy the cloned object
-     */
-
-    void destroy()
-    {
-      do_destroy();
-    }
-
-    /**
-       destruct function
-     */
-
-    virtual ~data_set(){}
       
   };
 
@@ -341,23 +342,6 @@ namespace opt_utilities
     typename element_type_trait<Tp>::element_type upper_limit;
     Tstr description;
   public:
-
-    /**
-       construct function
-       \param _name the name of the param
-       \param _v the value of the param
-       \param _l the lower boundary of the param
-       \param _u the upper boundary of the param
-     */
-    param_info(const Tstr& _name,
-	       const typename element_type_trait<Tp>::element_type& _v,
-	       const typename element_type_trait<Tp>::element_type& _l=0,
-	       const typename element_type_trait<Tp>::element_type& _u=0,
-	       const Tstr& desc=Tstr())
-      :name(_name),value(_v),lower_limit(_l),
-       upper_limit(_u),description(desc)
-    {}
-
     /**
        default construct
      */
@@ -377,6 +361,21 @@ namespace opt_utilities
       opt_eq(upper_limit,rhs.upper_limit);
     }
 
+    /**
+       construct function
+       \param _name the name of the param
+       \param _v the value of the param
+       \param _l the lower boundary of the param
+       \param _u the upper boundary of the param
+     */
+    param_info(const Tstr& _name,
+	       const typename element_type_trait<Tp>::element_type& _v,
+	       const typename element_type_trait<Tp>::element_type& _l=0,
+	       const typename element_type_trait<Tp>::element_type& _u=0,
+	       const Tstr& desc=Tstr())
+      :name(_name),value(_v),lower_limit(_l),
+       upper_limit(_u),description(desc)
+    {}
     
     /**
        assignment operator
@@ -391,7 +390,8 @@ namespace opt_utilities
       return *this;
     }
 
-
+  public:
+    //get functions
     /**
        \return the name of the parameter
      */
@@ -428,7 +428,8 @@ namespace opt_utilities
     {
       return description;
     }
-    
+  public:
+    //set functions
     /**
        set the value
        \param x the value of the parameter
@@ -499,6 +500,14 @@ namespace opt_utilities
     {
       delete this;
     }
+    
+    virtual Ty do_eval(const Tx& x,const Tp& p)=0;
+    
+    virtual Tstr do_get_information()const
+    {
+      return Tstr();
+    }
+
 
     /**
        \return the type name of self
@@ -509,30 +518,6 @@ namespace opt_utilities
       return typeid(*this).name();
     }
   public:
-
-    /**
-       \return the cloned object
-     */
-    model<Ty,Tx,Tp,Tstr>* clone()const
-    {
-      return do_clone();
-    }
-
-    const char* get_type_name()const
-    {
-      return this->do_get_type_name();
-    }
-
-
-    /**
-       destroy the cloned object
-     */
-    void destroy()
-    {
-      do_destroy();
-    }
-  public:
-
     /**
        default construct function
      */
@@ -587,36 +572,30 @@ namespace opt_utilities
 	  p_param_modifier->destroy();
 	}
     }
-    
 
     /**
-       set the param modifier
-       \param pm param modifier
+       \return the cloned object
      */
-    void set_param_modifier(const param_modifier<Ty,Tx,Tp,Tstr>& pm)
+    model<Ty,Tx,Tp,Tstr>* clone()const
     {
-      if(p_param_modifier!=0)
-	{
-	  //delete p_param_modifier;
-	  p_param_modifier->destroy();
-	}
-      p_param_modifier=pm.clone();
-      p_param_modifier->set_model(*this);
+      return do_clone();
     }
 
     /**
-       clear the param modifier
-    */
-    void clear_param_modifier()
+       destroy the cloned object
+     */
+    void destroy()
     {
-      if(p_param_modifier!=0)
-	{
-	  //delete p_param_modifier;
-	  p_param_modifier->destroy();
-	}
-      p_param_modifier=0;
+      do_destroy();
     }
-    
+
+  public:
+    const char* get_type_name()const
+    {
+      return this->do_get_type_name();
+    }
+
+
 
     /**
        \return the param_modifier
@@ -761,6 +740,63 @@ namespace opt_utilities
     }
 
     /**
+       get the order of a parameter
+       \param pname the name of the parameter
+       \return the order of the parameter
+     */
+    size_t get_param_order(const Tstr& pname)const
+    {
+      for(size_t i=0;i<param_info_list.size();++i)
+	{
+	  if(param_info_list[i].get_name()==pname)
+	    {
+	      return i;
+	    }
+	}
+      // assert(false);
+      throw param_not_found();
+      return -1;
+    }
+    
+
+    /**
+       \return the description of the model
+     */
+    Tstr get_information()const
+    {
+      return do_get_information();
+    }
+
+  public:
+    /**
+       set the param modifier
+       \param pm param modifier
+     */
+    void set_param_modifier(const param_modifier<Ty,Tx,Tp,Tstr>& pm)
+    {
+      if(p_param_modifier!=0)
+	{
+	  //delete p_param_modifier;
+	  p_param_modifier->destroy();
+	}
+      p_param_modifier=pm.clone();
+      p_param_modifier->set_model(*this);
+    }
+
+    /**
+       clear the param modifier
+    */
+    void clear_param_modifier()
+    {
+      if(p_param_modifier!=0)
+	{
+	  //delete p_param_modifier;
+	  p_param_modifier->destroy();
+	}
+      p_param_modifier=0;
+    }
+    
+    /**
        \param pinfo param information being set
      */
     void set_param_info(const param_info<Tp,Tstr>& pinfo)
@@ -885,28 +921,6 @@ namespace opt_utilities
 	  param_info_list[i].set_upper_limit(get_element(param,i));
 	}
     }
-
-
-    /**
-       get the order of a parameter
-       \param pname the name of the parameter
-       \return the order of the parameter
-     */
-    size_t get_param_order(const Tstr& pname)const
-    {
-      for(size_t i=0;i<param_info_list.size();++i)
-	{
-	  if(param_info_list[i].get_name()==pname)
-	    {
-	      return i;
-	    }
-	}
-      // assert(false);
-      throw param_not_found();
-      return -1;
-    }
-    
-
 		
   protected:
 
@@ -931,18 +945,7 @@ namespace opt_utilities
 
 
 
-  public:
-
-    /**
-       \return the description of the model
-     */
-    Tstr get_information()const
-    {
-      return do_get_information();
-    }
-
-
-    
+  public:    
     Tp reform_param(const Tp& p)const
     {
       if(p_param_modifier==0)
@@ -978,14 +981,6 @@ namespace opt_utilities
       return do_eval(x,reform_param(p));
     }
 
-  private:
-    virtual Ty do_eval(const Tx& x,const Tp& p)=0;
-
-  private:
-    virtual Tstr do_get_information()const
-    {
-      return Tstr();
-    }
     
   };
 
@@ -1088,7 +1083,7 @@ namespace opt_utilities
 	}
     }
     
-
+  public:
     /**
        evaluate the model
      */
@@ -1109,141 +1104,7 @@ namespace opt_utilities
 	}
       return p_model->eval_raw(x,p);
     }
-    
-
   public:
-
-    /**
-       set the model
-       \param m model to be used
-     */
-    void set_model(const model<Ty,Tx,Tp,Tstr>& m)
-    {
-      if(p_model!=0)
-	{
-	  //delete p_model;
-	  p_model->destroy();
-	}
-      p_model=m.clone();
-      //p_model=&m;
-      //  current_param.resize(m.get_num_params());
-    }
-
-
-    /**
-       set the statistic (e.g., chi square, least square c-statistic etc.)
-       \param s statistic to be used
-     */
-    void set_statistic(const statistic<Ty,Tx,Tp,Ts,Tstr>& s)
-    {
-      if(p_statistic!=0)
-	{
-	  //delete p_statistic;
-	  p_statistic->destroy();
-	}
-      p_statistic=s.clone();
-      //p_statistic=&s;
-      p_statistic->set_fitter(*this);
-    }
-
-    /**
-       set parameter modifier
-       \param pm parameter modifier to be used
-     */
-    void set_param_modifier(const param_modifier<Ty,Tx,Tp,Tstr>& pm)
-    {
-      if(p_model==0)
-	{
-	  throw model_undefined();
-	}
-      p_model->set_param_modifier(pm);
-    }
-
-    /**
-       clear the param modifier
-    */
-    void clear_param_modifier()
-    {
-      if(p_model==0)
-	{
-	  throw model_undefined();
-	}
-      p_model->clear_param_modifier();
-    }
-
-
-    /**
-       Get the inner kept param modifier
-       \return the reference of param_modifier
-     */
-    param_modifier<Ty,Tx,Tp,Tstr>& get_param_modifier()
-    {
-      if(p_model==0)
-	{
-	  throw model_undefined();
-	}
-      return p_model->get_param_modifier();
-    }
-
-    /**
-       Get the inner kept param modifier
-       \return the reference of param_modifier
-     */
-    const param_modifier<Ty,Tx,Tp,Tstr>& get_param_modifier()const
-    {
-      if(p_model==0)
-	{
-	  throw model_undefined();
-	}
-      return p_model->get_param_modifier();
-    }
-
-    /**
-       report the status of a parameter
-       \param s the name of a parameter
-       \return string used to describe the parameter
-     */
-    Tstr report_param_status(const Tstr& s)const
-    {
-      if(p_model==0)
-	{
-	  throw model_undefined();
-	}
-      return p_model->report_param_status(s);
-    }
-    
-    /**
-       load the data set
-       \param da a data set
-    */
-    void load_data(const data_set<Ty,Tx>& da)
-    {
-      if(p_data_set!=0)
-	{
-	  //delete p_data_set;
-	  p_data_set->destroy();
-	}
-      p_data_set=da.clone();
-      if(p_statistic!=0)
-	{
-	  p_statistic->set_fitter(*this);
-	}
-    }
-	
-    void set_data_set(const data_set<Ty,Tx>& da)
-    {
-      if(p_data_set!=0)
-	{
-	  //delete p_data_set;
-	  p_data_set->destroy();
-	}
-      p_data_set=da.clone();
-      if(p_statistic!=0)
-	{
-	  p_statistic->set_fitter(*this);
-	}
-    }
-
     /**
        get the data set that have been loaded
        \return the const reference of inner data_set
@@ -1341,6 +1202,253 @@ namespace opt_utilities
       return optengine.get_opt_method();
     }
 
+
+    /**
+       Get the inner kept param modifier
+       \return the reference of param_modifier
+    */
+    param_modifier<Ty,Tx,Tp,Tstr>& get_param_modifier()
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->get_param_modifier();
+    }
+
+    /**
+       Get the inner kept param modifier
+       \return the reference of param_modifier
+     */
+    const param_modifier<Ty,Tx,Tp,Tstr>& get_param_modifier()const
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->get_param_modifier();
+    }
+
+    /**
+       report the status of a parameter
+       \param s the name of a parameter
+       \return string used to describe the parameter
+     */
+    Tstr report_param_status(const Tstr& s)const
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->report_param_status(s);
+    }
+
+  public:
+
+    /**
+       get the parameter value
+       \param pname the name of the parameter
+       \return the value of the parameter
+     */
+    typename element_type_trait<Tp>::element_type get_param_value(const Tstr& pname)const
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->get_param_info(pname).get_value();
+    }
+
+    /**
+       get the lower limit of a parameter
+       \param pname the name of a parameter
+       \return the lower limit of a parameter
+     */
+    typename element_type_trait<Tp>::element_type get_param_lower_limit(const Tstr& pname)const
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->get_param_info(pname).get_lower_limit();
+    }
+    
+    /**
+       get the upper limit of a parameter
+       \param pname the name of a parameter
+       \return the upper limit of a parameter
+     */
+    typename element_type_trait<Tp>::element_type get_param_upper_limit(const Tstr& pname)const
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->get_param_info(pname).get_upper_limit();
+    }
+
+    /**
+       get the param_info of a parameter
+       \param pname the name of the parameter
+       \return the const reference of a param_info object
+     */
+    const param_info<Tp,Tstr>& get_param_info(const Tstr& pname)const
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->get_param_info(pname);
+    }
+    
+    /**
+       get the param_info of a parameter by its order
+       \param n the order of the parameter
+       \return the const reference of a param_info object
+     */
+    const param_info<Tp,Tstr>& get_param_info(size_t n)const
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->get_param_info(n);
+    }
+
+    /**
+       get the order of a parameter by its name
+       \param pname the name of the parameter
+       \return the order of the parameter
+     */
+    size_t get_param_order(const Tstr& pname)const
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->get_param_order(pname);
+    }
+
+    /**
+       get the number of parameters
+       \return the number of parameters
+     */
+    size_t get_num_params()const
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      return p_model->get_num_params();
+    }
+
+    /**
+       get all params
+       \return the vector containing the values of all parameters
+     */
+    Tp get_all_params()const
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      //return current_param;
+      return p_model->get_all_params();
+    }
+
+
+  public:
+
+    /**
+       set the model
+       \param m model to be used
+     */
+    void set_model(const model<Ty,Tx,Tp,Tstr>& m)
+    {
+      if(p_model!=0)
+	{
+	  //delete p_model;
+	  p_model->destroy();
+	}
+      p_model=m.clone();
+      //p_model=&m;
+      //  current_param.resize(m.get_num_params());
+    }
+
+
+    /**
+       set the statistic (e.g., chi square, least square c-statistic etc.)
+       \param s statistic to be used
+     */
+    void set_statistic(const statistic<Ty,Tx,Tp,Ts,Tstr>& s)
+    {
+      if(p_statistic!=0)
+	{
+	  //delete p_statistic;
+	  p_statistic->destroy();
+	}
+      p_statistic=s.clone();
+      //p_statistic=&s;
+      p_statistic->set_fitter(*this);
+    }
+
+    /**
+       set parameter modifier
+       \param pm parameter modifier to be used
+     */
+    void set_param_modifier(const param_modifier<Ty,Tx,Tp,Tstr>& pm)
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      p_model->set_param_modifier(pm);
+    }
+
+    /**
+       clear the param modifier
+    */
+    void clear_param_modifier()
+    {
+      if(p_model==0)
+	{
+	  throw model_undefined();
+	}
+      p_model->clear_param_modifier();
+    }
+    
+    /**
+       load the data set
+       \param da a data set
+    */
+    void load_data(const data_set<Ty,Tx>& da)
+    {
+      if(p_data_set!=0)
+	{
+	  //delete p_data_set;
+	  p_data_set->destroy();
+	}
+      p_data_set=da.clone();
+      if(p_statistic!=0)
+	{
+	  p_statistic->set_fitter(*this);
+	}
+    }
+	
+    void set_data_set(const data_set<Ty,Tx>& da)
+    {
+      if(p_data_set!=0)
+	{
+	  //delete p_data_set;
+	  p_data_set->destroy();
+	}
+      p_data_set=da.clone();
+      if(p_statistic!=0)
+	{
+	  p_statistic->set_fitter(*this);
+	}
+    }
+
   public:
     /**
        set the value of a parameter
@@ -1430,49 +1538,6 @@ namespace opt_utilities
 
 
     /**
-       get the parameter value
-       \param pname the name of the parameter
-       \return the value of the parameter
-     */
-    typename element_type_trait<Tp>::element_type get_param_value(const Tstr& pname)const
-    {
-      if(p_model==0)
-	{
-	  throw model_undefined();
-	}
-      return p_model->get_param_info(pname).get_value();
-    }
-
-    /**
-       get the lower limit of a parameter
-       \param pname the name of a parameter
-       \return the lower limit of a parameter
-     */
-    typename element_type_trait<Tp>::element_type get_param_lower_limit(const Tstr& pname)const
-    {
-      if(p_model==0)
-	{
-	  throw model_undefined();
-	}
-      return p_model->get_param_info(pname).get_lower_limit();
-    }
-    
-    /**
-       get the upper limit of a parameter
-       \param pname the name of a parameter
-       \return the upper limit of a parameter
-     */
-    typename element_type_trait<Tp>::element_type get_param_upper_limit(const Tstr& pname)const
-    {
-      if(p_model==0)
-	{
-	  throw model_undefined();
-	}
-      return p_model->get_param_info(pname).get_upper_limit();
-    }
-
-
-    /**
        \param pinfo the param information being set
      */
 
@@ -1486,74 +1551,6 @@ namespace opt_utilities
     }
 
     
-    /**
-       get the param_info of a parameter
-       \param pname the name of the parameter
-       \return the const reference of a param_info object
-     */
-    const param_info<Tp,Tstr>& get_param_info(const Tstr& pname)const
-    {
-      if(p_model==0)
-	{
-	  throw model_undefined();
-	}
-      return p_model->get_param_info(pname);
-    }
-    
-    /**
-       get the param_info of a parameter by its order
-       \param n the order of the parameter
-       \return the const reference of a param_info object
-     */
-    const param_info<Tp,Tstr>& get_param_info(size_t n)const
-    {
-      if(p_model==0)
-	{
-	  throw model_undefined();
-	}
-      return p_model->get_param_info(n);
-    }
-
-    /**
-       get the order of a parameter by its name
-       \param pname the name of the parameter
-       \return the order of the parameter
-     */
-    size_t get_param_order(const Tstr& pname)const
-    {
-      if(p_model==0)
-	{
-	  throw model_undefined();
-	}
-      return p_model->get_param_order(pname);
-    }
-
-    /**
-       get the number of parameters
-       \return the number of parameters
-     */
-    size_t get_num_params()const
-    {
-      if(p_model==0)
-	{
-	  throw model_undefined();
-	}
-      return p_model->get_num_params();
-    }
-
-    /**
-       get all params
-       \return the vector containing the values of all parameters
-     */
-    Tp get_all_params()const
-    {
-      if(p_model==0)
-	{
-	  throw model_undefined();
-	}
-      //return current_param;
-      return p_model->get_all_params();
-    }
 
     /**
        set the optimization method used to perform the model fitting
@@ -1684,31 +1681,9 @@ namespace opt_utilities
     {
       return typeid(*this).name();
     }
-    
+
   public:
-    /**
-       clone the existing object
-       \return the clone of self
-     */
-    statistic<Ty,Tx,Tp,Ts,Tstr>* clone()const
-    {
-      return this->do_clone();
-    }
-
-    const char* get_type_name()const
-    {
-      return this->do_get_type_name();
-    }
-    
-    /**
-       destroy the cloned object
-     */
-    void destroy()
-    {
-      return do_destroy();
-    }
-
-    /**
+        /**
        default construct
      */
     statistic()
@@ -1743,6 +1718,31 @@ namespace opt_utilities
     virtual ~statistic()
     {}
 
+
+  public:
+    /**
+       clone the existing object
+       \return the clone of self
+     */
+    statistic<Ty,Tx,Tp,Ts,Tstr>* clone()const
+    {
+      return this->do_clone();
+    }
+
+    /**
+       destroy the cloned object
+     */
+    void destroy()
+    {
+      return do_destroy();
+    }
+
+
+    const char* get_type_name()const
+    {
+      return this->do_get_type_name();
+    }
+  public:    
     /**
        set the fitter
        \param pfitter the fitter to be linked
@@ -1809,46 +1809,7 @@ namespace opt_utilities
   {
   private:
     model<Ty,Tx,Tp,Tstr>* p_model;
-  public:
-    /**
-       constructing full parameter list from the free parameters
-     */
-    Tp reform(const Tp& p)const
-    {
-      return do_reform(p);
-    }
-
-    /**
-       constructing the free parameter from the full parameters
-     */
-    Tp deform(const Tp& p)const
-    {
-      return do_deform(p);
-    }
-
-    /**
-       return the clone of self
-       \return the clone of self
-     */
-    param_modifier<Ty,Tx,Tp,Tstr>* clone()const
-    {
-      return do_clone();
-    }
-
-    const char* get_type_name()const
-    {
-      return this->do_get_type_name();
-    }
-
-    
-    /**
-       destroy the cloned object
-     */
-    void destroy()
-    {
-      do_destroy();
-    }
-
+  private:
     /**
        \return the type name of self
     */
@@ -1858,6 +1819,18 @@ namespace opt_utilities
       return typeid(*this).name();
     }
 
+    virtual Tp do_reform(const Tp& p)const=0;
+    virtual Tp do_deform(const Tp& p)const=0;
+    virtual size_t do_get_num_free_params()const=0;
+    virtual Tstr do_report_param_status(const Tstr&)const=0;
+    virtual void update(){}
+
+    virtual param_modifier<Ty,Tx,Tp,Tstr>* do_clone()const=0;
+    
+    virtual void do_destroy()
+    {
+      delete this;
+    }
   public:
     /**
        the default construct function
@@ -1885,7 +1858,52 @@ namespace opt_utilities
       p_model=rhs.p_model;
       return *this;
     }
-    
+    /**
+       destruct function
+     */
+    virtual ~param_modifier(){}
+
+  public:
+
+    /**
+       return the clone of self
+       \return the clone of self
+     */
+    param_modifier<Ty,Tx,Tp,Tstr>* clone()const
+    {
+      return do_clone();
+    }
+
+    /**
+       destroy the cloned object
+    */
+    void destroy()
+    {
+      do_destroy();
+    }
+
+    const char* get_type_name()const
+    {
+      return this->do_get_type_name();
+    }    
+  public:
+    /**
+       constructing full parameter list from the free parameters
+     */
+    Tp reform(const Tp& p)const
+    {
+      return do_reform(p);
+    }
+
+    /**
+       constructing the free parameter from the full parameters
+     */
+    Tp deform(const Tp& p)const
+    {
+      return do_deform(p);
+    }
+
+
   public:
     
     /**
@@ -1929,25 +1947,6 @@ namespace opt_utilities
     {
       return do_report_param_status(name);
     }
-
-    /**
-       destruct function
-     */
-    virtual ~param_modifier(){}
-  private:
-    virtual Tp do_reform(const Tp& p)const=0;
-    virtual Tp do_deform(const Tp& p)const=0;
-    virtual size_t do_get_num_free_params()const=0;
-    virtual Tstr do_report_param_status(const Tstr&)const=0;
-    virtual void update(){}
-
-    virtual param_modifier<Ty,Tx,Tp,Tstr>* do_clone()const=0;
-    
-    virtual void do_destroy()
-    {
-      delete this;
-    }
-
   };
 }
 
