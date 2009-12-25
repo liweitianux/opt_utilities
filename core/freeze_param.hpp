@@ -8,7 +8,7 @@
 #include "fitter.hpp"
 #include <vector>
 #include <set>
-
+#include <algorithm>
 namespace opt_utilities
 {
   /**
@@ -81,7 +81,7 @@ namespace opt_utilities
 
     bool is_frozen(size_t i)const
     {
-      if(find(param_num.begin(),param_num.end(),i)==param_num.end())
+      if(std::find(param_num.begin(),param_num.end(),i)==param_num.end())
 	{
 	  return false;
 	}
