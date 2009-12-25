@@ -260,13 +260,13 @@ namespace opt_utilities
     return false;
   }
 
-};
+}
 
 
-#define DEF_VEC_FUNC(_func) template <typename T>		\
+#define DEF_VEC_FUNC(_func) template <typename T>			\
   opt_utilities::optvec<T> _func(const opt_utilities::optvec<T>& x)	\
-  {								\
-    opt_utilities::optvec<T> result(x.size());		\
+  {									\
+    opt_utilities::optvec<T> result(x.size());				\
     for(int i=0;i!=result.size();++i)				\
       {								\
 	result[i]=_func(x[i]);					\
@@ -276,11 +276,11 @@ namespace opt_utilities
 
 namespace std
 {
-  DEF_VEC_FUNC(sin);
-  DEF_VEC_FUNC(cos);
-  DEF_VEC_FUNC(log);
-  DEF_VEC_FUNC(sqrt);
-  DEF_VEC_FUNC(exp);
+  DEF_VEC_FUNC(sin)
+  DEF_VEC_FUNC(cos)
+  DEF_VEC_FUNC(log)
+  DEF_VEC_FUNC(sqrt)
+  DEF_VEC_FUNC(exp)
   template<typename T>
   opt_utilities::optvec<T> pow(const opt_utilities::optvec<T>& x,const T& y)
   {
