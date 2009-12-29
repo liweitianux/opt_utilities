@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 2.6)
+PROJECT(opt_utilities,CPP)
+
+add_subdirectory(core)
+add_subdirectory(data_sets)
+add_subdirectory(interface)
+add_subdirectory(example)
+add_subdirectory(methods)
+add_subdirectory(misc)
+add_subdirectory(models)
+add_subdirectory(statistics)
+add_subdirectory(utilities)
+add_subdirectory(vmodels)
+include_directories (${opt_utilities_SOURCE_DIR})
+
+set(LIBRARY_OUTPUT_PATH,lib)
+ADD_LIBRARY(opt STATIC interface/opt.cc)
