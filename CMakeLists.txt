@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.6)
-PROJECT(opt_utilities,CPP)
+PROJECT(opt_utilities,CXX)
 
 add_subdirectory(core)
 add_subdirectory(data_sets)
@@ -11,7 +11,9 @@ add_subdirectory(models)
 add_subdirectory(statistics)
 add_subdirectory(utilities)
 add_subdirectory(vmodels)
-include_directories (${opt_utilities_SOURCE_DIR})
+include_directories (${PROJECT_SOURCE_DIR})
 
 set(LIBRARY_OUTPUT_PATH,lib)
 ADD_LIBRARY(opt STATIC interface/opt.cc)
+ADD_EXECUTABLE(test_fitter example/test_fitter.cpp)
+ADD_EXECUTABLE(test_optimizer example/test_optimizer.cpp)
