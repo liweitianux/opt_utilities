@@ -13,6 +13,7 @@
 #include <core/opt_traits.hpp>
 #include <cassert>
 #include <cmath>
+#include <ctime>
 #include <vector>
 #include <algorithm>
 /*
