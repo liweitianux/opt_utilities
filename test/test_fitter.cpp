@@ -1,4 +1,5 @@
 #include <core/fitter.hpp>
+#include <misc/bootstrap.hpp>
 #include <methods/powell/powell_method.hpp>
 #include <statistics/chisq.hpp>
 #include <models/nbeta1d.hpp>
@@ -36,4 +37,7 @@ int main(int argc,char* argv[])
     {
       cout<<f.get_param_info(i).get_name()<<"="<<f.get_param_info(i).get_value()<<endl;
     }
+  bootstrap<double,double,vector<double>,double,std::string> bst;
+  bst.set_fitter(f);
+  bst.sample(1000);
 }

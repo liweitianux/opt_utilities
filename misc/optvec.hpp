@@ -25,8 +25,8 @@ namespace opt_utilities
 
     optvec& operator=(const optvec& rhs)
     {
-      //dynamic_cast<std::vector<T>&>(*this).operator=(rhs);
-      std::vector<T>::operator=(rhs);
+      static_cast<std::vector<T>&>(*this).operator=(rhs);
+      //std::cerr<<"rhs.size="<<rhs.size()<<std::endl;
       return *this;
     }
   public:
@@ -208,8 +208,8 @@ namespace opt_utilities
   optvec<T> operator/(const T& x1,const optvec<T>& x2)
   {
     
-    optvec<T> result(x1.size());
-    for(size_t i=0;i!=x1.size();++i)
+    optvec<T> result(x2.size());
+    for(size_t i=0;i!=x2.size();++i)
       {
 	result[i]=x1/x2[i];
       }
@@ -258,6 +258,30 @@ namespace opt_utilities
 	  }
       }
     return false;
+  }
+
+  template <typename Ty>
+  inline Ty randn(Ty y0,Ty y_err)
+  {
+    Ty y;
+    do
+      {
+	y=(rand()/(Ty)RAND_MAX-(Ty).5)*(10*y_err)+y0;
+      }
+    while(rand()/(Ty)RAND_MAX>exp(-(y-y0)*(y-y0)/(y_err*y_err)));
+    return y;
+  }
+  
+  
+  template <typename T>
+  optvec<T> rand_norm(const optvec<T>& y0, const optvec<T>& y_err)
+  {
+    optvec<T> result(y0.size());
+    for(int i=0;i<y0.size();++i)
+      {
+	result[i]=randn(y0[i],y_err[i]);
+      }
+    return result;
   }
 
 }
