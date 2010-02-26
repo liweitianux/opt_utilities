@@ -12,7 +12,7 @@
 #include <cassert>
 #include <cmath>
 #include <algorithm>
-#include <gsl_multimin.h>
+#include <gsl/gsl_multimin.h>
 #include <iostream>
 
 
