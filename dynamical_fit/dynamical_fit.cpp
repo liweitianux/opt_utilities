@@ -15,9 +15,9 @@ using namespace opt_utilities;
 
 int main(int argc,char* argv[])
 {
-  if(argc!=2)
+  if(argc!=3)
     {
-      cerr<<"Usage: "<<argv[0]<<" <config file>"<<endl;
+      cerr<<"Usage: "<<argv[0]<<" <config file> <model dump file>"<<endl;
       exit(-1);
     }
   ifstream cfg_file(argv[1]);
@@ -57,7 +57,30 @@ int main(int argc,char* argv[])
 
   fit.load_data(dl.get_data_set());
 
+  fit.set_precision(1e-5);
+  fit.fit();
+  fit.fit();
+
   vector<double> p=fit.fit();
-  cout<<p[0]<<"\t"<<p[1]<<endl;
+  for(int i=0;i<fit.get_num_params();++i)
+    {
+      cerr<<fit.get_param_info(i).get_name()<<"\t"<<fit.get_param_info(i).get_value()<<endl;
+    }
   
+  ofstream ofs(argv[2]);
+  ofs<<"no no no\n";
+  double xmin,xmax;
+  xmin=fit.get_data_set().get_data(0).get_x();
+  xmax=fit.get_data_set().get_data(0).get_x();
+  for(int i=0;i<fit.get_data_set().size();++i)
+    {
+      xmin=std::min(xmin,fit.get_data_set().get_data(i).get_x());
+      xmax=std::max(xmax,fit.get_data_set().get_data(i).get_x());
+    }
+  
+  for(double x=xmin;x<xmax;x+=(xmax-xmin)/1000.)
+    {
+      ofs<<x<<"\t0\t0\t"<<fit.eval_model_raw(x,fit.get_all_params())<<"\t0\t0"<<endl;
+    }
+
 }
