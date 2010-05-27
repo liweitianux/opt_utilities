@@ -11,22 +11,24 @@
 
 namespace opt_utilities
 {
+  
   template <typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr>
   class opt_types
   {
   public:
-    typedef fitter<Ty,Tx,Tp,Ts,Tstr> fitter;
-    typedef chisq<Ty,Tx,Tp,Ts,Tstr> chisq;
-    typedef leastsq<Ty,Tx,Tp,Ts,Tstr> leastsq;
-    typedef powell_method<Ty,Tp> powell_method;
-    typedef model<Ty,Tx,Tp,Tstr> model;
-    typedef default_data_set<Ty,Ty> data_set;
-    typedef optimizer<Ty,Tp> optimizer;
-    typedef func_obj<Ty,Tp> func_obj;
-    typedef opt_method<Ty,Tp> opt_method;
+    typedef ::opt_utilities::fitter<Ty,Tx,Tp,Ts,Tstr> fitter;
+    typedef ::opt_utilities::chisq<Ty,Tx,Tp,Ts,Tstr> chisq;
+    typedef ::opt_utilities::leastsq<Ty,Tx,Tp,Ts,Tstr> leastsq;
+    typedef ::opt_utilities::powell_method<Ty,Tp> powell_method;
+    typedef ::opt_utilities::model<Ty,Tx,Tp,Tstr> model;
+    typedef ::opt_utilities::default_data_set<Ty,Ty> data_set;
+    typedef ::opt_utilities::optimizer<Ty,Tp> optimizer;
+    typedef ::opt_utilities::func_obj<Ty,Tp> func_obj;
+    typedef ::opt_utilities::opt_method<Ty,Tp> opt_method;
   };
 
   typedef opt_types<double,double,std::vector<double>,double,std::string> dopt;
+  
 }
 
 

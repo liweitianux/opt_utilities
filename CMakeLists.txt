@@ -12,7 +12,7 @@ add_subdirectory(dynamical_fit)
 
 include_directories (${PROJECT_SOURCE_DIR} ${LTDL_INCLUDE_DIRS})
 
-message(${LTDL_LIBRARIES})
+#message(${LTDL_LIBRARIES})
 set(LIBRARY_OUTPUT_PATH,lib)
 ADD_LIBRARY(opt STATIC interface/opt.cc)
 ADD_EXECUTABLE(test_fitter example/test_fitter.cpp)
