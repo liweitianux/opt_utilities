@@ -3,6 +3,7 @@
 #define OPT_HEADER
 #include "mnbrak.hpp"
 #include "brent.hpp"
+#include <cmath>
 #include <core/opt_traits.hpp>
 
 namespace opt_utilities
@@ -74,7 +75,7 @@ namespace opt_utilities
     func_adaptor<rT,pT> fadpt(p,xi,func);
 
     int j=0;
-    const rT TOL=sqrt(std::numeric_limits<rT>::epsilon());
+    const rT TOL=std::sqrt(std::numeric_limits<rT>::epsilon());
     rT xx=0,xmin=0,fx=0,fb=0,fa=0,bx=0,ax=0;
     int n=(int)get_size(p);
 

@@ -10,7 +10,7 @@
 #include <limits>
 #include <cassert>
 #include <cmath>
-#include "linmin.hpp"
+#include "../linmin/linmin.hpp"
 #include <algorithm>
 #include <iostream>
 
