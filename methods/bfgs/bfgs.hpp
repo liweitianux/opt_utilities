@@ -35,7 +35,6 @@ namespace opt_utilities
     typedef typename element_type_trait<pT>::element_type element_type;
     element_type* mem_pool;
     element_type** invBk;
-    element_type** invBk1;
     bool bstop;
   private:
     const char* do_get_type_name()const
@@ -52,7 +51,7 @@ namespace opt_utilities
   public:
     bfgs_method()
       :threshold(1e-5),p_fo(0),p_optimizer(0),
-       mem_pool(0),invBk(0),invBk1(0)
+       mem_pool(0),invBk(0)
     {
       
     }
@@ -64,7 +63,7 @@ namespace opt_utilities
     
     bfgs_method(const bfgs_method<rT,pT>& rhs)
       :p_fo(rhs.p_fo),p_optimizer(rhs.p_optimizer),
-       threshold(rhs.threshold)
+       threshold(rhs.threshold),mem_pool(0),invBk(0)
     {
     }
 
@@ -83,14 +82,12 @@ namespace opt_utilities
     void init_workspace(int n)
     {
       destroy_workspace();
-      mem_pool=new element_type[n*n*2];
+      mem_pool=new element_type[n*n];
       invBk=new element_type*[n];
-      invBk1=new element_type*[n];
 
       for(size_t i=0;i!=n;++i)
 	{
 	  invBk[i]=mem_pool+i*n;
-	  invBk1[i]=invBk[i]+n*n;
 	}
       for(size_t i=0;i!=n;++i)
 	{
@@ -105,7 +102,6 @@ namespace opt_utilities
     {
       delete[] mem_pool;
       delete[] invBk;
-      delete[] invBk1;
     }
 
   public:
