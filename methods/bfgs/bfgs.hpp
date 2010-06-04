@@ -6,6 +6,7 @@
 #include <limits>
 #include <cstdlib>
 #include <core/opt_traits.hpp>
+#include "../linmin/linmin.hpp"
 #include <math/num_diff.hpp>
 #include <cassert>
 #include <cmath>
@@ -26,7 +27,7 @@ namespace opt_utilities
   class bfgs_method
     :public opt_method<rT,pT>
   {
-  private:
+  public:
     pT start_point;
     rT threshold;
     func_obj<rT,pT>* p_fo;
@@ -50,8 +51,8 @@ namespace opt_utilities
 
   public:
     bfgs_method()
-      :p_fo(0),p_optimizer(0),
-       invBk(0),invBk1(0);
+      :threshold(1e-5),p_fo(0),p_optimizer(0),
+       mem_pool(0),invBk(0),invBk1(0)
     {
       
     }
@@ -121,7 +122,7 @@ namespace opt_utilities
     
     void do_set_precision(rT t)
     {
-      threshold=t;
+      threshold=t>=0?t:-t;
     }
 
     rT do_get_precision()const
@@ -138,52 +139,64 @@ namespace opt_utilities
     pT do_optimize()
     {
       pT s;
+      pT& p=start_point;
       resize(s,get_size(start_point));
       pT old_grad;
       pT y;
       resize(old_grad,get_size(start_point));
       resize(y,get_size(start_point));
-      for(size_t i=0;i!=get_size(p);++i)
+      for(;;)
 	{
-	  set_element(old_grad,i,gradient(*p_fo,start_point,i));
-	  set_element(s,i,0);
-	  for(size_t j=0;j!=get_size(p);++j)
+	  for(size_t i=0;i!=get_size(p);++i)
 	    {
-	      s[i]+=invBk[i][j]*old_grad[j];
+	      set_element(old_grad,i,gradient(*p_fo,start_point,i));
+	      set_element(s,i,0);
+	      for(size_t j=0;j!=get_size(p);++j)
+		{
+		  s[i]+=invBk[i][j]*old_grad[j];
+		}
+	    }
+	  double fret;
+	  linmin(start_point,s,fret,*p_fo);
+	  
+	  for(size_t i=0;i!=get_size(p);++i)
+	    {
+	      set_element(y,i,gradient(*p_fo,start_point,i)-get_element(old_grad,i));
+	    }
+	  
+	  rT sy=0;
+	  pT invBy;
+	  pT yinvB;
+	  resize(invBy,get_size(p));
+	  resize(yinvB,get_size(p));
+	  for(size_t i=0;i!=get_size(p);++i)
+	    {
+	      sy+=s[i]*y[i];
+	      for(size_t j=0;j!=get_size(p);++j)
+		{
+		  invBy[i]+=invBk[i][j]*y[j];
+		  yinvB[i]+=y[j]*invBk[j][i];
+		}
+	    }
+	  if(sy<threshold&&sy>-threshold)
+	    {
+	      return start_point;
+	    }
+	  rT yinvBy=0;
+	  for(size_t i=0;i!=get_size(p);++i)
+	    {
+	      yinvBy+=invBy[i]*y[i];
+	    }
+	  
+	  for(size_t i=0;i<get_size(p);++i)
+	    {
+	      for(size_t j=0;j<get_size(p);++j)
+		{
+		  invBk[i][j]+=((sy+yinvBy)*s[i]*s[j]/(sy*sy)-(invBy[i]*s[j]+s[i]*yinvB[j])/(sy));
+		}
 	    }
 	}
-      linmin(start_point,s,*p_fo);
-      for(size_t i=0;i!=get_size(p);++i)
-	{
-	  set_element(y,gradient(*p_fo,start_point,i)-get_element(old_grad,i));
-	}
-      rT sy=0;
-      pT invBy;
-      pT yinvB;
-      resize(invBy,get_size(p));
-      resize(yinvB,get_size(p));
-      for(size_t i=0;i!=get_size(p);++i)
-	{
-	  sy+=s[i]*y[i];
-	  for(size_t j=0;j!=get_size(p);++j)
-	    {
-	      invBy[i]+=invBk[i][j]*y[j];
-	      yinvB[i]+=y[j]*invBk[j][i];
-	    }
-	}
-      rT yinvBy=0;
-      for(size_t i=0;i!=get_size(p);++i)
-	{
-	  yinvBy+=invBy[i]*y[i];
-	}
-      for(size_t i=0;i<get_size(p);++i)
-	{
-	  for(size_t j=0;j<get_size(p);++j)
-	    {
-	      invBk[i][j]+=((sy+yinvBy)*s[i]*s[j]/(sy*sy)-(invBy[i]*s[j]+s[i]*yinvB[j])/(sy));
-	    }
-	}
-      
+	return start_point;
     }
     
     void do_stop()
