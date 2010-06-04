@@ -1,6 +1,6 @@
 #include "opt.h"
 #include <utilities/opt_types.hpp>
-#include <core/num_diff.hpp>
+#include <math/num_diff.hpp>
 #include <models/models.hpp>
 #include <map>
 #include <core/freeze_param.hpp>
