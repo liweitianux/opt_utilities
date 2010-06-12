@@ -5,12 +5,13 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR})
 set(CMAKE_VERBOSE_MAKEFILE true)
 
 find_package(ltdl REQUIRED)
+find_package(muparser REQUIRED)
 
 add_subdirectory(example)
 add_subdirectory(interface)
 add_subdirectory(dynamical_fit)
 
-include_directories (${PROJECT_SOURCE_DIR} ${LTDL_INCLUDE_DIRS})
+include_directories (${PROJECT_SOURCE_DIR} ${LTDL_INCLUDE_DIRS} ${MP_INCLUDE_DIRS})
 
 #message(${LTDL_LIBRARIES})
 set(LIBRARY_OUTPUT_PATH,lib)
@@ -19,5 +20,5 @@ ADD_EXECUTABLE(test_fitter example/test_fitter.cpp)
 ADD_EXECUTABLE(test_optimizer example/test_optimizer.cpp)
 ADD_EXECUTABLE(dynamical_fit.out dynamical_fit/dynamical_fit.cpp)
 
-target_link_libraries(dynamical_fit.out ${LTDL_LIBRARIES})
+target_link_libraries(dynamical_fit.out ${LTDL_LIBRARIES} ${MP_LIBRARIES})
 
