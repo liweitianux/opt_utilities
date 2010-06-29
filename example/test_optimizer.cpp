@@ -5,7 +5,7 @@
 #include <iostream>
 
 
-//declear a class derived from func_obj
+//declare a class derived from func_obj
 class foo
   :public opt_utilities::func_obj<double,std::vector<double> >
 //                              ^^^^^^^^double is the return type
