@@ -17,35 +17,60 @@ namespace opt_utilities
   /**
      calculate the numerical differential of a func_obj
   */
+  template<typename rT,typename pT>
+  class diff_func_obj
+    :public func_obj<rT,pT>
+  {
+  private:
+    virtual pT do_gradient(const pT& p)=0;
+  public:
+    pT gradient(const pT& p)
+    {
+      return do_gradient(p);
+    }
+  };
+  
+
+
   template <typename rT,typename pT>
-  rT gradient(func_obj<rT,pT>& f,const pT& p,size_t n)
+  rT gradient(func_obj<rT,pT>& f,pT& p,size_t n)
   {
     rT ep=std::sqrt(std::numeric_limits<rT>::epsilon());
     
     rT result;
-    pT p2;
-    resize(p2,get_size(p));
-    pT p1;
-    resize(p1,get_size(p));
+    pT p_tmp;
     
-    for(size_t i=0;i<get_size(p);++i)
-      {
-	set_element(p2,i,get_element(p,i));
-	set_element(p1,i,get_element(p,i));
-      }
+    typename element_type_trait<pT>::element_type old_value=get_element(p,n);
+    
     typename element_type_trait<pT>::element_type h=
       std::max(get_element(p,n),rT(1))*ep;
-    set_element(p2,n,get_element(p,n)+h);
-    set_element(p1,n,get_element(p,n)-h);
-    
-    rT v2=f(p2);
-    rT v1=f(p1);
-    
+    set_element(p,n,old_value+h);
+    rT v2=f(p);
+    set_element(p,n,old_value-h);
+    rT v1=f(p_tmp);
+    set_element(p,n,old_value);
     result=(v2-v1)/h/2;
     return result;
   }
 
+  template <typename rT,typename pT>
+  pT gradient(func_obj<rT,pT>& f,pT& p)
+  {
+    diff_func_obj<rT,pT>* pdfo=0;
+    if(pdfo=dynamic_cast<diff_func_obj<rT,pT>*>(&f))
+      {
+	return pdfo->gradient(p);
+      }
+    pT result;
+    resize(result,get_size(p));
+    for(int i=0;i<get_size(p);++i)
+      {
+	set_element(result,i,gradient(f,p,i));
+      }
+    return result;
+  }
 
+  
   template <typename rT,typename pT>
   rT hessian(func_obj<rT,pT>& f,const pT& p,size_t m,size_t n)
   {
@@ -83,6 +108,19 @@ namespace opt_utilities
     rT result=(f(p11)+f(p00)-f(p01)-f(p10))/(4*hm*hn);
     return result;
   }
+
+
+  template<typename rT,typename pT>
+  rT div(func_obj<rT,pT>& f,const pT& p)
+  {
+    rT result=0;
+    for(int i=0;i<get_size(p);++i)
+      {
+	result+=hessian(f,p,i,i);
+      }
+    return result;
+  }
+
 }
 
 #endif
