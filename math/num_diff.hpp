@@ -38,7 +38,6 @@ namespace opt_utilities
     rT ep=std::sqrt(std::numeric_limits<rT>::epsilon());
     
     rT result;
-    pT p_tmp;
     
     typename element_type_trait<pT>::element_type old_value=get_element(p,n);
     
@@ -47,7 +46,7 @@ namespace opt_utilities
     set_element(p,n,old_value+h);
     rT v2=f(p);
     set_element(p,n,old_value-h);
-    rT v1=f(p_tmp);
+    rT v1=f(p);
     set_element(p,n,old_value);
     result=(v2-v1)/h/2;
     return result;
