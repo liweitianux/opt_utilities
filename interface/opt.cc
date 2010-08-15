@@ -1,10 +1,31 @@
 #include "opt.h"
 #include <utilities/opt_types.hpp>
 #include <math/num_diff.hpp>
-#include <models/models.hpp>
 #include <map>
 #include <core/freeze_param.hpp>
 #include <data_sets/default_data_set.hpp>
+#include "type_depository.hpp"
+#include <memory>
+
+//models:
+#include <models/gauss1d.hpp>
+#include <models/bl1d.hpp>
+#include <models/nfw1d.hpp>
+#include <models/bpl1d.hpp>
+#include <models/beta1d.hpp>
+#include <models/nbeta1d.hpp>
+#include <models/dbeta1d.hpp>
+#include <models/lin1d.hpp>
+#include <models/pl1d.hpp>
+#include <models/poly1d.hpp>
+#include <models/bremss.hpp>
+#include <models/beta2d2.hpp>
+#include <models/beta2d.hpp>
+#include <models/dbeta2d2.hpp>
+#include <models/dbeta2d3.hpp>
+#include <models/dbeta2d.hpp>
+#include <models/polar_ellipse.hpp>
+//end models
 //#include <iostream>
 
 using namespace std;
@@ -27,6 +48,31 @@ struct fit_space
   
 };
 
+std::vector<std::string> model_names;
+
+void regist_model(const dopt::model& m,const char* addr)
+{
+  
+  if(find(model_names.begin(),model_names.end(),m.get_type_name())!=model_names.end())
+    {
+      cerr<<m.get_type_name()<<" has been registed"<<endl;
+      return;
+    }
+  cerr<<"registing:"<<m.get_type_name()<<endl;
+  model_names.push_back(m.get_type_name());
+  opt_utilities::register_model(m);
+}
+
+
+
+class initializer
+{
+public:
+  initializer()
+  {
+    regist_model(lin1d<double>(),"lin1d");
+  }
+}_initializer;
 
 extern "C"
 {
@@ -90,7 +136,8 @@ void set_model_(const int& nfit,const char* model_name)
     }
   try
     {
-      iter->second.fit.set_model(opt_utilities::get_1dmodel_by_name(model_name));
+      std::auto_ptr<dopt::model> p(opt_utilities::get_model<double,double,std::vector<double>,std::string>(model_name));
+      iter->second.fit.set_model(*p);
     }
   catch(opt_exception& e)
   {
