@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <memory>
+#include <cstring>
 
 #if     LBFGS_FLOAT == 32 && LBFGS_IEEE_FLOAT
 #define fsigndiff(x, y) (((*(uint32_t*)(x)) ^ (*(uint32_t*)(y))) & 0x80000000U)
