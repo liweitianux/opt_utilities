@@ -6,7 +6,10 @@
 #define CSTAT_HPP
 #define OPT_HEADER
 #include <core/fitter.hpp>
+#include <math/vector_operation.hpp>
 #include <iostream>
+#include <cassert>
+
 
 using std::cout;using std::endl;
 namespace opt_utilities
@@ -50,7 +53,7 @@ namespace opt_utilities
       for(int i=(this->get_data_set()).size()-1;i>=0;--i)
 	{
 	  Ty model_y=eval_model(this->get_data_set().get_data(i).get_x(),p);
-	  result-=this->get_data_set().get_data(i).get_y()*std::log(model_y);
+	  result-=contract(this->get_data_set().get_data(i).get_y(),std::log(model_y),result);
 	}
 
       if(verb)
