@@ -28,7 +28,7 @@ namespace opt_utilities
       this->push_param_info(param_info<optvec<T> >("sigma",1));
     }
 
-
+    
   public:
     optvec<T> do_eval(const optvec<T>& x,const optvec<T>& param)
     {
