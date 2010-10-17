@@ -93,7 +93,6 @@ namespace opt_utilities
 	{
 	  param_info<optvec<T>,std::string> p1(std::string("_w")+smorder,w);	  
 	  this->push_param_info(p1);
-	  //std::cout<<this->get_num_params()<<std::endl;
 	  weight_num.push_back(this->get_num_params()-1);
 	}
 
@@ -103,13 +102,6 @@ namespace opt_utilities
 	  param_info<optvec<T>,std::string> p(m.get_param_info(i));
 	  param_info<optvec<T>,std::string> p1(p.get_name()+smorder,p.get_value());
 	  this->push_param_info(p1);
-	  if(this->get_num_params()==1)
-	    {
-	      std::cout<<"origin:"<<p.get_value()<<std::endl;
-	      std::cout<<"self:"<<this->get_param_info(0).get_value()<<std::endl;
-
-	    }
-	  //std::cout<<this->get_num_params()<<std::endl;
 	}
     }
 
@@ -129,9 +121,7 @@ namespace opt_utilities
       for(int i=0;i<result.size();++i)
 	{
 	  result[i]=result[i]*result[i];
-	  //	  std::cout<<result[i]<<"\t";
 	}
-      //      std::cout<<std::endl;
       return result;
     }
 
@@ -147,8 +137,6 @@ namespace opt_utilities
       optvec<T> weight(convert_unit_sph(weight_angle));
       
       int pnum=0;
-      //std::cout<<param[2]<<"\t";
-      //std::cout<<weight[0]<<"\t"<<weight[1]<<std::endl;
       for(int i=0;i<components.size();++i)
 	{
 	  T temp_result=0;
