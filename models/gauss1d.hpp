@@ -34,8 +34,8 @@ namespace opt_utilities
       T N=get_element(param,0);
       T x0=get_element(param,1);
       T sigma=get_element(param,2);
-      T y=(x-x0)/2./sigma;
-      return N*exp(-y*y);
+      T y=(x-x0)/sigma;
+      return N*exp(-y*y/2);
     }
 
   private:
