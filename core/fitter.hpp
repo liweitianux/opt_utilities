@@ -382,6 +382,10 @@ namespace opt_utilities
      */
     param_info& operator=(const param_info& rhs)
     {
+      if(this==&rhs)
+	{
+	  return *this;
+	}
       name=rhs.name;
       description=rhs.description;
       opt_eq(value,rhs.value);
