@@ -1,5 +1,5 @@
-#ifndef BFGS_METHOD
-#define BFGS_METHOD
+#ifndef LBFGS_METHOD
+#define LBFGS_METHOD
 #define OPT_HEADER
 #include <core/optimizer.hpp>
 //#include <blitz/array.h>

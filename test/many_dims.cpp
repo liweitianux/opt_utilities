@@ -4,6 +4,7 @@
 #include <methods/powell/powell_method.hpp>
 //#include <methods/gsl_simplex/gsl_simplex.hpp>
 #include <methods/bfgs/bfgs.hpp>
+#include <methods/lbfgs/lbfgs_method.hpp>
 #include <methods/aga/aga.hpp>
 #include <vector>
 #include <iostream>
@@ -122,7 +123,7 @@ class foo5
 void test_opt(const func_obj<double,vector<double> >& fo,
 	      const opt_method<double,vector<double> >& optm)
 {
-  const int problem_size=500;
+  const int problem_size=500000;
   optimizer<double,vector<double> > opt;
   
   opt.set_func_obj(fo);
@@ -154,7 +155,7 @@ void test_opt(const func_obj<double,vector<double> >& fo,
   cout<<"the result is:\n";
   for(int i=0;i<p.size();++i)
     {
-      cout<<p[i]<<endl;
+      //      cout<<p[i]<<endl;
     }
   cout<<"The result of the object function is:\n"
       <<opt.eval(p)<<endl;
@@ -165,12 +166,12 @@ void test_opt(const func_obj<double,vector<double> >& fo,
 int main()
 {
   //gsl_simplex<double,vector<double> > agam;
-  bfgs_method<double,vector<double> > agam;
+  lbfgs_method<double,vector<double> > agam;
   //powell_method<double,vector<double> > agam;
   //aga_method<double,vector<double> > agam(100,50);
   test_opt(foo1(),agam);
-  test_opt(foo2(),agam);
-  test_opt(foo3(),agam);
-  test_opt(foo4(),agam);
-  test_opt(foo5(),agam);
+  //  test_opt(foo2(),agam);
+  //test_opt(foo3(),agam);
+  //test_opt(foo4(),agam);
+  //test_opt(foo5(),agam);
 }
