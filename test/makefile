@@ -6,7 +6,7 @@ test_optimizer:test_optimizer.cpp
 	$(CXX) $< -o $@ -I .. -O3 -g
 
 many_dims:many_dims.cpp
-	$(CXX) $< -o $@ -I .. -O3 -g
+	$(CXX) $< -o $@ -I .. -O3 -g -p
 
 test_fitter:test_fitter.cpp
 	$(CXX) $< -o $@ -I .. -O3 -g

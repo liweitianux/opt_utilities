@@ -15,13 +15,28 @@ using namespace std;
 class foo1
   :public func_obj<double,vector<double> >
 {
+  long long n_eval;
+public:
+  foo1()
+    :n_eval(0)
+  {
+  }
+
+  ~foo1()
+  {
+    cerr<<n_eval<<" evaluations done"<<endl;
+  }
+
   foo1* do_clone()const
   {
     return new foo1(*this);
   }
+  
+  
 
   double do_eval(const vector<double>& p)
   {
+    ++n_eval;
     double result=0;
     for(int i=0;i!=p.size();++i)
       {
@@ -123,7 +138,7 @@ class foo5
 void test_opt(const func_obj<double,vector<double> >& fo,
 	      const opt_method<double,vector<double> >& optm)
 {
-  const int problem_size=500000;
+  const int problem_size=100000;
   optimizer<double,vector<double> > opt;
   
   opt.set_func_obj(fo);
@@ -170,6 +185,7 @@ int main()
   //powell_method<double,vector<double> > agam;
   //aga_method<double,vector<double> > agam(100,50);
   test_opt(foo1(),agam);
+  //  test_opt(foo1(),agam);
   //  test_opt(foo2(),agam);
   //test_opt(foo3(),agam);
   //test_opt(foo4(),agam);
