@@ -2,8 +2,8 @@
    \file opt_traits.hpp
  */
 
-#ifndef ARRAY_OPERATION
-#define ARRAY_OPERATION
+#ifndef OPT_TRAITS
+#define OPT_TRAITS
 #define OPT_HEADER
 #include <cstddef>
 namespace opt_utilities
