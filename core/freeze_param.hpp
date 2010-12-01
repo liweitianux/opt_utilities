@@ -172,6 +172,19 @@ namespace opt_utilities
       return result;
     }
 
+    freeze_param plus(const freeze_param& fp)const
+    {
+      freeze_param result(*this);
+      for(typename std::set<Tstr>::const_iterator i=fp.param_names.begin();
+	  i!=fp.param_names.end();
+	  ++i)
+	{
+	  result.param_names.insert(*i);
+	}
+      return result;
+    }
+
+
     /**
        += operator
        like the plus operator
@@ -197,6 +210,29 @@ namespace opt_utilities
 	}
       return *this;
     }
+
+    freeze_param& plus_eq(const freeze_param& fp)
+    {
+      //param_names.insert(param_names.end(),
+      //fp.param_names.begin(),
+      //fp.param_names.end());
+      for(typename std::set<Tstr>::const_iterator i=fp.param_names.begin();
+	  i!=fp.param_names.end();
+	  ++i)
+	{
+	  param_names.insert(*i);
+	}
+      try
+	{
+	  update();
+	}
+      catch(opt_exception& e)
+	{
+	  throw;
+	}
+      return *this;
+    }
+
 
 
     /**
@@ -226,8 +262,32 @@ namespace opt_utilities
       return *this;
     }
 
-  };
 
+    freeze_param& minus_eq(const freeze_param& fp)
+    {
+      //param_names.insert(param_names.end(),
+      //fp.param_names.begin(),
+      //fp.param_names.end());
+      for(typename std::set<Tstr>::const_iterator i=fp.param_names.begin();
+	  i!=fp.param_names.end();
+	  ++i)
+	{
+	  param_names.erase(*i);
+	}
+      try
+	{
+	  update();
+	}
+      catch(opt_exception& e)
+	{
+	  throw;
+	}
+      return *this;
+    }
+    
+  };
+  
+  
   /**
      help function to create a freeze_param object
      \param name the name to be frozen
