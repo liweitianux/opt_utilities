@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <methods/powell/powell_method.hpp>
+#include <methods/gsl_simplex/gsl_simplex.hpp>
 #include <statistics/chisq.hpp>
 #include <cstdlib>
 
@@ -22,8 +23,11 @@ int main(int argc,char* argv[])
     }
   ifstream cfg_file(argv[1]);
   fitter<double,double,std::vector<double>,double,std::string> fit;
+  chisq<double,double,vector<double>,double,string> stat;
+  stat.verbose(true);
   fit.set_opt_method(powell_method<double,vector<double> >());
-  fit.set_statistic(chisq<double,double,vector<double>,double,string>());
+  //
+  fit.set_statistic(stat);
   std::string model_so_name;
   cfg_file>>model_so_name;
   cerr<<"loading model shared object "<<model_so_name<<endl;
@@ -58,6 +62,8 @@ int main(int argc,char* argv[])
   fit.load_data(dl.get_data_set());
 
   fit.set_precision(1e-5);
+  fit.fit();
+  fit.set_opt_method(gsl_simplex<double,vector<double> >());
   fit.fit();
   fit.fit();
 
