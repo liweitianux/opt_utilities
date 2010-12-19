@@ -4,6 +4,7 @@
 #include <core/fitter.hpp>
 #include <cmath>
 #include <misc/optvec.hpp>
+#include <limits>
 
 namespace opt_utilities
 {
