@@ -1,5 +1,7 @@
 /**
    \file chisq.hpp
+   \brief chi-square statistic
+   \author Junhua Gu
  */
 
 #ifndef CHI_SQ_HPP

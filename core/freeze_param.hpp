@@ -1,5 +1,7 @@
 /**
    \file freeze_param.hpp
+   \brief param modifer that used to freeze one or more parameters
+   \author Junhua Gu
 */
 
 #ifndef FREEZE_PARAM_HPP
@@ -172,6 +174,9 @@ namespace opt_utilities
       return result;
     }
 
+    /**
+       Same as operator+
+     */
     freeze_param plus(const freeze_param& fp)const
     {
       freeze_param result(*this);
@@ -211,6 +216,9 @@ namespace opt_utilities
       return *this;
     }
 
+    /**
+       Same as operator+
+     */
     freeze_param& plus_eq(const freeze_param& fp)
     {
       //param_names.insert(param_names.end(),
@@ -262,7 +270,9 @@ namespace opt_utilities
       return *this;
     }
 
-
+    /**
+       Same as operator-=
+     */
     freeze_param& minus_eq(const freeze_param& fp)
     {
       //param_names.insert(param_names.end(),

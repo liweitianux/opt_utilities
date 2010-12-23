@@ -1,6 +1,7 @@
 /**
    \file optimizer.hpp
    \brief the definition of classes optimizer, func_obj, and opt_method
+   \author Junhua Gu
  */
 
 

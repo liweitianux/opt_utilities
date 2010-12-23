@@ -1,5 +1,7 @@
 /**
    \file gsl_simplex.hpp
+   \brief a simple wrapper for the GSL_SIMPLEX method
+   \author Junhua Gu
  */
 
 #ifndef GSL_SIMPLEX_METHOD

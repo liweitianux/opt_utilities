@@ -1,6 +1,7 @@
 /**
    \file aga.hpp
    \brief asexual genetic algorithm method
+   \author Junhua Gu
 */
 
 #ifndef AGA_METHOD

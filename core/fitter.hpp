@@ -1,5 +1,7 @@
 /**
    \file fitter.hpp
+   \brief classes used to perform model fitting by using optimizer
+   \author Junhua Gu
  */
 
 #ifndef FITTER_HPP
@@ -244,6 +246,13 @@ namespace opt_utilities
       return typeid(*this).name();
     }
     
+    /**
+       Overwrite this function to change the 
+       behavior when destroying a heap-allocated instance.
+       The default function cooperates with then 
+       the do_clone function allocates a new instance with
+       the new operator.
+     */
     virtual void do_destroy()
     {
       delete this;
@@ -284,6 +293,10 @@ namespace opt_utilities
       return this->do_get_data(i);
     }
 
+    /**
+       get the type name
+       \return the name of the type
+     */
     const char* get_type_name()const
     {
       return this->do_get_type_name();
@@ -428,6 +441,11 @@ namespace opt_utilities
       return upper_limit;
     }
 
+    /**
+       Returns a piece of description
+       Usually used as the help information of the parameter
+       \return a piece of description of the parameter
+    */
     const Tstr& get_description()const
     {
       return description;
@@ -465,12 +483,17 @@ namespace opt_utilities
     /**
        set the name of the parameter
        \param _name the name of the parameter
-     */
-
+    */
+    
     void set_name(const Tstr& _name)
     {
       name=_name;
     }
+    
+    /**
+       Set the description
+       \param desc the description to be assigned
+    */
 
     void set_description(const Tstr& desc)
     {
@@ -498,15 +521,36 @@ namespace opt_utilities
     //    int num_free_params;
     param_modifier<Ty,Tx,Tp,Tstr>* p_param_modifier;
   private:
+    /**
+       Clone self, 
+       The default behavior is to allocate a new instance
+       on the heap with new operator and return the pointer.
+       \return a point to the cloned instance
+     */
+    
     virtual model<Ty,Tx,Tp,Tstr>* do_clone()const=0;
+
+    /**
+       Destroy the cloned instance
+     */
 
     virtual void do_destroy()
     {
       delete this;
     }
     
+    /**
+       Should be implemented to evaluate the model
+       \param x the varible
+       \param p the parameter
+       \return the model value
+     */
     virtual Ty do_eval(const Tx& x,const Tp& p)=0;
     
+    /**
+       Can be overrided to return a piece of information of the model.
+       The default implement returns a empty string.
+     */
     virtual Tstr do_get_information()const
     {
       return Tstr();
@@ -594,6 +638,13 @@ namespace opt_utilities
     }
 
   public:
+    /**
+       Get the type name
+       Usually used to return the name of this model, which is often 
+       used as a key when implementing the prototype pattern
+       \return the type name
+     */
+    
     const char* get_type_name()const
     {
       return this->do_get_type_name();
@@ -949,7 +1000,19 @@ namespace opt_utilities
 
 
 
-  public:    
+  public:   
+    /**
+       When the parameter modifier exists,
+       use it to form the complete parameter list to be fed to the model.
+       The basic idea is that say we want to freeze some parameter(s),
+       we will assign a param_modifier to this model, then some parameters
+       vanishes in the fitting, but when in the core of the model, i.e., the
+       do_eval member function, it only accepts a complete list of paramters.
+       Thus we need a function to complete the parameter list from the
+       vanished list.
+       \param p the input incomplete parameter list
+       \return the output complete parameter list to be fed to the do_eval.
+     */
     Tp reform_param(const Tp& p)const
     {
       if(p_param_modifier==0)
@@ -958,7 +1021,11 @@ namespace opt_utilities
 	}
       return p_param_modifier->reform(p);
     }
-
+    /**
+       Perform the inverse operator of reform_param
+       \param p the complete parameter list 
+       \param p the vanished parameter list
+     */
     Tp deform_param(const Tp& p)const
     {
       if(p_param_modifier==0)
@@ -979,13 +1046,15 @@ namespace opt_utilities
       return do_eval(x,reform_param(p));
     }
 
-
+    /**
+       evaluate the model, and ignore the param_modifier.
+       \param p the parameter
+       \return the model value
+     */
     Ty eval_raw(const Tx& x,const Tp& p)
     {
       return do_eval(x,reform_param(p));
     }
-
-    
   };
 
 
@@ -1090,6 +1159,9 @@ namespace opt_utilities
   public:
     /**
        evaluate the model
+       \param x the varible
+       \param p the parameter
+       \return the model value
      */
     Ty eval_model(const Tx& x,const Tp& p)
     {
@@ -1100,6 +1172,13 @@ namespace opt_utilities
       return p_model->eval(x,p);
     }
 
+    /**
+       evaluate the model, ignore the param_modifier
+       \param x the varible
+       \param p the parameter
+       \return the model value       
+     */
+    
     Ty eval_model_raw(const Tx& x,const Tp& p)
     {
       if(p_model==0)
@@ -1234,7 +1313,7 @@ namespace opt_utilities
     }
 
     /**
-       report the status of a parameter
+       report the status of a parameter, e.g., freezed, thaw, etc.
        \param s the name of a parameter
        \return string used to describe the parameter
      */
@@ -1438,19 +1517,14 @@ namespace opt_utilities
 	  p_statistic->set_fitter(*this);
 	}
     }
-	
+    
+    /**
+       Same as load_data
+       \param da the data to be set
+     */
     void set_data_set(const data_set<Ty,Tx>& da)
     {
-      if(p_data_set!=0)
-	{
-	  //delete p_data_set;
-	  p_data_set->destroy();
-	}
-      p_data_set=da.clone();
-      if(p_statistic!=0)
-	{
-	  p_statistic->set_fitter(*this);
-	}
+      load_data(da);
     }
 
   public:
@@ -1542,6 +1616,7 @@ namespace opt_utilities
 
 
     /**
+       Set the param information
        \param pinfo the param information being set
      */
 
@@ -1687,16 +1762,16 @@ namespace opt_utilities
     }
 
   public:
-        /**
+    /**
        default construct
-     */
+    */
     statistic()
       :p_fitter(0)
     {}
     
     /**
        copy construct
-     */
+    */
     statistic(const statistic& rhs)
       :func_obj<Ts,Tp>(static_cast<const func_obj<Ts,Tp>& >(rhs))
       ,p_fitter(rhs.p_fitter)
@@ -1741,7 +1816,10 @@ namespace opt_utilities
       return do_destroy();
     }
 
-
+    /**
+       Return the type name, used in a prototype pattern
+       \return the type name
+     */
     const char* get_type_name()const
     {
       return this->do_get_type_name();
@@ -1823,7 +1901,17 @@ namespace opt_utilities
       return typeid(*this).name();
     }
 
+    /**
+       Form the complete parameter list from a vanished parameter list
+       \param p the vanished parameter list
+       \return the complete parameter list
+     */
     virtual Tp do_reform(const Tp& p)const=0;
+    /**
+       The inverse operator of do_reform
+       \param p the complete parameter list
+       \return the vanished parameter list
+     */
     virtual Tp do_deform(const Tp& p)const=0;
     virtual size_t do_get_num_free_params()const=0;
     virtual Tstr do_report_param_status(const Tstr&)const=0;
@@ -1886,6 +1974,10 @@ namespace opt_utilities
       do_destroy();
     }
 
+    /**
+       Return the type name
+       \return type name
+     */
     const char* get_type_name()const
     {
       return this->do_get_type_name();

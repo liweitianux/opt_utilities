@@ -1,5 +1,6 @@
 /**
    \file sorted_data_set.hpp
+   \author Junhua Gu
 */
 
 #ifndef SORTED_DATA_SET

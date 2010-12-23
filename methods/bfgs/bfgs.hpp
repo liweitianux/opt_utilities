@@ -1,3 +1,9 @@
+/**
+   \file bfgs.hpp
+   \brief BFGS optimization method
+   \author Junhua Gu
+ */
+
 #ifndef BFGS_METHOD
 #define BFGS_METHOD
 #define OPT_HEADER

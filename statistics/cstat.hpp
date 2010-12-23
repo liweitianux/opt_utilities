@@ -1,5 +1,7 @@
 /**
    \file cstat.hpp
+   \brief maximum-liklihood statistic
+   \author Junhua Gu
  */
 
 #ifndef CSTAT_HPP

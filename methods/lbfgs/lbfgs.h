@@ -24,13 +24,6 @@ typedef double lbfgsfloatval_t;
 #endif
 
 
-/** 
- * \addtogroup liblbfgs_api libLBFGS API
- * @{
- *
- *  The libLBFGS API.
- */
-
 /**
  * Return values of lbfgs().
  * 

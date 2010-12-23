@@ -1,5 +1,6 @@
 /**
    \file powell_method.hpp
+   \author Junhua Gu
  */
 
 #ifndef POWELL_METHOD

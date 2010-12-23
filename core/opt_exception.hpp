@@ -1,5 +1,7 @@
 /**
    \file opt_exception.hpp
+   \brief opt_utilities exceptions
+   \author Junhua Gu
 */
 
 #ifndef OPT_EXCEPTION

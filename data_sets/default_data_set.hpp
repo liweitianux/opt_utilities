@@ -1,5 +1,6 @@
 /**
    \file default_data_set.hpp
+   \author Junhua Gu
  */
 
 #ifndef DEFAULT_DATA_SET

@@ -1,5 +1,6 @@
 /**
-   \file default_data_set.hpp
+   \file shared_table_data_set.hpp
+   \author Junhua Gu
  */
 
 #ifndef SHARED_TABLE_DATA_SET
@@ -14,6 +15,8 @@ namespace opt_utilities
 
   /**
      \brief shared_table implement of the data set
+     When the shared_table_data_set clones self, it doesn't
+     allocate a new instance, but returns a pointer to self.
      \tparam Ty type of y
      \tparam Tx type of x
    */
@@ -25,11 +28,17 @@ namespace opt_utilities
   public:
     std::vector<data<Ty,Tx> > data_vec;
     
+    /**
+       Only returns a pointer to self
+     */
     data_set<Ty,Tx>* do_clone()const
     {
       return (data_set<Ty,Tx>*)(this);
     }
 
+    /**
+       We do nothing here.
+     */
     void do_destroy()
     {
     }

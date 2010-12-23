@@ -1,5 +1,7 @@
 /**
    \file opt_traits.hpp
+   \brief some trait class
+   \author Junhua Gu
  */
 
 #ifndef OPT_TRAITS

@@ -1,5 +1,7 @@
 /**
    \file leastsq.hpp
+   \brief least square statistic
+   \author Junhua Gu
  */
 
 #ifndef LEAST_SQ_HPP

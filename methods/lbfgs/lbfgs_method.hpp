@@ -1,3 +1,9 @@
+/**
+   \file lbfgs_method.hpp
+   \brief large bfgs method, used to perform large scale optimization
+   \author Junhua Gu
+ */
+
 #ifndef LBFGS_METHOD
 #define LBFGS_METHOD
 #define OPT_HEADER
