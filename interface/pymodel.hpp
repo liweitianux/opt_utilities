@@ -51,21 +51,23 @@ namespace opt_utilities
 
   public:
     void attach(const std::string module_name,
-		const std::string arglist_name,
+		const std::string arg_name,
+		const std::string arg_value,
 		const std::string func_name)
     {
       this->clear_param_info();
       boost::python::object mod(boost::python::import(module_name.c_str()));
       pyfunc=mod.attr(func_name.c_str());
-      boost::python::dict args(mod.attr(arglist_name.c_str()));
-      boost::python::list pnames(args.keys());
-      int nparams=boost::python::len(pnames);
+      boost::python::list args_names(mod.attr(arg_name.c_str()));
+      boost::python::list args_values(mod.attr(arg_value.c_str()));
+      
+      int nparams=boost::python::len(args_names);
       for(size_t i=0;i!=nparams;++i)
 	{
-	  boost::python::object pname_obj=pnames[i];
+	  boost::python::object pname_obj=args_names[i];
 	  std::string pname=boost::python::extract<std::string>(pname_obj);
 	  typename element_type_trait<Tp>::element_type pvalue=
-	    boost::python::extract<typename element_type_trait<Tp>::element_type>(args.get(pname_obj));
+	    boost::python::extract<typename element_type_trait<Tp>::element_type>(args_values[i]);
 	  
 	  push_param_info(param_info<Tp,std::string>(pname,pvalue));
 	}
