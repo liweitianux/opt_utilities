@@ -1266,6 +1266,15 @@ namespace opt_utilities
 	}
       return *(this->p_statistic);
     }
+
+    /**
+       \return current statstic value
+     */
+    Ts get_statistic_value()
+    {
+      Tp current_params(get_model().get_all_params());
+      return get_statistic().eval(get_model().deform_param(current_params));
+    }
     
     /**
        Get the optimization method that used

@@ -150,9 +150,9 @@ namespace opt_utilities
     {
       if(param_names.find(name)==param_names.end())
 	{
-	  return "thawed";
+	  return Tstr("thawed");
 	}
-      return "frozen";
+      return Tstr("frozen");
     }
 
   public:
