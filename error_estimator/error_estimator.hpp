@@ -2,14 +2,24 @@
 #define ERROR_EST
 #include <core/fitter.hpp>
 #include <iostream>
+#include <vector>
+#include <string>
 
 namespace opt_utilities
 {
   template <typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr>
   void estimate_error(fitter<Ty,Tx,Tp,Ts>& fit,const Tstr& pname,typename element_type_trait<Tp>::element_type& lower,typename element_type_trait<Tp>::element_type& upper,const Ts& dchi)
   {
-    
     typedef typename element_type_trait<Tp>::element_type Tpe;
+    std::vector<Tstr> pnames;
+    std::vector<Tpe> pvalues;
+    
+    for(int i=0;i<fit.get_num_params();++i)
+    {
+      pnames.push_back(fit.get_param_info(i).get_name());
+      pvalues.push_back(fit.get_param_info(i).get_value());
+    }
+    
     fit.fit();
     if(fit.report_param_status(pname)=="frozen")
       {
@@ -76,9 +86,15 @@ namespace opt_utilities
 	  }
       }
     
-    fit.set_param_value(pname,current_value);
+    for(int i=0;i<fit.get_num_params();++i)
+    {
+      fit.set_param_value(pnames[i],pvalues[i]);
+    }
+
     fit.fit();
     
+    
+
     ////
     Tpe lower1=current_value;
     step=current_value-lower;
@@ -127,7 +143,12 @@ namespace opt_utilities
       }
 
     dynamic_cast<freeze_param<Ty,Tx,Tp,Tstr>& >(fit.get_param_modifier())-=freeze_param<Ty,Tx,Tp,Tstr>(pname);
+    for(int i=0;i<fit.get_num_params();++i)
+      {
+	fit.set_param_value(pnames[i],pvalues[i]);
+      }
     
+    fit.fit();
   }
 }
 
