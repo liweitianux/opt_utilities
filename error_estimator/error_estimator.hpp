@@ -1,6 +1,7 @@
 #ifndef ERROR_EST
 #define ERROR_EST
 #include <core/fitter.hpp>
+#include <core/freeze_param.hpp>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -8,7 +9,7 @@
 namespace opt_utilities
 {
   template <typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr>
-  void estimate_error(fitter<Ty,Tx,Tp,Ts>& fit,const Tstr& pname,typename element_type_trait<Tp>::element_type& lower,typename element_type_trait<Tp>::element_type& upper,const Ts& dchi)
+  void estimate_error(fitter<Ty,Tx,Tp,Ts>& fit,const Tstr& pname,typename element_type_trait<Tp>::element_type& lower,typename element_type_trait<Tp>::element_type& upper,const Ts& dchi,const Ts& precision)
   {
     typedef typename element_type_trait<Tp>::element_type Tpe;
     std::vector<Tstr> pnames;
@@ -41,16 +42,24 @@ namespace opt_utilities
     
     Tpe current_value=
       fit.get_param_value(pname);
+    
+    if(lower>=current_value||upper<=current_value)
+      {
+	std::cerr<<"Error, initial lower and upper limits should be smaller and larger than the best fit value, respectively"<<std::endl;
+	return;
+      }
+
     Tp current_params(fit.get_model().get_all_params());
     Ts current_chi=fit.get_statistic_value();
     Tpe upper1=current_value;
     Tpe step=upper-current_value;
+    
     while(1)
       {
 	fit.set_param_value(pname,upper);
 	fit.fit();
 	Ts chi=fit.get_statistic_value();
-	cerr<<upper<<"\t"<<chi<<std::endl;
+	std::cerr<<upper<<"\t"<<chi<<std::endl;
 	if(chi>current_chi+dchi)
 	  {
 	    break;
@@ -59,7 +68,7 @@ namespace opt_utilities
       }
     
     Ts target_chi=current_chi+dchi;
-    while(upper-upper1>1E-10)
+    while(upper-upper1>std::abs(precision))
       {
 	std::cerr<<upper<<"\t"<<upper1<<std::endl;
 	fit.set_param_value(pname,upper1);
@@ -114,7 +123,7 @@ namespace opt_utilities
     fit.set_param_value(pname,current_value);
     fit.fit();
     
-    while(lower1-lower>1E-10)
+    while(lower1-lower>std::abs(precision))
       {
 	fit.set_param_value(pname,lower1);
 	fit.fit();

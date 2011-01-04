@@ -1,6 +1,7 @@
 #include <core/optimizer.hpp>
 #include <methods/powell/powell_method.hpp>
 #include <methods/aga/aga.hpp>
+#include <error_estimator/error_estimator.hpp>
 #include <core/fitter.hpp>
 #include <vector>
 #include <iostream>
@@ -56,4 +57,10 @@ int main()
   f.fit();
   cout<<f.get_param_value("k")<<endl;
   cout<<f.get_param_value("b")<<endl;
+  
+  double lower=3;
+  double upper=6;
+  
+  estimate_error(f,std::string("b"),lower,upper,1.,1E-10);
+  std::cout<<lower<<"\t"<<upper<<endl;
 }
