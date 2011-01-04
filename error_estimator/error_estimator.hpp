@@ -1,3 +1,9 @@
+/**
+   \file error_estimator.hpp
+   \brief define the function used to estimate the error boundaries of a fit
+   \author Junhua Gu
+ */
+
 #ifndef ERROR_EST
 #define ERROR_EST
 #include <core/fitter.hpp>
@@ -8,6 +14,15 @@
 
 namespace opt_utilities
 {
+  /**
+     \brief calculate the error boundary of a fit, according to the given delta statistic.
+     \param fit the fitter that has a sucessful fit result
+     \param pname the name of the parameter, the error of which will be estimated
+     \param lower input as the initial value of the lower boundary, and output as the final result of the lower boundary
+     \param upper input as the initial value of the upper boundary, and output as the final result of the upper boundary
+     \param dchi the delta statistic corresponding to a certain confidence level
+     \param precision determine how precise the error bounds should be determined
+   */
   template <typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr>
   void estimate_error(fitter<Ty,Tx,Tp,Ts>& fit,const Tstr& pname,typename element_type_trait<Tp>::element_type& lower,typename element_type_trait<Tp>::element_type& upper,const Ts& dchi,const Ts& precision)
   {
