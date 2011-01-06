@@ -29,14 +29,15 @@ namespace opt_utilities
     typedef typename element_type_trait<Tp>::element_type Tpe;
     std::vector<Tstr> pnames;
     std::vector<Tpe> pvalues;
-    
+    //Make sure we start from an optimal parameter set
+    fit.fit();
+    //stores origin parameter values
     for(int i=0;i<fit.get_num_params();++i)
     {
       pnames.push_back(fit.get_param_info(i).get_name());
       pvalues.push_back(fit.get_param_info(i).get_value());
     }
-    
-    fit.fit();
+    //ensure that the interesting parameter is free    
     if(fit.report_param_status(pname)=="frozen")
       {
 	return;
@@ -54,21 +55,21 @@ namespace opt_utilities
       {
 	fit.set_param_modifier(freeze_param<Ty,Tx,Tp,Tstr>(pname));
       }
-    
+    //get current statistic value
     Tpe current_value=
       fit.get_param_value(pname);
-    
+    //initial lower boundary should be a worse parameter,
+    //so do the upper boundary
     if(lower>=current_value||upper<=current_value)
       {
 	std::cerr<<"Error, initial lower and upper limits should be smaller and larger than the best fit value, respectively"<<std::endl;
 	return;
       }
-
-    Tp current_params(fit.get_model().get_all_params());
+    
     Ts current_chi=fit.get_statistic_value();
     Tpe upper1=current_value;
     Tpe step=upper-current_value;
-    
+    //find a new upper bound, whose statistic is worse than the target statistic
     while(1)
       {
 	fit.set_param_value(pname,upper);
@@ -81,11 +82,10 @@ namespace opt_utilities
 	  }
 	upper+=step;
       }
-    
+    //perform the bi-search
     Ts target_chi=current_chi+dchi;
     while(upper-upper1>std::abs(precision))
       {
-	std::cerr<<upper<<"\t"<<upper1<<std::endl;
 	fit.set_param_value(pname,upper1);
 	fit.fit();
 	Ts s1=fit.get_statistic_value();
@@ -95,6 +95,7 @@ namespace opt_utilities
 	fit.set_param_value(pname,(upper+upper1)/2);
 	fit.fit();
 	Ts s01=fit.get_statistic_value();
+	std::cerr<<s1-target_chi<<"\t"<<s01-target_chi<<"\t"<<s-target_chi<<std::endl;
 	if((s1-target_chi)*(s01-target_chi)<0&&(s-target_chi)*(s01-target_chi)>=0)
 	  {
 	    upper=(upper+upper1)/2;
@@ -149,7 +150,6 @@ namespace opt_utilities
 	fit.set_param_value(pname,(lower+lower1)/2);
 	fit.fit();
 	Ts s01=fit.get_statistic_value();
-	//std::cerr<<"l:"<<lower1<<"\t"<<(lower1+lower)/2<<"\t"<<lower<<std::endl;
 	std::cerr<<s1-target_chi<<"\t"<<s01-target_chi<<"\t"<<s-target_chi<<std::endl;
 	if((s1-target_chi)*(s01-target_chi)<0&&(s-target_chi)*(s01-target_chi)>=0)
 	  {
@@ -165,8 +165,9 @@ namespace opt_utilities
 	    break;
 	  }
       }
-
+    //restore the param_modifier
     dynamic_cast<freeze_param<Ty,Tx,Tp,Tstr>& >(fit.get_param_modifier())-=freeze_param<Ty,Tx,Tp,Tstr>(pname);
+    //restore the origin param values
     for(int i=0;i<fit.get_num_params();++i)
       {
 	fit.set_param_value(pnames[i],pvalues[i]);
