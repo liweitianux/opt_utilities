@@ -53,6 +53,7 @@ namespace opt_utilities
       
       pT xt;
       opt_eq(xt,p1);
+#pragma omp parallel for 
       for(size_t i=0;i<get_size(xt);++i)
 	{
 	  //get_element(xt,i)+=x*get_element((pT)xi1,i);
@@ -88,6 +89,7 @@ namespace opt_utilities
     //cout<<xx<<endl;
     fret=brent(ax,xx,bx,fadpt,TOL,xmin);
     //cout<<xmin<<endl;
+#pragma omp parallel for 
     for(j=0;j<n;++j)
       {
 	//get_element(xi,j)*=xmin;
