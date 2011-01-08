@@ -50,7 +50,7 @@ namespace opt_utilities
   private:
     std::string do_get_information()const
     {
-      return "polar elliptical\n"
+      return "polar elliptical\n";
 	//"y=k*x+b\n";
     }
   };
