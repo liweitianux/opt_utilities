@@ -1,3 +1,10 @@
+/**
+   \file uniformed.hpp
+   \brief uniformed distribution
+   \author Junhua Gu
+ */
+
+
 #ifndef UNIFORMED_MODEL_H_
 #define UNIFORMED_MODEL_H_
 #define OPT_HEADER

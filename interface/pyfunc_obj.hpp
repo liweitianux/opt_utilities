@@ -1,3 +1,10 @@
+/**
+   \file pyfunc_obj.hpp
+   \brief function object wrappers for python functions
+   \author Junhua Gu
+ */
+
+
 #ifndef PYFUNC_OBJ_HPP
 #define PYFUNC_OBJ_HPP
 #include <boost/python.hpp>

@@ -1,5 +1,6 @@
 /**
    \file sorted_data_set.hpp
+   \brief a data set with data sorted by x
    \author Junhua Gu
 */
 

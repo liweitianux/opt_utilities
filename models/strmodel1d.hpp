@@ -1,3 +1,10 @@
+/**
+   \file strmodel1d.hpp
+   \brief evaluating model from string, by usig muparser
+   \author Junhua Gu
+ */
+
+
 #ifndef STRMODEL1D_HPP
 #define STRMODEL1D_HPP
 #define OPT_HEADER

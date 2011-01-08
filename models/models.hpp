@@ -1,3 +1,10 @@
+/**
+   \file models.hpp
+   \brief implement of the prototype pattern to get models from string keywords
+   \author Junhua Gu
+ */
+
+
 #ifndef MODELS_HPP
 #define MODELS_HPP
 #define OPT_HEADER

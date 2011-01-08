@@ -1,3 +1,10 @@
+/**
+   \file optdl.hpp
+   \brief dynamically loadable modules
+   \author Junhua Gu
+ */
+
+
 #ifndef OPTDL_HPP
 #define OPTDL_HPP
 #define OPT_HEADER

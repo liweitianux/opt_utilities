@@ -1,3 +1,10 @@
+/**
+   \file bpl1d.hpp
+   \brief broken powerlaw
+   \author Junhua Gu
+ */
+
+
 #ifndef BROKEN_POWER_LAW_MODEL_H_
 #define BROKEN_POWER_LAW_MODEL_H_
 #define OPT_HEADER

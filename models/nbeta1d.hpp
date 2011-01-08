@@ -1,3 +1,10 @@
+/**
+   \file nbeta1d
+   \brief 1d density beta model
+   \author Junhua Gu
+ */
+
+
 #ifndef NBETA_MODEL_H_
 #define NBETA_MODEL_H_
 #define OPT_HEADER

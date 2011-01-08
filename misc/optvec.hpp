@@ -1,3 +1,11 @@
+/**
+   \file optvec
+   \brief A ready to use, but ad-hoc mathematical vector class
+   \author Junhua Gu
+
+ */
+
+
 #ifndef OPTVEC_HPP
 #define OPTVEC_HPP
 

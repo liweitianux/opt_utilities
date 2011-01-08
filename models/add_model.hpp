@@ -1,3 +1,10 @@
+/**
+   \file add_model.hpp
+   \brief proxy class representing the sum of two models
+   \author Junhua Gu
+ */
+
+
 #ifndef ADD_MODEL_H_
 #define ADD_MODEL_H_
 #define OPT_HEADER

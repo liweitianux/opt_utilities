@@ -1,3 +1,10 @@
+/**
+   \file normed_dgauss1d.hpp
+   \brief normalized double gaussian distribution
+   \author Junhua Gu
+ */
+
+
 #ifndef NDGAUSS_MODEL_H_
 #define NDGAUSS_MODEL_H_
 #define OPT_HEADER

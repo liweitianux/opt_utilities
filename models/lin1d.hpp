@@ -1,3 +1,10 @@
+/**
+   \file lin1d.hpp
+   \brief 1d linear model
+   \author Junhua Gu
+ */
+
+
 #ifndef LINEAR_MODEL_H_
 #define LINEAR_MODEL_H_
 #define OPT_HEADER

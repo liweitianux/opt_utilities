@@ -1,3 +1,11 @@
+/**
+   \file pow_model.hpp
+   \brief combing two model by power operation
+   \author Junhua Gu
+ */
+
+
+
 #ifndef POW_MODEL_H_
 #define POW_MODEL_H_
 #define OPT_HEADER

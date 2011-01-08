@@ -1,3 +1,10 @@
+/**
+   \file dbeta2d.hpp
+   \brief 2d double beta model
+   \author Junhua Gu
+ */
+
+
 #ifndef DBETA_MODEL2d_H_
 #define DBETA_MODEL2d_H_
 #define OPT_HEADER

@@ -1,3 +1,11 @@
+/**
+   \file polar_ellipse.hpp
+   \brief defing ellipse in polar coordinate
+   \author Junhua Gu
+ */
+
+
+
 #ifndef PELLIPSE_MODEL_H_
 #define PELLIPSE_MODEL_H_
 #define OPT_HEADER
@@ -42,8 +50,8 @@ namespace opt_utilities
   private:
     std::string do_get_information()const
     {
-      return "linear model\n"
-	"y=k*x+b\n";
+      return "polar elliptical\n"
+	//"y=k*x+b\n";
     }
   };
 }

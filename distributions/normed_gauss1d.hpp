@@ -1,3 +1,10 @@
+/**
+   \file normed_gauss1d.hpp
+   \brief normalized guassian distribution
+   \author Junhua Gu
+ */
+
+
 #ifndef NGAUSS_MODEL_H_
 #define NGAUSS_MODEL_H_
 #define OPT_HEADER

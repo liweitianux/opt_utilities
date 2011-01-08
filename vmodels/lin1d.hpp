@@ -1,3 +1,10 @@
+/**
+   \file lin1d.hpp
+   \brief linear 
+   \author Junhua Gu
+ */
+
+
 #ifndef VLINEAR_MODEL_H_
 #define VLINEAR_MODEL_H_
 #define OPT_HEADER

@@ -1,3 +1,10 @@
+/**
+   \file powerlaw.hpp
+   \brief power law model
+   \author Junhua Gu
+ */
+
+
 #ifndef POWER_LAW_MODEL_H_
 #define POWER_LAW_MODEL_H_
 #define OPT_HEADER

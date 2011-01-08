@@ -1,3 +1,10 @@
+/**
+   \file bremss.hpp
+   \brief bremss emission
+   \author Junhua Gu
+ */
+
+
 #ifndef BREMSS_MODEL_H_
 #define BREMSS_MODEL_H_
 #define OPT_HEADER

@@ -1,3 +1,10 @@
+/**
+   \file vector_operation.hpp
+   \brief defing vector operators
+   \author Junhua Gu
+ */
+
+
 #ifndef VECTOR_OPERATION_HPP
 #define VECTOR_OPERATION_HPP
 #include <core/opt_traits.hpp>

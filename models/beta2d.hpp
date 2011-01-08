@@ -1,3 +1,10 @@
+/**
+   \file beta2d.hpp
+   \brief 2d beta 
+   \author Junhua Gu
+ */
+
+
 #ifndef BETA_MODEL2d_H_
 #define BETA_MODEL2d_H_
 #define OPT_HEADER

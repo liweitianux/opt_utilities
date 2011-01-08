@@ -1,3 +1,9 @@
+/**
+   \file mul_model.hpp
+   \brief the multiply of two models
+   \author Junhua Gu
+ */
+
 #ifndef MUL_MODEL_HPP
 #define MUL_MODEL_HPP
 #define OPT_HEADER

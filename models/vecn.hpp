@@ -1,3 +1,10 @@
+/**
+   \file vecn.hpp
+   \brief n-dim fixed size vector
+   \author Junhua Gu
+ */
+
+
 #ifndef VECN_HPP
 #define VECN_HPP
 #define OPT_HEADER

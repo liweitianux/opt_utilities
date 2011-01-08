@@ -1,3 +1,10 @@
+/**
+   \file component.hpp
+   \brief rpresents a distribution composed of more than one components
+   \author Junhua Gu
+ */
+
+
 #ifndef COMPONENT_MODEL_H_
 #define COMPONENT_MODEL_H_
 #define OPT_HEADER
@@ -6,9 +13,7 @@
 #include <misc/optvec.hpp>
 #include <sstream>
 #include <iostream>
-/*
- *Represents a distribution composed of more than one components
- */
+
 
 
 namespace opt_utilities

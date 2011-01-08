@@ -1,9 +1,17 @@
+/**
+   \file type_depository.hpp
+   \brief depository and draw objects
+   \author Junhua Gu
+ */
+
+
+
 #ifndef TYPE_DEPOSITORY_HPP
 #define TYPE_DEPOSITORY_HPP
 #include <string>
 #include <utility>
-#include "../core/optimizer.hpp"
-#include "../core/fitter.hpp"
+#include <core/optimizer.hpp>
+#include <core/fitter.hpp>
 #include <map>
 #include <iostream>
 namespace opt_utilities

@@ -1,5 +1,6 @@
 /**
    \file shared_table_data_set.hpp
+   \brief A data set with high copy efficiency
    \author Junhua Gu
  */
 

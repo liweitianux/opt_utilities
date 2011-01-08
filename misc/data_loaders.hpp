@@ -1,6 +1,7 @@
 /**
    \file data_loaders.hpp
-   a set of classes used to load data_set from std::istream
+   \brief a set of classes used to load data_set from std::istream
+   \author Junhua Gu
  */
 
 #ifndef DATA_LOADERS_H

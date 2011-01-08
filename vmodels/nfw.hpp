@@ -1,3 +1,10 @@
+/**
+   \file nfw.hpp
+   \brief NFW model
+   \author Junhua Gu
+ */
+
+
 #ifndef NFW_MODEL_H_
 #define NFW_MODEL_H_
 #define OPT_HEADER

@@ -1,5 +1,7 @@
 /**
    \file num_diff.hpp
+   \brief performing n-dim differential operation on func objects
+   \author Junhua Gu
  */
 
 

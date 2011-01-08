@@ -1,5 +1,6 @@
 /**
    \file powell_method.hpp
+   \brief powerll optimization method
    \author Junhua Gu
  */
 

@@ -1,3 +1,10 @@
+/**
+   \file opt_types
+   \brief define some usually used template
+   \author Junhua Gu
+ */
+
+
 #ifndef OPT_TYPES_HPP
 #define OPT_TYPES_HPP
 #define OPT_HEADER

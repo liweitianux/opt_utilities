@@ -1,3 +1,10 @@
+/**
+   \file poly1d.hpp
+   \brief 1d polynomial
+   \author Junhua Gu
+ */
+
+
 #ifndef POLY_MODEL_H_
 #define POLY_MODEL_H_
 #define OPT_HEADER

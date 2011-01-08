@@ -1,3 +1,10 @@
+/**
+   \file constant.hpp
+   \brief constant model
+   \author Junhua Gu
+ */
+
+
 #ifndef CONSTANT_MODEL_H_
 #define CONSTANT_MODEL_H_
 #define OPT_HEADER

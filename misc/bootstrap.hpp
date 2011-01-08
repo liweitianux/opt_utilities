@@ -1,5 +1,7 @@
 /**
    \file bootstrap.hpp
+   \brief A simple implement of bootstrap method for error estimation
+   \autho Junhua Gu
 */
 
 

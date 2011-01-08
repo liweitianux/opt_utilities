@@ -1,3 +1,10 @@
+/**
+   \file linmin.hpp
+   \brief linear search
+   \author Junhua Gu
+ */
+
+
 #ifndef LINMIN_HPP
 #define LINMIN_HPP
 #define OPT_HEADER

@@ -1,3 +1,10 @@
+/**
+   \file bl1d.hpp
+   \brief 1d broken linear
+   \author Junhua Gu
+ */
+
+
 #ifndef BROKEN_LINE_MODEL_H_
 #define BROKEN_LINE_MODEL_H_
 #define OPT_HEADER

@@ -1,3 +1,11 @@
+/**
+   \file pymodel.hpp
+   \brief model wrapper of python functions
+   \author Junhua Gu
+ */
+
+
+
 #ifndef PYMODEL
 #define PYMODEL
 #include <boost/python.hpp>

@@ -1,3 +1,9 @@
+/**
+   \file gauss1d.hpp
+   \brief Gauss model
+   \author Junhua Gu
+ */
+
 #ifndef GAUSS_MODEL_H_
 #define GAUSS_MODEL_H_
 #define OPT_HEADER
