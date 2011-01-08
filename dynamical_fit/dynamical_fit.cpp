@@ -63,7 +63,7 @@ int main(int argc,char* argv[])
 
   fit.set_precision(1e-5);
   fit.fit();
-  fit.set_opt_method(gsl_simplex<double,vector<double> >());
+  //fit.set_opt_method(gsl_simplex<double,vector<double> >());
   fit.fit();
   fit.fit();
 
