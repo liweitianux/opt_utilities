@@ -7,12 +7,12 @@ public:
 	{
 	  cerr<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
 	  cerr<<"% Flexible model fitting package      %"<<endl;
-	  cerr<<"% version 2.18                        %"<<endl;
-	  cerr<<"% by Gu Junhua 2007.                  %"<<endl;
+	  cerr<<"% version ????                        %"<<endl;
+	  cerr<<"% by Gu Junhua 2011.                  %"<<endl;
 	  cerr<<"% tompkins@sjtu.edu.cn                %"<<endl;
 	  cerr<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;;
 	    
 	}
 
 	~cprt(){}
-}_licence;
+}_cprt;
