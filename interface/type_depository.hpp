@@ -122,7 +122,7 @@ namespace opt_utilities
   }
 
   template <typename Ty,typename Tx>
-  void fetch_func_obj(func_obj<Ty,Tx>* &fo,std::string cname,fetch_direction dir=in)
+  void fetch_func_obj(const func_obj<Ty,Tx>* &fo,std::string cname,fetch_direction dir=in)
   {
     static std::map<std::string,holder<func_obj<Ty,Tx> > >pm;
     typename std::map<std::string,
@@ -138,7 +138,7 @@ namespace opt_utilities
 	else
 	  {
 	    func_obj<Ty,Tx>* result=it->second;
-	    fo=result->clone();
+	    fo=result;
 	  }
       }
     else if(dir==in)
@@ -152,14 +152,14 @@ namespace opt_utilities
   template <typename Ty,typename Tx>
   void register_func_obj(const func_obj<Ty,Tx>& fo)
   {
-    func_obj<Ty,Tx>* pfo=const_cast<func_obj<Ty,Tx>*>(&fo);
+    const func_obj<Ty,Tx>* pfo=&fo;
     fetch_func_obj(pfo,fo.get_type_name(),in);
   }
 
   template <typename Ty,typename Tx>
-  func_obj<Ty,Tx>* get_func_obj(std::string cname)
+  const func_obj<Ty,Tx>* get_func_obj(std::string cname)
   {
-    func_obj<Ty,Tx>* pom;
+    const func_obj<Ty,Tx>* pom;
     fetch_func_obj(pom,cname,out);
     return pom;
   }
@@ -172,7 +172,7 @@ namespace opt_utilities
   }
 
   template <typename Ty,typename Tx>
-  void fetch_opt_method(opt_method<Ty,Tx>* &fo,std::string cname,fetch_direction dir)
+  void fetch_opt_method(const opt_method<Ty,Tx>* &fo,std::string cname,fetch_direction dir)
   {
     static std::map<std::string,holder<opt_method<Ty,Tx> > > pm;
     typename std::map<std::string,
@@ -188,7 +188,7 @@ namespace opt_utilities
 	else
 	  {
 	    opt_method<Ty,Tx>* result=it->second;
-	    fo=result->clone();
+	    fo=result;
 	  }
       }
     else if(dir==in)
@@ -201,14 +201,14 @@ namespace opt_utilities
   template <typename Ty,typename Tx>
   void register_opt_method(const opt_method<Ty,Tx>& fo)
   {
-    opt_method<Ty,Tx>* pfo=const_cast<opt_method<Ty,Tx>*>(&fo);
+    const opt_method<Ty,Tx>* pfo=&fo;
     fetch_opt_method(pfo,fo.get_type_name(),in);
   }
 
   template <typename Ty,typename Tx>
-  opt_method<Ty,Tx>* get_opt_method(std::string cname)
+  const opt_method<Ty,Tx>* get_opt_method(std::string cname)
   {
-    opt_method<Ty,Tx>* pom;
+    const opt_method<Ty,Tx>* pom;
     fetch_opt_method(pom,cname,out);
     return pom;
   }
@@ -221,7 +221,7 @@ namespace opt_utilities
 
 
   template<typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr>
-  void fetch_statistic(statistic<Ty,Tx,Tp,Ts,Tstr>* &fo,std::string cname,fetch_direction dir)
+  void fetch_statistic(const statistic<Ty,Tx,Tp,Ts,Tstr>* &fo,std::string cname,fetch_direction dir)
   {
     static std::map<std::string,holder<statistic<Ty,Tx,Tp,Ts,Tstr> > > pm;
     typename std::map<std::string,
@@ -237,27 +237,27 @@ namespace opt_utilities
 	else
 	  {
 	    statistic<Ty,Tx,Tp,Ts,Tstr>* result=it->second;
-	    fo=result->clone();
+	    fo=result;
 	  }
       }
     else if(dir==in)
       {
 	//pm.insert(cname,fo->clone());
 	pm[cname]=holder<statistic<Ty,Tx,Tp,Ts,Tstr> >(fo->clone());
-  }
+      }
   }
 
   template<typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr>
   void register_statistic(const statistic<Ty,Tx,Tp,Ts,Tstr>& fo)
   {
-    statistic<Ty,Tx,Tp,Ts,Tstr>* pfo=const_cast<statistic<Ty,Tx,Tp,Ts,Tstr>*>(&fo);
+    const statistic<Ty,Tx,Tp,Ts,Tstr>* pfo=&fo;
     fetch_statistic(pfo,fo.get_type_name(),in);
   }
 
   template<typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr>
-  statistic<Ty,Tx,Tp,Ts,Tstr>* get_statistic(std::string cname)
+  const statistic<Ty,Tx,Tp,Ts,Tstr>* get_statistic(std::string cname)
   {
-    statistic<Ty,Tx,Tp,Ts,Tstr>* pst;
+    const statistic<Ty,Tx,Tp,Ts,Tstr>* pst;
     fetch_statistic(pst,cname,out);
     return pst;
   }
@@ -269,7 +269,7 @@ namespace opt_utilities
   }
 
   template <typename Ty,typename Tx,typename Tp,typename Tstr>
-  void fetch_param_modifier(param_modifier<Ty,Tx,Tp,Tstr>* &fo,std::string cname,fetch_direction dir)
+  void fetch_param_modifier(const param_modifier<Ty,Tx,Tp,Tstr>* &fo,std::string cname,fetch_direction dir)
   {
     static std::map<std::string,holder<param_modifier<Ty,Tx,Tp,Tstr> > > pm;
     typename std::map<std::string,
@@ -285,7 +285,7 @@ namespace opt_utilities
 	else
 	  {
 	    param_modifier<Ty,Tx,Tp,Tstr>* result=it->second;
-	    fo=result->clone();
+	    fo=result;
 	  }
       }
     else if(dir==in)
@@ -298,14 +298,14 @@ namespace opt_utilities
   template<typename Ty,typename Tx,typename Tp,typename Tstr>
   void register_param_modifier(const param_modifier<Ty,Tx,Tp,Tstr>& fo)
   {
-    param_modifier<Ty,Tx,Tp,Tstr>* pfo=const_cast<param_modifier<Ty,Tx,Tp,Tstr>*>(&fo);
+    const param_modifier<Ty,Tx,Tp,Tstr>* pfo=&fo;
     fetch_param_modifier(pfo,fo.get_type_name(),in);
   }
 
   template<typename Ty,typename Tx,typename Tp,typename Tstr>
-  param_modifier<Ty,Tx,Tp,Tstr>* get_param_modifier(std::string cname)
+  const param_modifier<Ty,Tx,Tp,Tstr>* get_param_modifier(std::string cname)
   {
-    param_modifier<Ty,Tx,Tp,Tstr>* ppm;
+    const param_modifier<Ty,Tx,Tp,Tstr>* ppm;
     fetch_param_modifier(ppm,cname,out);
     return ppm;
   }
@@ -318,7 +318,7 @@ namespace opt_utilities
   }
 
   template <typename Ty,typename Tx>
-  void fetch_data_set(data_set<Ty,Tx>* &fo,std::string cname,fetch_direction dir)
+  void fetch_data_set(const data_set<Ty,Tx>* &fo,std::string cname,fetch_direction dir)
   {
     static std::map<std::string,holder<data_set<Ty,Tx> > > pm;
     typename std::map<std::string,
@@ -334,7 +334,7 @@ namespace opt_utilities
 	else
 	  {
 	    data_set<Ty,Tx>* result=it->second;
-	    fo=result->clone();
+	    fo=result;
 	  }
       }
     else if(dir==in)
@@ -347,14 +347,14 @@ namespace opt_utilities
   template <typename Ty,typename Tx>
   void register_data_set(const data_set<Ty,Tx>& fo)
   {
-    data_set<Ty,Tx>* pfo=const_cast<data_set<Ty,Tx>*>(&fo);
+    const data_set<Ty,Tx>* pfo=&fo;
     fetch_data_set(pfo,fo.get_type_name(),in);
   }
 
   template<typename Ty,typename Tx>
-  data_set<Ty,Tx>* get_data_set(std::string cname)
+  const data_set<Ty,Tx>* get_data_set(std::string cname)
   {
-    data_set<Ty,Tx>* pds;
+    const data_set<Ty,Tx>* pds;
     fetch_data_set(pds,cname,out);
     return pds;
   }
@@ -370,7 +370,7 @@ namespace opt_utilities
 
 
   template <typename Ty,typename Tx,typename Tp,typename Tstr>
-  void fetch_model(model<Ty,Tx,Tp,Tstr>* &fo,std::string cname,fetch_direction dir)
+  void fetch_model(const model<Ty,Tx,Tp,Tstr>* &fo,std::string cname,fetch_direction dir)
   {
     static std::map<std::string,holder<model<Ty,Tx,Tp,Tstr> > > pm;
     typename std::map<std::string,
@@ -386,7 +386,7 @@ namespace opt_utilities
 	else
 	  {
 	    model<Ty,Tx,Tp,Tstr>* result=it->second;
-	    fo=result->clone();
+	    fo=result;
 	  }
       }
     else if(dir==in)
@@ -398,14 +398,14 @@ namespace opt_utilities
   template <typename Ty,typename Tx,typename Tp,typename Tstr>
   void register_model(const model<Ty,Tx,Tp,Tstr>& fo)
   {
-    model<Ty,Tx,Tp,Tstr>* pfo=const_cast<model<Ty,Tx,Tp,Tstr>*>(&fo);
+    const model<Ty,Tx,Tp,Tstr>* pfo=&fo;
     fetch_model(pfo,fo.get_type_name(),in);
   }
 
   template <typename Ty,typename Tx,typename Tp,typename Tstr>
-  model<Ty,Tx,Tp,Tstr>* get_model(std::string cname)
+  const model<Ty,Tx,Tp,Tstr>* get_model(std::string cname)
   {
-    model<Ty,Tx,Tp,Tstr>* pds;
+    const model<Ty,Tx,Tp,Tstr>* pds;
     fetch_model(pds,cname,out);
     return pds;
   }
