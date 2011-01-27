@@ -139,7 +139,7 @@ extern "C"
       }
     try
       {
-	std::auto_ptr<dopt::model> p(opt_utilities::get_model<double,double,std::vector<double>,std::string>(model_name));
+	const dopt::model* p(opt_utilities::get_model<double,double,std::vector<double>,std::string>(model_name));
 	iter->second.fit.set_model(*p);
 	return 0;
       }
