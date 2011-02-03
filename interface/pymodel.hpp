@@ -22,6 +22,7 @@ namespace opt_utilities
   {
   private:
     boost::python::object pyfunc;
+    std::string type_name;
   public:
     pymodel()
     {
@@ -63,6 +64,7 @@ namespace opt_utilities
 		const std::string arg_value,
 		const std::string func_name)
     {
+      type_name=module_name+"."+func_name;
       this->clear_param_info();
       boost::python::object mod(boost::python::import(module_name.c_str()));
       pyfunc=mod.attr(func_name.c_str());
@@ -99,6 +101,11 @@ namespace opt_utilities
 	  args.append(get_element(p,i));
 	}
       return boost::python::extract<Ty>(pyfunc(x,args));
+    }
+
+    const char* do_get_type_name()const
+    {
+      return type_name.c_str();
     }
   };
 }
