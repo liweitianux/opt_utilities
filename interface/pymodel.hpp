@@ -16,6 +16,50 @@
 namespace opt_utilities
 {
 
+  template<typename T>
+  boost::python::object convert_to_object(const T& x)
+  {
+    boost::python::list result;
+    for(size_t i=0;i<get_size(x);++i)
+      {
+	result.append(get_element(x,i));
+      }
+    return result;
+  }
+
+  static inline boost::python::object convert_to_object(double x)
+  {
+    return boost::python::object(x);
+  }
+
+  static inline boost::python::object convert_to_object(float x)
+  {
+    return boost::python::object(x);
+  }
+
+  
+  template <typename T>
+  T convert_from_object(const boost::python::object& o,const T&)
+  {
+    T result(boost::python::len(o));
+    for(int i=0;i<get_size(result);++i)
+      {
+	result[i]=boost::python::extract<typename element_type_trait<T>::element_type>(o[i]);
+      }
+    return result;
+  }
+
+  static inline double convert_from_object(const boost::python::object& o,double)
+  {
+    return boost::python::extract<double>(o);
+  }
+  
+  static inline double convert_from_object(const boost::python::object& o,float)
+  {
+    return boost::python::extract<double>(o);
+  }
+
+
   template <typename Ty,typename Tx,typename Tp>
   class pymodel
     :public model<Ty,Tx,Tp,std::string>
@@ -100,7 +144,7 @@ namespace opt_utilities
 	{
 	  args.append(get_element(p,i));
 	}
-      return boost::python::extract<Ty>(pyfunc(x,args));
+      return convert_from_object(pyfunc(convert_to_object(x),args),x);
     }
 
     const char* do_get_type_name()const
