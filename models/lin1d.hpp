@@ -9,6 +9,7 @@
 #define LINEAR_MODEL_H_
 #define OPT_HEADER
 #include <core/fitter.hpp>
+#include <pre_estimater/pre_estimater.hpp>
 #include <cmath>
 
 namespace opt_utilities
@@ -16,6 +17,7 @@ namespace opt_utilities
   template <typename T>
   class lin1d
     :public model<T,T,std::vector<T>,std::string>
+    ,public pre_estimatable<T,T,std::vector<T>,std::string>
   {
   private:
     model<T,T,std::vector<T> >* do_clone()const

@@ -10,6 +10,7 @@
 #define OPT_HEADER
 #include <core/fitter.hpp>
 #include <misc/optvec.hpp>
+#include <pre_estimater/pre_estimater.hpp>
 #include <cmath>
 
 namespace opt_utilities
@@ -17,6 +18,7 @@ namespace opt_utilities
   template <typename T>
   class lin1d
     :public model<optvec<T>,optvec<T>,optvec<T>,std::string>
+    ,public pre_estimatable<optvec<T>,optvec<T>,optvec<T>,std::string>
   {
     typedef optvec<T> Tv;
   private:
