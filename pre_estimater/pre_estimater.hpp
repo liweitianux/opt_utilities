@@ -56,6 +56,27 @@ namespace opt_utilities
     pre_estimatable()
       :ppe(0)
     {}
+
+    pre_estimatable(const pre_estimatable<Ty,Tx,Tp,Tstr>& rhs)
+    {
+      if(rhs.ppe)
+	{
+	  ppe=rhs.ppe->clone();
+	}
+    }
+
+    pre_estimatable& operator=(const pre_estimatable<Ty,Tx,Tp,Tstr>& rhs)
+    {
+      if(this==&rhs)
+	{
+	  return *this;
+	}
+      if(ppe)
+	{
+	  ppe->destroy();
+	}
+      ppe=rhs.ppe->clone();
+    }
     
     void set_pre_estimater(const pre_estimater<Ty,Tx,Tp,Tstr>& pe)
     {
@@ -74,7 +95,7 @@ namespace opt_utilities
     {
       if(ppe)
 	{
-	  delete ppe;
+	  ppe->destroy();
 	}
     }
 
