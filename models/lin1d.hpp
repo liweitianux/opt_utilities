@@ -9,7 +9,7 @@
 #define LINEAR_MODEL_H_
 #define OPT_HEADER
 #include <core/fitter.hpp>
-#include <pre_estimater/pre_estimater.hpp>
+#include <core/pre_estimater.hpp>
 #include <cmath>
 
 namespace opt_utilities
