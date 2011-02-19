@@ -58,6 +58,7 @@ namespace opt_utilities
     {}
 
     pre_estimatable(const pre_estimatable<Ty,Tx,Tp,Tstr>& rhs)
+      :ppe(0)
     {
       if(rhs.ppe)
 	{
