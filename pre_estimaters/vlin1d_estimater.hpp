@@ -1,15 +1,15 @@
-#ifndef LIN1D_ESTIMATER
-#define LIN1D_ESTIMATER
+#ifndef VLIN1D_ESTIMATER
+#define VLIN1D_ESTIMATER
 #include <core/pre_estimater.hpp>
 #include <misc/optvec.hpp>
-#include <models/lin1d.hpp>
+#include <vmodels/lin1d.hpp>
 #include <vector>
 
 namespace opt_utilities
 {
   template <typename T>
   class lin1d_estimater
-    :public pre_estimater<T,T,std::vector<T>,std::string>
+    :public pre_estimater<optvec<T>,optvec<T>,optvec<T>,std::string>
   {
   public:
     lin1d_estimater()
@@ -22,7 +22,7 @@ namespace opt_utilities
       return new lin1d_estimater<T>(*this);
     }
 
-    void do_estimate(const data_set<T,T>& d,model<T,T,std::vector<T>,std::string>& m)const
+    void do_estimate(const data_set<optvec<T>,optvec<T> >& d,model<optvec<T>,optvec<T>,optvec<T>,std::string>& m)const
     {
       T n=d.size();
       T sy=0;
@@ -32,10 +32,10 @@ namespace opt_utilities
       
       for(int i=0;i<d.size();++i)
 	{
-	  sy+=d.get_data(i).get_y();
-	  sxx+=d.get_data(i).get_x()*d.get_data(i).get_x();
-	  sx+=d.get_data(i).get_x();
-	  sxy+=d.get_data(i).get_x()*d.get_data(i).get_y();
+	  sy+=d.get_data(i).get_y()[0];
+	  sxx+=d.get_data(i).get_x()[0]*d.get_data(i).get_x()[0];
+	  sx+=d.get_data(i).get_x()[0];
+	  sxy+=d.get_data(i).get_x()[0]*d.get_data(i).get_y()[0];
 	}
       T b=(sy*sxx-sx*sxy)/(n*sxx-sx*sx);
       T k=(n*sxy-sx*sy)/(n*sxx-sx*sx);
