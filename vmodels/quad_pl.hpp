@@ -40,7 +40,7 @@ namespace opt_utilities
     {
       T a=get_element(param,0);
       T b=get_element(param,1);
-      T c=get_element(param,1);
+      T c=get_element(param,2);
       return c*exp(a*log(x)*log(x)+b*log(x));
     }
 
