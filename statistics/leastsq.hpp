@@ -8,6 +8,7 @@
 #define LEAST_SQ_HPP
 #define OPT_HEADER
 #include <core/fitter.hpp>
+#include <misc/optvec.hpp>
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -84,8 +85,71 @@ namespace opt_utilities
       return result;
     }
   };
+
+  template<typename T,typename Ts,typename Tstr>
+  class leastsq<optvec<T>,optvec<T>,optvec<T>,Ts,Tstr>
+    :public statistic<optvec<T>,optvec<T>,optvec<T>,Ts,Tstr>
+  {
+  private:
+    bool verb;
+    int n;
+    
+    typedef optvec<T> Tx;
+    typedef optvec<T> Ty;
+    typedef optvec<T> Tp;
+    statistic<Ty,Tx,Tp,Ts,Tstr>* do_clone()const
+    {
+      // return const_cast<statistic<Ty,Tx,Tp>*>(this);
+      return new leastsq<Ty,Tx,Tp,Ts,Tstr>(*this);
+    }
+
+    const char* do_get_type_name()const
+    {
+      return "least square statistic";
+    }
+    
+  public:
+    void verbose(bool v)
+    {
+      verb=v;
+    }
+  public:
+    leastsq()
+      :verb(false)
+    {}
+    
+    
+
+    Ts do_eval(const Tp& p)
+    {
+      Ts result(0);
+      for(int i=(this->get_data_set()).size()-1;i>=0;--i)
+	{
+	  Ty chi(this->get_data_set().get_data(0).get_y().size());
+	  for(int j=0;j<chi.size();++j)
+	    {
+	      Ty model_y(eval_model(this->get_data_set().get_data(i).get_x(),p));
+	      if(model_y[j]>this->get_data_set().get_data(i).get_y()[j])
+		{
+		  chi[j]=(this->get_data_set().get_data(i).get_y()[j]-model_y[j]);
+		}
+	      else
+		{
+		  chi[j]=(this->get_data_set().get_data(i).get_y()[j]-model_y[j]);
+		}
+	    }
+	  result+=sum(chi*chi);
+	  
+	}
+      return result;
+    }
+  };
+  
+
   
 }
+
+
 
 #endif
 //EOF
