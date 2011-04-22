@@ -53,10 +53,10 @@ namespace opt_utilities
   optvec<T> operator+(const optvec<T>& x1,const optvec<T>& x2)
   {
     
-    optvec<T> result(x1.size());
-    for(size_t i=0;i!=x1.size();++i)
+    optvec<T> result(min(x1.size(),x2.size()));
+    for(size_t i=0;i!=result.size();++i)
       {
-	result[i]=x1[i]+x2.at(i);
+	result[i]=x1[i]+x2[i];
       }
     return result;
   }
@@ -66,7 +66,7 @@ namespace opt_utilities
   {
     
     optvec<T> result(x1.size());
-    for(size_t i=0;i!=x1.size();++i)
+    for(size_t i=0;i!=result.size();++i)
       {
 	result[i]=x1[i]+x2;
       }
@@ -76,9 +76,9 @@ namespace opt_utilities
   template<typename T>
   optvec<T>& operator+=(optvec<T>& x1,const optvec<T>& x2)
   {
-    for(size_t i=0;i!=x1.size();++i)
+    for(size_t i=0;i!=min(x1.size(),x2.size());++i)
       {
-	x1[i]+=x2.at(i);
+	x1[i]+=x2[i];
       }
     return x1;
   }
@@ -87,10 +87,10 @@ namespace opt_utilities
   optvec<T> operator-(const optvec<T>& x1,const optvec<T>& x2)
   {
     
-    optvec<T> result(x1.size());
-    for(size_t i=0;i!=x1.size();++i)
+    optvec<T> result(min(x1.size(),x2.size()));
+    for(size_t i=0;i!=result.size();++i)
       {
-	result[i]=x1[i]-x2.at(i);
+	result[i]=x1[i]-x2[i];
       }
     return result;
   }
@@ -123,9 +123,9 @@ namespace opt_utilities
   template<typename T>
   optvec<T>& operator-=(optvec<T>& x1,const optvec<T>& x2)
   {
-    for(size_t i=0;i!=x1.size();++i)
+    for(size_t i=0;i!=min(x1.size(),x2.size());++i)
       {
-	x1[i]-=x2.at(i);
+	x1[i]-=x2[i];
       }
     return x1;
   }
@@ -134,10 +134,10 @@ namespace opt_utilities
   optvec<T> operator*(const optvec<T>& x1,const optvec<T>& x2)
   {
     
-    optvec<T> result(x1.size());
-    for(size_t i=0;i!=x1.size();++i)
+    optvec<T> result(min(x1.size(),x2.size()));
+    for(size_t i=0;i!=result.size();++i)
       {
-	result[i]=x1[i]*x2.at(i);
+	result[i]=x1[i]*x2[i];
       }
     return result;
   }
@@ -170,9 +170,9 @@ namespace opt_utilities
   template<typename T>
   optvec<T>& operator*=(optvec<T>& x1,const optvec<T>& x2)
   {
-    for(size_t i=0;i!=x1.size();++i)
+    for(size_t i=0;i!=min(x1.size(),x2.size());++i)
       {
-	x1[i]*=x2.at(i);
+	x1[i]*=x2[i];
       }
     return x1;
   }
@@ -192,8 +192,8 @@ namespace opt_utilities
   optvec<T> operator/(const optvec<T>& x1,const optvec<T>& x2)
   {
     
-    optvec<T> result(x1.size());
-    for(size_t i=0;i!=x1.size();++i)
+    optvec<T> result(min(x1.size(),x2.size()));
+    for(size_t i=0;i!=result.size();++i)
       {
 	result[i]=x1[i]/x2.at(i);
       }
@@ -227,7 +227,7 @@ namespace opt_utilities
   template<typename T>
   optvec<T>& operator/=(optvec<T>& x1,const optvec<T>& x2)
   {
-    for(size_t i=0;i!=x1.size();++i)
+    for(size_t i=0;i!=min(x1.size(),x2.size());++i)
       {
 	x1[i]/=x2.at(i);
       }
@@ -258,7 +258,7 @@ namespace opt_utilities
   template<typename T>
   bool operator<(const optvec<T>& x1,const optvec<T>& x2)
   {
-    for(size_t i=0;i!=x1.size();++i)
+    for(size_t i=0;i!=min(x1.size(),x2.size());++i)
       {
 	if(x1[i]!=x2[i])
 	  {
