@@ -60,7 +60,6 @@ int main()
   
   double lower=3;
   double upper=6;
-  
-  estimate_error(f,std::string("b"),lower,upper,1.,1E-10);
+  estimate_error(f,std::string("k"),lower,upper,1.,1E-10);
   std::cout<<lower<<"\t"<<upper<<endl;
 }

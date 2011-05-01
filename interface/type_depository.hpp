@@ -53,7 +53,7 @@ namespace opt_utilities
 
     ~holder()
     {
-      delete ptr;
+      destroy();
     }
 
     holder& operator=(const holder& rhs)
@@ -62,7 +62,7 @@ namespace opt_utilities
 	{
 	  return *this;
 	}
-      delete ptr;
+      destroy();
       ptr=rhs.ptr;
       const_cast<holder&>(rhs).ptr=0;
     }
@@ -77,7 +77,10 @@ namespace opt_utilities
 
     void destroy()
     {
-      delete ptr;
+      if(ptr)
+	{
+	  ptr->destroy();
+	}
     }
 
     T* get()const

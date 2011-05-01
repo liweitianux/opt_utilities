@@ -8,12 +8,39 @@
 #define ERROR_EST
 #include <core/fitter.hpp>
 #include <core/freeze_param.hpp>
+#include <interface/type_depository.hpp>
+#include <math/num_diff.hpp>
 #include <iostream>
 #include <vector>
 #include <string>
 
 namespace opt_utilities
 {
+  template <typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr>
+  typename element_type_trait<Tp>::element_type estimate_error_hessian(fitter<Ty,Tx,Tp,Ts>& fit,const Tstr& pname,const Ts& dchi)
+  {
+    size_t porder=fit.get_param_order(pname);
+    holder<param_modifier<Ty,Tx,Tp,Tstr> > h;
+    try
+      {
+	h.reset(fit.get_param_modifier().clone());
+      }
+    catch(const param_modifier_undefined&)
+      {
+	h.reset(0);
+      }
+    fit.clear_param_modifier();
+    Tp p=fit.get_all_params();
+    Ts a=hessian(fit.get_statistic(),p,porder,porder)/2;
+    if(h.get())
+      {
+	fit.set_param_modifier(*(h.get()));
+      }
+    fit.fit();
+    return std::sqrt(dchi/a);
+  }
+
+
   /**
      \brief calculate the error boundary of a fit, according to the given delta statistic.
      \param fit the fitter that has a sucessful fit result
@@ -24,7 +51,7 @@ namespace opt_utilities
      \param precision determine how precise the error bounds should be determined
    */
   template <typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr>
-  void estimate_error(fitter<Ty,Tx,Tp,Ts>& fit,const Tstr& pname,typename element_type_trait<Tp>::element_type& lower,typename element_type_trait<Tp>::element_type& upper,const Ts& dchi,const Ts& precision)
+  void estimate_error_directly(fitter<Ty,Tx,Tp,Ts>& fit,const Tstr& pname,typename element_type_trait<Tp>::element_type& lower,typename element_type_trait<Tp>::element_type& upper,const Ts& dchi,const Ts& precision)
   {
     typedef typename element_type_trait<Tp>::element_type Tpe;
     std::vector<Tstr> pnames;
@@ -174,6 +201,15 @@ namespace opt_utilities
       }
     
     fit.fit();
+  }
+
+  template <typename Ty,typename Tx,typename Tp,typename Ts,typename Tstr>
+  void estimate_error(fitter<Ty,Tx,Tp,Ts>& fit,const Tstr& pname,typename element_type_trait<Tp>::element_type& lower,typename element_type_trait<Tp>::element_type& upper,const Ts& dchi,const Ts& precision)
+  {
+    typename element_type_trait<Tp>::element_type e=estimate_error_hessian(fit,pname,dchi);
+    lower=fit.get_param_value(pname)-e*2;
+    upper=fit.get_param_value(pname)+e*2;
+    estimate_error_directly(fit,pname,lower,upper,dchi,precision);
   }
 }
 
