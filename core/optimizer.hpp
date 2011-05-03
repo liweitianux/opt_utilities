@@ -477,7 +477,7 @@ namespace opt_utilities
     {
       if(p_opt_method==0)
 	{
-	  throw opt_method_undefined();
+	  throw opt_method_not_defined();
 	}
       return *(this->p_opt_method);
     }
@@ -490,7 +490,7 @@ namespace opt_utilities
     {
       if(p_opt_method==0)
 	{
-	  throw opt_method_undefined();
+	  throw opt_method_not_defined();
 	}
       return *(this->p_opt_method);
     }
@@ -504,7 +504,7 @@ namespace opt_utilities
     {
       if(p_opt_method==0)
 	{
-	  throw opt_method_undefined();
+	  throw opt_method_not_defined();
 	}
       p_opt_method->set_precision(x);
     }
@@ -517,7 +517,7 @@ namespace opt_utilities
     {
       if(p_opt_method==0)
 	{
-	  throw opt_method_undefined();
+	  throw opt_method_not_defined();
 	}
       return p_opt_method->get_precision();
     }
@@ -531,7 +531,7 @@ namespace opt_utilities
     {
       if(p_opt_method==0)
 	{
-	  throw opt_method_undefined();
+	  throw opt_method_not_defined();
 	}
       p_opt_method->set_start_point(x);
     }
@@ -544,7 +544,7 @@ namespace opt_utilities
     {
       if(p_opt_method==0)
 	{
-	  throw opt_method_undefined();
+	  throw opt_method_not_defined();
 	}
       return p_opt_method->get_start_point();
     }
@@ -558,7 +558,7 @@ namespace opt_utilities
     {
       if(p_opt_method==0)
 	{
-	  throw opt_method_undefined();
+	  throw opt_method_not_defined();
 	}
       p_opt_method->set_lower_limit(x);
     }
@@ -571,7 +571,7 @@ namespace opt_utilities
     {
       if(p_opt_method==0)
 	{
-	  throw opt_method_undefined();
+	  throw opt_method_not_defined();
 	}
       return p_opt_method->get_lower_limit();
     }
@@ -585,7 +585,7 @@ namespace opt_utilities
     {
       if(p_opt_method==0)
 	{
-	  throw opt_method_undefined();
+	  throw opt_method_not_defined();
 	}
       p_opt_method->set_upper_limit(x);
     }
@@ -598,7 +598,7 @@ namespace opt_utilities
     {
       if(p_opt_method==0)
 	{
-	  throw opt_method_undefined();
+	  throw opt_method_not_defined();
 	}
       return p_opt_method->get_upper_limit();
     }
@@ -613,7 +613,7 @@ namespace opt_utilities
     {
       if(p_func_obj==0)
 	{
-	  throw object_function_undefined();
+	  throw object_function_not_defined();
 	}
       return p_func_obj->eval(x);
     }
@@ -628,11 +628,11 @@ namespace opt_utilities
     {
       if(p_opt_method==0)
 	{
-	  throw opt_method_undefined();
+	  throw opt_method_not_defined();
 	}
       if(p_func_obj==0)
 	{
-	  throw object_function_undefined();
+	  throw object_function_not_defined();
 	}
       return p_opt_method->optimize();
     }
@@ -665,7 +665,7 @@ namespace opt_utilities
     {
       if(p_func_obj==0)
 	{
-	  throw object_function_undefined();
+	  throw object_function_not_defined();
 	}
       return *p_func_obj;
     }
@@ -677,7 +677,7 @@ namespace opt_utilities
     {
       if(p_func_obj==0)
 	{
-	  throw object_function_undefined();
+	  throw object_function_not_defined();
 	}
       return *p_func_obj;
     }

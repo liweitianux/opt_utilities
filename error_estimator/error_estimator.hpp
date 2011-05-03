@@ -25,7 +25,7 @@ namespace opt_utilities
       {
 	h.reset(fit.get_param_modifier().clone());
       }
-    catch(const param_modifier_undefined&)
+    catch(const param_modifier_not_defined&)
       {
 	h.reset(0);
       }
@@ -78,7 +78,7 @@ namespace opt_utilities
 	  }
 	*pfp+=freeze_param<Ty,Tx,Tp,Tstr>(pname);
       }
-    catch(const param_modifier_undefined&)
+    catch(const param_modifier_not_defined&)
       {
 	fit.set_param_modifier(freeze_param<Ty,Tx,Tp,Tstr>(pname));
       }

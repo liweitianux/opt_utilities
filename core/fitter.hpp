@@ -659,7 +659,7 @@ namespace opt_utilities
     {
       if(p_param_modifier==0)
 	{
-	  throw param_modifier_undefined();
+	  throw param_modifier_not_defined();
 	}
       return *p_param_modifier;
     }
@@ -671,7 +671,7 @@ namespace opt_utilities
     {
       if(p_param_modifier==0)
 	{
-	  throw param_modifier_undefined();
+	  throw param_modifier_not_defined();
 	}
       return *p_param_modifier;
     }
@@ -1167,7 +1167,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return p_model->eval(x,p);
     }
@@ -1183,7 +1183,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return p_model->eval_raw(x,p);
     }
@@ -1196,7 +1196,7 @@ namespace opt_utilities
     {
       if(p_data_set==0)
 	{
-	  throw data_unloaded();
+	  throw data_not_loaded();
 	}
       return *(this->p_data_set);
     }
@@ -1210,7 +1210,7 @@ namespace opt_utilities
     {
       if(p_data_set==0)
 	{
-	  throw data_unloaded();
+	  throw data_not_loaded();
 	}
       return *(this->p_data_set);
     }
@@ -1223,7 +1223,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return *(this->p_model);
     }
@@ -1236,7 +1236,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return *(this->p_model);
     }
@@ -1249,7 +1249,7 @@ namespace opt_utilities
     {
       if(p_statistic==0)
 	{
-	  throw statistic_undefined();
+	  throw statistic_not_defined();
 	}
       return *(this->p_statistic);
     }
@@ -1262,7 +1262,7 @@ namespace opt_utilities
     {
       if(p_statistic==0)
 	{
-	  throw statistic_undefined();
+	  throw statistic_not_defined();
 	}
       return *(this->p_statistic);
     }
@@ -1303,7 +1303,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return p_model->get_param_modifier();
     }
@@ -1316,7 +1316,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return p_model->get_param_modifier();
     }
@@ -1330,7 +1330,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return p_model->report_param_status(s);
     }
@@ -1346,7 +1346,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return p_model->get_param_info(pname).get_value();
     }
@@ -1360,7 +1360,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return p_model->get_param_info(pname).get_lower_limit();
     }
@@ -1374,7 +1374,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return p_model->get_param_info(pname).get_upper_limit();
     }
@@ -1388,7 +1388,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return p_model->get_param_info(pname);
     }
@@ -1402,7 +1402,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return p_model->get_param_info(n);
     }
@@ -1416,7 +1416,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return p_model->get_param_order(pname);
     }
@@ -1429,7 +1429,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return p_model->get_num_params();
     }
@@ -1442,7 +1442,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       //return current_param;
       return p_model->get_all_params();
@@ -1492,7 +1492,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       p_model->set_param_modifier(pm);
     }
@@ -1504,7 +1504,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       p_model->clear_param_modifier();
     }
@@ -1547,7 +1547,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       p_model->set_param_value(pname,v);
     }
@@ -1562,7 +1562,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       p_model->set_param_lower_limit(pname,v);
     }
@@ -1577,7 +1577,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       p_model->set_param_upper_limit(pname,v);
     }
@@ -1592,7 +1592,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       p_model->set_param_value(param);
     }
@@ -1605,7 +1605,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       p_model->set_param_lower_limit(param);
     }
@@ -1618,7 +1618,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       p_model->set_param_upper_limit(param);
     }
@@ -1633,7 +1633,7 @@ namespace opt_utilities
     {
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       p_model->set_param_info(pinfo);
     }
@@ -1668,18 +1668,18 @@ namespace opt_utilities
       //      assert(p_model!=0);
       if(p_model==0)
 	{
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       if(p_data_set==0)
 	{
-	  throw data_unloaded();
+	  throw data_not_loaded();
 	}
       //assert(p_optimizer!=0);
       //assert(p_data_set!=0);
       //assert(p_statistic!=0);
       if(p_statistic==0)
 	{
-	  throw statistic_undefined();
+	  throw statistic_not_defined();
 	}
 
       optengine.set_func_obj(*p_statistic);
@@ -1852,7 +1852,7 @@ namespace opt_utilities
     {
       if(p_fitter==0)
 	{
-	  throw fitter_unset();
+	  throw fitter_not_set();
 	}
       return *p_fitter;
     }
@@ -1867,7 +1867,7 @@ namespace opt_utilities
     {
       if(p_fitter==0)
 	{
-	  throw fitter_unset();
+	  throw fitter_not_set();
 	}
       return p_fitter->eval_model(x,p);
     }
@@ -1880,7 +1880,7 @@ namespace opt_utilities
     {
       if(p_fitter==0)
 	{
-	  throw fitter_unset();
+	  throw fitter_not_set();
 	}
       return p_fitter->get_data_set();
     }
@@ -2030,7 +2030,7 @@ namespace opt_utilities
       if(p_model==0)
 	{
 	  std::cout<<"dajf;asdjfk;";
-	  throw model_undefined();
+	  throw model_not_defined();
 	}
       return *(this->p_model);
     }

@@ -40,11 +40,11 @@ namespace opt_utilities
      When objection is not defined in optimizer, and optimizion is performing,
      this exception will be thrown
    */
-  class object_function_undefined
+  class object_function_not_defined
     :public opt_exception
   {
   public:
-    object_function_undefined()
+    object_function_not_defined()
       :opt_exception("object function undefined")
     {}
   };
@@ -53,11 +53,11 @@ namespace opt_utilities
      When the opt_method is not defined before the optimization is performing,
      this exception will be thrown.
    */
-  class opt_method_undefined
+  class opt_method_not_defined
     :public opt_exception
   {
   public:
-    opt_method_undefined()
+    opt_method_not_defined()
       :opt_exception("opt method undefined")
     {}
   };
@@ -66,11 +66,11 @@ namespace opt_utilities
      When fitter is not attached in a model, statistic, and other objects,
      this exception will be thrown.
    */
-  class fitter_unset
+  class fitter_not_set
     :public opt_exception
   {
   public:
-    fitter_unset()
+    fitter_not_set()
       :opt_exception("fitter_unset")
     {}
   };
@@ -80,11 +80,11 @@ namespace opt_utilities
      When the model is not set before the model fitting,
      this exception will be thrown.
    */
-  class model_undefined
+  class model_not_defined
     :public opt_exception
   {
   public:
-    model_undefined()
+    model_not_defined()
       :opt_exception("model_undefined")
     {}
   };
@@ -94,11 +94,11 @@ namespace opt_utilities
      When the data set is not loaded before the model fitting,
      this exception will be thrown.
    */
-  class data_unloaded
+  class data_not_loaded
     :public opt_exception
   {
   public:
-    data_unloaded()
+    data_not_loaded()
       :opt_exception("data not loaded")
     {}
   };
@@ -108,11 +108,11 @@ namespace opt_utilities
      When the statistic is not set before the model fitting,
      this exception will be thrown.
    */
-  class statistic_undefined
+  class statistic_not_defined
     :public opt_exception
   {
   public:
-    statistic_undefined()
+    statistic_not_defined()
       :opt_exception("statistic undefined")
     {}
   };
@@ -136,11 +136,11 @@ namespace opt_utilities
      If param_modifier is not defined, and the user tries to get the 
      param_modifer, this exception will be thrown.
    */
-  class param_modifier_undefined
+  class param_modifier_not_defined
     :public opt_exception
   {
   public:
-    param_modifier_undefined()
+    param_modifier_not_defined()
       :opt_exception("param modifier undefined")
     {}
   };

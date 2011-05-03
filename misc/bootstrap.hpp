@@ -119,7 +119,7 @@ namespace opt_utilities
 	}
       else
 	{
-	  throw opt_exception("Fitter unset");
+	  throw opt_exception("Fitter not_set");
 	}
     }
 
@@ -173,7 +173,7 @@ namespace opt_utilities
     {
       if(p_fitter==NULL)
 	{
-	  throw fitter_unset();
+	  throw fitter_not_set();
 	}
       current_data_set=default_data_set<Ty,Tx>();
       for(size_t i=0;i<origin_data_set.size();++i)
@@ -207,7 +207,7 @@ namespace opt_utilities
     {
       if(p_fitter==NULL)
 	{
-	  throw opt_exception("Fitter unset");
+	  throw opt_exception("Fitter not_set");
 	}
       if(param_pool.empty())
 	{
