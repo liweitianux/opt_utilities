@@ -85,7 +85,10 @@ namespace opt_utilities
       return p_fo->eval(x);
     }
 
-   
+    const char* do_get_type_name()const
+    {
+      return "large scale bfgs";
+    }
   public:
     lbfgs_method()
       :threshold(1e-4)

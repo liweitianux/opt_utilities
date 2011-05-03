@@ -69,7 +69,10 @@ namespace opt_utilities
       return p_fo->eval(x);
     }
 
-   
+    const char* do_get_type_name()const
+    {
+      return "gsl simplex";
+    }
   public:
     gsl_simplex()
       :threshold(1e-4)

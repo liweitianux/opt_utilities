@@ -43,15 +43,15 @@ namespace opt_utilities
     element_type** invBk;
     bool bstop;
   private:
-    const char* do_get_type_name()const
-    {
-      return "asexual genetic algorithm";
-    }
-    
     rT func(const pT& x)
     {
       assert(p_fo!=0);
       return p_fo->eval(x);
+    }
+
+    const char* do_get_type_name()const
+    {
+      return "bfgs";
     }
 
   public:
