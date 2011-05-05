@@ -41,6 +41,12 @@ namespace opt_utilities
     {
       verb=v;
     }
+
+    const char* do_get_type_name()const
+    {
+      return "maximum likelihood";
+    }
+
   public:
 
     statistic<Ty,Tx,Tp,Ts,Tstr>* do_clone()const
