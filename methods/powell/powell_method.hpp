@@ -33,7 +33,7 @@ namespace opt_utilities
   private:
     func_obj<rT,pT>* p_fo;
     optimizer<rT,pT>* p_optimizer;
-    mutable bool bstop;
+    volatile bool bstop;
     //typedef blitz::Array<rT,2> array2d_type;
     
     const char* do_get_type_name()const
