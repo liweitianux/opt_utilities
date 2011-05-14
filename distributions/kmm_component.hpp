@@ -1,12 +1,12 @@
 /**
-   \file component.hpp
-   \brief rpresents a distribution composed of more than one components
+   \file kmm_component.hpp
+   \brief rpresents a distribution composed of more than one kmm_components
    \author Junhua Gu
  */
 
 
-#ifndef COMPONENT_MODEL_H_
-#define COMPONENT_MODEL_H_
+#ifndef KMM_COMPONENT_MODEL_H_
+#define KMM_COMPONENT_MODEL_H_
 #define OPT_HEADER
 #include <core/fitter.hpp>
 #include <cmath>
@@ -19,16 +19,16 @@
 namespace opt_utilities
 {
   template <typename T>
-  class component
+  class kmm_component
     :public model<optvec<T>,optvec<T>,optvec<T>,std::string>
   {
   private:
     std::vector<model<optvec<T>,optvec<T>,optvec<T>,std::string>*> components;
     std::vector<int> weight_num;
   private:
-    component* do_clone()const
+    kmm_component* do_clone()const
     {
-      return new component<T>(*this);
+      return new kmm_component<T>(*this);
     }
 
     const char* do_get_type_name()const
@@ -36,17 +36,17 @@ namespace opt_utilities
       return "Multi-distribution";
     }
   public:
-    component()
+    kmm_component()
     {
       //this->push_param_info(param_info<optvec<T> >("x0",0));
       //this->push_param_info(param_info<optvec<T> >("sigma",1));
     }
 
-    component(const component& rhs)
+    kmm_component(const kmm_component& rhs)
     {
       for(int i=0;i<rhs.components.size();++i)
 	{
-	  if(i>0)
+	  if(i>=1)
 	    {
 	      add_component(*rhs.components[i],rhs.get_param_info(rhs.weight_num[i-1]).get_value());
 	    }
@@ -62,7 +62,7 @@ namespace opt_utilities
       
     }
 
-    component& operator=(const component& rhs)
+    kmm_component& operator=(const kmm_component& rhs)
     {
       if(this==&rhs)
 	{
@@ -84,7 +84,7 @@ namespace opt_utilities
       
     }
 
-    ~component()
+    ~kmm_component()
     {
       for(int i=0;i<components.size();++i)
 	{
@@ -107,7 +107,6 @@ namespace opt_utilities
 	  this->push_param_info(p1);
 	  weight_num.push_back(this->get_num_params()-1);
 	}
-
       int np=m.get_num_params();
       for(int i=0;i<np;++i)
 	{
@@ -164,6 +163,33 @@ namespace opt_utilities
       result1[0]=result;;
       return result1;
     }
+
+    optvec<T> eval_unsumed(const optvec<T>& x,const optvec<T>& param)
+    {
+      optvec<T> weight_angle;
+      for(int i=0;i<weight_num.size();++i)
+	{
+	  weight_angle.push_back(param[weight_num[i]]);
+	}
+      optvec<T> weight(convert_unit_sph(weight_angle));
+      optvec<T> result(components.size());
+      int pnum=0;
+      for(int i=0;i<components.size();++i)
+	{
+	  T temp_result=0;
+	  optvec<T> p(components[i]->get_num_params());
+	  for(int j=0;j<p.size();++j)
+	    {
+	      p[j]=param[pnum++];
+	    }
+	  result[i]=(components[i]->eval(x,p)[0]*weight[i]);
+	  ++pnum;
+	}
+      
+      return result;
+    }
+
+    
 
   private:
     std::string do_get_information()const
