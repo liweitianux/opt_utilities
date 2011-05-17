@@ -63,7 +63,7 @@ namespace opt_utilities
   private:
     std::string do_get_information()const
     {
-      return "";
+#include <model_doc/bpl.info>
     }
   };
 }

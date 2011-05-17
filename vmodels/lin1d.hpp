@@ -54,7 +54,7 @@ namespace opt_utilities
   private:
     std::string do_get_information()const
     {
-#include "lin1d.info"
+#include <model_doc/lin1d.info>
     }
   };
 }
