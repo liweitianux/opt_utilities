@@ -120,6 +120,7 @@ namespace opt_utilities
 
     pT do_get_start_point()const
     {
+      return start_point;
     }
     
     void do_set_precision(rT t)
