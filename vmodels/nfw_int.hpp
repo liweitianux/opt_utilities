@@ -45,8 +45,8 @@ namespace opt_utilities
   private:
     std::string do_get_information()const
     {
-      return "integrated NFW mass profile\n"
-	"y=rho0/(x/rs*(1+x/rs)^2)\n";
+#include <model_doc/nfw_int.info>
+      return "";
     }
   };
 }

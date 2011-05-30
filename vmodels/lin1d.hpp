@@ -55,6 +55,7 @@ namespace opt_utilities
     std::string do_get_information()const
     {
 #include <model_doc/lin1d.info>
+      return "";
     }
   };
 }

@@ -1,12 +1,12 @@
 /**
-   \file nbeta1d.hpp
-   \brief 1d density beta model
+   \file lin1d.hpp
+   \brief linear 
    \author Junhua Gu
  */
 
 
-#ifndef VNBETA_MODEL_H_
-#define VNBETA_MODEL_H_
+#ifndef VRQUARTER_MODEL_H_
+#define VRQUARTER_MODEL_H_
 #define OPT_HEADER
 #include <core/fitter.hpp>
 #include <misc/optvec.hpp>
@@ -15,42 +15,38 @@
 namespace opt_utilities
 {
   template <typename T>
-  class nbeta1d
+  class rquarter
     :public model<optvec<T>,optvec<T>,optvec<T>,std::string>
   {
     typedef optvec<T> Tv;
   private:
-    nbeta1d<T>* do_clone()const
+    rquarter<T>* do_clone()const
     {
-      return new nbeta1d<T>(*this);
+      return new rquarter<T>(*this);
     }
 
     const char* do_get_type_name()const
     {
-      return "1d density beta model";
+      return "de Vaucoulurs 1/4 law";
     }
   public:
-    nbeta1d()
+    rquarter()
     {
-      this->push_param_info(param_info<Tv>("n0",1));
-      this->push_param_info(param_info<Tv>("rc",10));
-      this->push_param_info(param_info<Tv>("beta",2./3.));
+      this->push_param_info(param_info<Tv>("I0",1));
+      this->push_param_info(param_info<Tv>("Re",10));
+      this->push_param_info(param_info<Tv>("bkg",0));
     }
 
   public:
     Tv do_eval(const Tv& x,const Tv& param)
     {
       Tv result(x.size());
-      T n0=get_element(param,0);
-      T r_c=get_element(param,1);
-      T beta=get_element(param,2);
+      
       
       //return x*get_element(param,0)+get_element(param,1);
       for(size_t i=0;i!=x.size();++i)
 	{
-	  
-	  result[i]=n0*pow(1+(x[i]*x[i])/(r_c*r_c),-3./2.*beta);
-
+	  result[i]=param[0]*exp(-7.67*(pow(x[i]/param[1],.25)-T(1.)))+param[2];
 	}
       return result;
     }
@@ -58,7 +54,7 @@ namespace opt_utilities
   private:
     std::string do_get_information()const
     {
-#include <model_doc/nbeta1d.info>
+#include <model_doc/rquarter.info>
       return "";
     }
   };

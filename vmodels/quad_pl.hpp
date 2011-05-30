@@ -47,8 +47,8 @@ namespace opt_utilities
   private:
     std::string do_get_information()const
     {
-      return "Simple power law model\n"
-	"y=A*x^gamma\n";
+#include <model_doc/quad_pl.info>
+      return "";
     }
   };
 }

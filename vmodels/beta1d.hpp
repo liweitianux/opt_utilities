@@ -60,6 +60,7 @@ namespace opt_utilities
   private:
     std::string do_get_information()const
     {
+#include <model_doc/beta1d.info>
       return "";
     }
   };

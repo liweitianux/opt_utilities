@@ -45,8 +45,8 @@ namespace opt_utilities
   private:
     std::string do_get_information()const
     {
-      return "Simple power law model\n"
-	"y=A*x^gamma\n";
+#include <model_doc/powerlaw.info>
+      return "";
     }
   };
 }

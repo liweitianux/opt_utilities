@@ -50,7 +50,12 @@ public:
       }
     return result;
   }
-  
+
+  std::string do_get_information()const
+  {
+#include <model_doc/vt_temperature.info>
+    return "";
+  }
 };
 
 #endif

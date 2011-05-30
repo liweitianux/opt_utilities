@@ -55,6 +55,7 @@ namespace opt_utilities
   private:
     std::string do_get_information()const
     {
+#include <model_doc/normed_gauss1d.info>
       return "";
     }
   };

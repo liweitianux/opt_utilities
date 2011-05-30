@@ -64,6 +64,7 @@ namespace opt_utilities
     std::string do_get_information()const
     {
 #include <model_doc/bpl.info>
+      return "";
     }
   };
 }

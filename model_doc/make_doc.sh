@@ -10,3 +10,4 @@ rm -f *.sk
 rm -f *.ps
 rm -f *.dvi
 rm -f *.log
+rm -f *.svg

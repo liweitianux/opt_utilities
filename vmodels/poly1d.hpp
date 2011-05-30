@@ -67,14 +67,8 @@ namespace opt_utilities
   private:
     std::string do_get_information()const
     {
-      std::ostringstream ostr;
-      ostr<<n<<"-order polynorminal model\n";
-      for(int i=0;i<n;++i)
-	{
-	  ostr<<"a"<<i<<"*x^"<<i<<"+";
-	}
-      ostr<<"a"<<n<<"*x^"<<n;
-      return ostr.str();
+#include <model_doc/poly1d.info>
+      return "";
     }
   };
 }
