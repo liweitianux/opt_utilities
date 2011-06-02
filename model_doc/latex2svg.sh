@@ -1,5 +1,15 @@
 #!/bin/bash
 
+if [ $# -eq 1 ]
+then
+    :
+else
+    echo $#
+    echo "Usage $0 <base name>"
+    exit
+fi
+
+
 # you need gs-common, pstoedit and skencil to
 # get this script working
 export BASENAME="`basename $1 .tex`";
@@ -26,3 +36,4 @@ echo -e return "\"\c" >${BASENAME}.info
 cat ${BASENAME}.svg | sed -e ':a;N;$!ba;s/\n//g' -e 's/\"/\\\"/g' >>${BASENAME}.info
 
 echo \"\; >>${BASENAME}.info
+
