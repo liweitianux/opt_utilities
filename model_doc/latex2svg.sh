@@ -31,9 +31,21 @@ pstoedit -f sk  ${BASENAME}.ps  ${BASENAME}.sk
 # Convert to SVG
 skconvert  ${BASENAME}.sk  ${BASENAME}.svg
 
-echo -e return "\"\c" >${BASENAME}.info
+#echo -e return "\"\c" >${BASENAME}.info
+echo "" >>${BASENAME}.svg
+echo "std::string result;">${BASENAME}.info
 
-cat ${BASENAME}.svg | sed -e ':a;N;$!ba;s/\n//g' -e 's/\"/\\\"/g' >>${BASENAME}.info
+#cat ${BASENAME}.svg | sed -e ':a;N;$!ba;s/\n//g' -e 's/\"/\\\"/g' >>${BASENAME}.info
 
-echo \"\; >>${BASENAME}.info
+
+
+cat ${BASENAME}.svg|while read line
+do
+line=`echo $line|sed -e 's/\"/\\\"/g'`
+echo "result+=\"$line\";">>${BASENAME}.info
+echo "result+=\"\\n\";">>${BASENAME}.info
+done
+
+echo "return result;" >>${BASENAME}.info
+
 
