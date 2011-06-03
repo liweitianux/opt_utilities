@@ -65,6 +65,7 @@ namespace opt_utilities
       destroy();
       ptr=rhs.ptr;
       const_cast<holder&>(rhs).ptr=0;
+      return *this;
     }
 
   public:
