@@ -24,11 +24,17 @@ namespace opt_utilities
   }
 
   template <typename T>
+  T contract1(const T& x1,const T& x2,...)
+  {
+    return x1*x2;
+  }
+  
+  template <typename T>
   T contract(const T& x1,const T& x2,...)
   {
     return x1*x2;
   }
-
+  
   template <typename pT>
   typename element_type_trait<pT>::element_type
   contract(const pT& v1,const pT& v2,const typename element_type_trait<pT>::element_type&)
@@ -40,7 +46,7 @@ namespace opt_utilities
       }
     return result;
   }
-
+  
   
 }
 #endif
