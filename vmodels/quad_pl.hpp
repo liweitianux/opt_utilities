@@ -31,17 +31,17 @@ namespace opt_utilities
   public:
     quad_pl()
     {
-      this->push_param_info(param_info<optvec<T> >("a",1));
-      this->push_param_info(param_info<optvec<T> >("b",1));
-      this->push_param_info(param_info<optvec<T> >("c",1));
+      this->push_param_info(param_info<optvec<T> >("norm",1));
+      this->push_param_info(param_info<optvec<T> >("gamma",1));
+      this->push_param_info(param_info<optvec<T> >("corr",1));
     }
 
     optvec<T> do_eval(const optvec<T>& x,const optvec<T>& param)
     {
-      T a=get_element(param,0);
-      T b=get_element(param,1);
-      T c=get_element(param,2);
-      return c*exp(a*log(x)*log(x)+b*log(x));
+      T norm=get_element(param,0);
+      T gamma=get_element(param,1);
+      T corr=get_element(param,2);
+      return norm*pow(x,gamma)*exp(corr*log(x)*log(x));
     }
 
   private:
