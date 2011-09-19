@@ -709,7 +709,7 @@ namespace opt_utilities
       std::cerr<<"Param unfound!"<<std::endl;
       assert(false);
       throw param_not_found();
-      return null_param;
+      //return null_param;
     }
 
 
@@ -810,7 +810,7 @@ namespace opt_utilities
 	}
       // assert(false);
       throw param_not_found();
-      return -1;
+      //return (size_t)-1;
     }
     
 
