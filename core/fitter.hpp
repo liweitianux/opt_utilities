@@ -707,7 +707,7 @@ namespace opt_utilities
 	    }
 	}
       std::cerr<<"Param unfound!"<<std::endl;
-      assert(false);
+      //assert(false);
       throw param_not_found();
       //return null_param;
     }
