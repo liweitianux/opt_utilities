@@ -53,7 +53,9 @@ public:
 
   std::string do_get_information()const
   {
+#ifdef WITH_OPT_DOC
 #include <model_doc/vt_temperature.info>
+#endif
     return "";
   }
 };
