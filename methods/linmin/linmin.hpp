@@ -61,7 +61,7 @@ namespace opt_utilities
       pT xt;
       opt_eq(xt,p1);
 #pragma omp parallel for 
-      for(int i=0;i<get_size(xt);++i)
+      for(size_t i=0;i<get_size(xt);++i)
 	{
 	  //get_element(xt,i)+=x*get_element((pT)xi1,i);
 	  set_element(xt,i,

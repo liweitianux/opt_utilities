@@ -59,7 +59,7 @@ namespace opt_utilities
     //Make sure we start from an optimal parameter set
     fit.fit();
     //stores origin parameter values
-    for(int i=0;i<fit.get_num_params();++i)
+    for(size_t i=0;(size_t)i<fit.get_num_params();++i)
     {
       pnames.push_back(fit.get_param_info(i).get_name());
       pvalues.push_back(fit.get_param_info(i).get_value());
@@ -138,7 +138,7 @@ namespace opt_utilities
 	  }
       }
     
-    for(int i=0;i<fit.get_num_params();++i)
+    for(size_t i=0;i<fit.get_num_params();++i)
     {
       fit.set_param_value(pnames[i],pvalues[i]);
     }
@@ -195,7 +195,7 @@ namespace opt_utilities
     //restore the param_modifier
     dynamic_cast<freeze_param<Ty,Tx,Tp,Tstr>& >(fit.get_param_modifier())-=freeze_param<Ty,Tx,Tp,Tstr>(pname);
     //restore the origin param values
-    for(int i=0;i<fit.get_num_params();++i)
+    for(size_t i=0;i<fit.get_num_params();++i)
       {
 	fit.set_param_value(pnames[i],pvalues[i]);
       }

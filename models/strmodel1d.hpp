@@ -12,7 +12,7 @@
 #include <cmath>
 #include <sstream>
 #include <cassert>
-#include <muParser/muParser.h>
+#include <muParser.h>
 #include <vector>
 #include <string>
 
