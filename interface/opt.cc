@@ -50,6 +50,23 @@ struct fit_space
 
 std::vector<std::string> model_names;
 
+class func_obj_raw
+  :public func_obj<double,std::vector<double> >
+{
+public:
+  double (*pfunc)(const double*);
+private:
+  double do_eval(const std::vector<double>& x)
+  {
+    return (*pfunc)(x.data());
+  }
+  func_obj_raw* do_clone()const
+  {
+    return new func_obj_raw(*this);
+  }
+};
+
+
 void regist_model(const dopt::model& m,const char* addr)
 {
   
@@ -76,6 +93,26 @@ public:
 
 extern "C"
 {
+  void optimize_powell_(double (*pfunc)(const double*),const int& np,double* params,const double& precision)
+  {
+    std::vector<double> p(np);
+    for(int i=0;i<np;++i)
+      {
+	p[i]=params[i];
+      }
+    func_obj_raw fo;
+    fo.pfunc=pfunc;
+    optimizer<double,std::vector<double> > opt;
+    opt.set_func_obj(fo);
+    opt.set_opt_method(powell_method<double,std::vector<double> >());
+    opt.set_start_point(p);
+    opt.set_precision(precision);
+    p=opt.optimize();
+    for(int i=0;i<np;++i)
+      {
+	params[i]=p[i];
+      }
+  }
   
   int alloc_fit_(int& n)
   {

@@ -2,6 +2,7 @@
 #define OPT_H
 //#define F77
 #ifdef F77
+#define optimize_powell_ optimize_powell__
 #define alloc_fit_ alloc_fit__
 #define free_fit_ free_fit__
 #define load_data_ load_data__
@@ -15,6 +16,7 @@
 
 extern "C"
 {
+  void optimize_powell_(double (*pfunc)(const double*),const int& np,double* params,const double& precision);
   int alloc_fit_(int&);
   int free_fit_(const int& nxc);
   int load_data_(const int& nfit,const int& ndatas,double* x,double* y,double* yl,double* yu=0,double* xl=0,double* xu=0);
