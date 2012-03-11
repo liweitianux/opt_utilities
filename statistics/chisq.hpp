@@ -62,7 +62,7 @@ namespace opt_utilities
       Ts result(0);
       for(int i=(this->get_data_set()).size()-1;i>=0;--i)
 	{
-	  Ty chi=(this->get_data_set().get_data(i).get_y()-eval_model(this->get_data_set().get_data(i).get_x(),p))/this->get_data_set().get_data(i).get_y_upper_err();
+	  Ty chi=(this->get_data_set().get_data(i).get_y()-this->eval_model(this->get_data_set().get_data(i).get_x(),p))/this->get_data_set().get_data(i).get_y_upper_err();
 	  result+=chi*chi;
 
 	}
@@ -134,15 +134,15 @@ namespace opt_utilities
 	  Tx x1=this->get_data_set().get_data(i).get_x()-this->get_data_set().get_data(i).get_x_lower_err();
 	  Tx x2=this->get_data_set().get_data(i).get_x()+this->get_data_set().get_data(i).get_x_upper_err();
 	  Tx x=this->get_data_set().get_data(i).get_x();
-	  Ty errx1=(eval_model(x1,p)-eval_model(x,p));
-	  Ty errx2=(eval_model(x2,p)-eval_model(x,p));
+	  Ty errx1=(this->eval_model(x1,p)-this->eval_model(x,p));
+	  Ty errx2=(this->eval_model(x2,p)-this->eval_model(x,p));
 	  //Ty errx=0;
 #else
 	  Ty errx1=0;
 	  Ty errx2=0;
 #endif
 
-	  Ty y_model=eval_model(this->get_data_set().get_data(i).get_x(),p);
+	  Ty y_model=this->eval_model(this->get_data_set().get_data(i).get_x(),p);
 	  Ty y_obs=this->get_data_set().get_data(i).get_y();
 	  Ty y_err;
 	  
@@ -182,13 +182,13 @@ namespace opt_utilities
 
 	  Ty chi=(y_obs-y_model)/std::sqrt(y_err*y_err+errx*errx);
 
-	  //	  Ty chi=(this->get_data_set().get_data(i).get_y()-eval_model(this->get_data_set().get_data(i).get_x(),p));
+	  //	  Ty chi=(this->get_data_set().get_data(i).get_y()-this->eval_model(this->get_data_set().get_data(i).get_x(),p));
 	  //	  cerr<<chi<<"\n";
 	  result+=chi*chi;
 	  //std::cerr<<chi<<std::endl;
-	  //cerr<<eval_model(this->get_data_set()[i].x,p)<<endl;
+	  //cerr<<this->eval_model(this->get_data_set()[i].x,p)<<endl;
 	  //cerr<<this->get_data_set()[i].y_upper_err<<endl;
-	  //	  cerr<<this->get_data_set()[i].x<<"\t"<<this->get_data_set()[i].y<<"\t"<<eval_model(this->get_data_set()[i].x,p)<<endl;
+	  //	  cerr<<this->get_data_set()[i].x<<"\t"<<this->get_data_set()[i].y<<"\t"<<this->eval_model(this->get_data_set()[i].x,p)<<endl;
 	}
       if(verb)
 	{
@@ -252,7 +252,7 @@ namespace opt_utilities
 	  Ty chi(this->get_data_set().get_data(0).get_y().size());
 	  for(int j=0;j<chi.size();++j)
 	    {
-	      Ty model_y(eval_model(this->get_data_set().get_data(i).get_x(),p));
+	      Ty model_y(this->eval_model(this->get_data_set().get_data(i).get_x(),p));
 	      if(model_y[j]>this->get_data_set().get_data(i).get_y()[j])
 		{
 		  chi[j]=(this->get_data_set().get_data(i).get_y()[j]-model_y[j])/this->get_data_set().get_data(i).get_y_upper_err()[j];

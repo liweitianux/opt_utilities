@@ -60,7 +60,7 @@ namespace opt_utilities
       Ts result(0);
       for(int i=(this->get_data_set()).size()-1;i>=0;--i)
 	{
-	  Ty model_y=eval_model(this->get_data_set().get_data(i).get_x(),p);
+	  Ty model_y=this->eval_model(this->get_data_set().get_data(i).get_x(),p);
 	  result-=contract(this->get_data_set().get_data(i).get_y(),std::log(model_y),result);
 	}
 
@@ -125,7 +125,7 @@ namespace opt_utilities
       Ts result(0);
       for(int i=(this->get_data_set()).size()-1;i>=0;--i)
 	{
-	  Ty model_y=eval_model(this->get_data_set().get_data(i).get_x(),p);
+	  Ty model_y=this->eval_model(this->get_data_set().get_data(i).get_x(),p);
 	  result-=contract1(this->get_data_set().get_data(i).get_y(),std::log(model_y),result);
 	}
 

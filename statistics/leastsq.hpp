@@ -62,7 +62,7 @@ namespace opt_utilities
       Ts result(0);
       for(int i=(this->get_data_set()).size()-1;i>=0;--i)
 	{
-	  Ty chi=(this->get_data_set().get_data(i).get_y()-eval_model(this->get_data_set().get_data(i).get_x(),p));
+	  Ty chi=(this->get_data_set().get_data(i).get_y()-this->eval_model(this->get_data_set().get_data(i).get_x(),p));
 	  result+=chi*chi;
 
 	}
@@ -128,7 +128,7 @@ namespace opt_utilities
 	  Ty chi(this->get_data_set().get_data(0).get_y().size());
 	  for(int j=0;j<chi.size();++j)
 	    {
-	      Ty model_y(eval_model(this->get_data_set().get_data(i).get_x(),p));
+	      Ty model_y(this->eval_model(this->get_data_set().get_data(i).get_x(),p));
 	      if(model_y[j]>this->get_data_set().get_data(i).get_y()[j])
 		{
 		  chi[j]=(this->get_data_set().get_data(i).get_y()[j]-model_y[j]);

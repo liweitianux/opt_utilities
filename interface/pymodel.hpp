@@ -123,7 +123,7 @@ namespace opt_utilities
 	  typename element_type_trait<Tp>::element_type pvalue=
 	    boost::python::extract<typename element_type_trait<Tp>::element_type>(args_values[i]);
 	  
-	  push_param_info(param_info<Tp,std::string>(pname,pvalue));
+	  this->push_param_info(param_info<Tp,std::string>(pname,pvalue));
 	}
     }
   private:
