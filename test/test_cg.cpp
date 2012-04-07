@@ -47,7 +47,7 @@ int main()
   opt.set_opt_method(conjugate_gradient<double,vector<double> >());
   //opt.set_opt_method(powell_method<double,vector<double> >());
   opt.set_func_obj(foo());
-  std::vector<double> p(30);
+  std::vector<double> p(300);
   for(int i=0;i<p.size();++i)
     {
       p[i]=100;

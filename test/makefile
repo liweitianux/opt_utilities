@@ -1,4 +1,4 @@
-targets=test_optimizer many_dims test_fitter
+targets=test_optimizer many_dims test_fitter test_cg
 
 all:$(targets)
 
@@ -9,6 +9,9 @@ many_dims:many_dims.cpp
 	$(CXX) $< -o $@ -I .. -O3 -g -p
 
 test_fitter:test_fitter.cpp
+	$(CXX) $< -o $@ -I .. -O3 -g
+
+test_cg:test_cg.cpp
 	$(CXX) $< -o $@ -I .. -O3 -g
 
 clean:
