@@ -1,6 +1,6 @@
 /**
    \file conjugate_gradient.hpp
-   \brief powerll optimization method
+   \brief conjugate gradient optimization method
    \author Junhua Gu
  */
 
