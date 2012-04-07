@@ -17,7 +17,7 @@ class foo
   {
     static int call_cnt=0;
     ++call_cnt;
-    cerr<<call_cnt<<endl;
+    //cerr<<call_cnt<<endl;
     double result=0;
     for(int i=0;i<p.size();++i)
       {
@@ -44,11 +44,14 @@ class foo
 int main()
 {
   optimizer<double,vector<double> > opt;
-  //opt.set_opt_method(conjugate_gradient<double,vector<double> >());
-  opt.set_opt_method(powell_method<double,vector<double> >());
+  opt.set_opt_method(conjugate_gradient<double,vector<double> >());
+  //opt.set_opt_method(powell_method<double,vector<double> >());
   opt.set_func_obj(foo());
-  std::vector<double> p(2);
-  p[0]=p[1]=4;
+  std::vector<double> p(30);
+  for(int i=0;i<p.size();++i)
+    {
+      p[i]=100;
+    }
   opt.set_start_point(p);
   p=opt.optimize();
   cout<<p[0]<<"\t"<<p[1]<<endl;
