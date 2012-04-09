@@ -200,6 +200,14 @@ namespace opt_utilities
       int iter=100;
       opt_eq(end_point,start_point);
       rT fret;
+#if 0
+      for(int i=0;i<get_size(start_point);++i)
+	{
+	  array1d_type direction(start_point.size());
+	  direction[i]=1;
+	  linmin(end_point,direction,fret,(*p_fo));
+	}
+#endif
       cg(end_point,threshold,iter,fret);
       return end_point;
     }
