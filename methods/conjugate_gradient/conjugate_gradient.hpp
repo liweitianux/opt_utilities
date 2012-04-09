@@ -150,6 +150,11 @@ namespace opt_utilities
 	      b1+=Delta_Xn[i]*(Delta_Xn[i]-Delta_Xn1[i]);
 	      b2+=Delta_Xn1[i]*Delta_Xn1[i];
 	    }
+	  if(b2==0)
+	    {
+	      end_point=xn;
+	      return end_point;
+	    }
 	  betan=max(rT(0),b1/b2);
 	  ////
 	  for(size_t i=0;i<get_size(start_point);++i)
