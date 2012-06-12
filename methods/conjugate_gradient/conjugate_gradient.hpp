@@ -107,7 +107,7 @@ namespace opt_utilities
 		//dgg+=(xi[j]+g[j])*xi[j];
 		dgg+=xi[j]*xi[j];
 	      }
-	    std::cerr<<its<<"\t"<<gg<<std::endl;
+	    //std::cerr<<its<<"\t"<<gg<<std::endl;
 	    if(gg==0.0)
 	      {
 		return;
