@@ -119,7 +119,7 @@ namespace opt_utilities
 		xi[j]=h[j]=g[j]+gam*h[j];
 	      }
 	}
-      std::cerr<<"Too many iterations in cg"<<std::endl;
+      //std::cerr<<"Too many iterations in cg"<<std::endl;
     }
 
     
