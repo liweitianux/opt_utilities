@@ -1,4 +1,4 @@
-find_path(MP_INCLUDE_DIRS muParser/muParser.h)
+find_path(MP_INCLUDE_DIRS NAMES muParser/muParser.h muParser.h)
 
 message(${MP_INCLUDE_DIRS})
 SET(MP_NAMES ${MP_NAMES} muparser)
