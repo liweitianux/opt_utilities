@@ -1053,7 +1053,8 @@ namespace opt_utilities
      */
     Ty eval_raw(const Tx& x,const Tp& p)
     {
-      return do_eval(x,reform_param(p));
+      //return do_eval(x,reform_param(p));
+      return do_eval(x,p);
     }
   };
 
