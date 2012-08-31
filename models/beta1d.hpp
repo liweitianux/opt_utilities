@@ -40,10 +40,10 @@ namespace opt_utilities
 
     T do_eval(const T& x,const std::vector<T>& param)
     {
-      T S0=get_element(param,0);
+      T S0=std::abs(get_element(param,0));
       T r_c=get_element(param,1);
-      T beta=get_element(param,2);
-      T bkg=get_element(param,3);
+      T beta=std::abs(get_element(param,2));
+      T bkg=std::abs(get_element(param,3));
 
       return bkg+S0*pow(1+(x*x)/(r_c*r_c),-3*beta+static_cast<T>(.5));
     }
