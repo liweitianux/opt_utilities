@@ -26,6 +26,9 @@ namespace opt_utilities
       do_estimate(d,m);
     }
 
+    virtual ~pre_estimater()
+    {}
+
     pre_estimater* clone()const
     {
       return this->do_clone();
