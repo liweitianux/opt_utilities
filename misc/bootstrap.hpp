@@ -15,6 +15,7 @@
 #include <iostream>
 #include <utility>
 #include <algorithm>
+#include <cmath>
 #include <data_sets/default_data_set.hpp>
 using std::cerr;
 namespace opt_utilities
@@ -27,7 +28,7 @@ namespace opt_utilities
       {
 	y=(rand()/(Ty)RAND_MAX-(Ty).5)*(10*y_err)+y0;
       }
-    while(rand()/(Ty)RAND_MAX>exp(-(y-y0)*(y-y0)/(y_err*y_err)));
+    while(rand()/(Ty)RAND_MAX>std::exp(-(y-y0)*(y-y0)/(y_err*y_err)));
     return y;
   }
 
