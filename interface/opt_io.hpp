@@ -39,6 +39,14 @@ namespace opt_utilities
     try
       {
 	os<<f.get_model().get_type_name()<<"\n";
+	os<<"Current model parameters:\n";
+	os<<"==========================\n";
+	for(int i=0;i<f.get_num_params();++i)
+	  {
+	    const param_info<Tp,Tstr>& pinfo=f.get_param_info(i);
+	    os<<pinfo.get_name()<<"=\t"<<pinfo.get_value()<<"\n";
+	  }
+	os<<"==========================\n";
       }
     catch(const model_not_defined& e)
       {
