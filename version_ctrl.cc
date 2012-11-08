@@ -8,8 +8,8 @@ public:
 	  cerr<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
 	  cerr<<"% Flexible model fitting package      %"<<endl;
 	  cerr<<"% version ????                        %"<<endl;
-	  cerr<<"% by Gu Junhua 2011.                  %"<<endl;
-	  cerr<<"% tompkins@sjtu.edu.cn                %"<<endl;
+	  cerr<<"% by Gu Junhua 2012.                  %"<<endl;
+	  cerr<<"% jhgu@bao.ac.cn                      %"<<endl;
 	  cerr<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;;
 	    
 	}
