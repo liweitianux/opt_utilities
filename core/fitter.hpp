@@ -386,8 +386,8 @@ namespace opt_utilities
      */
     param_info(const Tstr& _name,
 	       const typename element_type_trait<Tp>::element_type& _v,
-	       const typename element_type_trait<Tp>::element_type& _l=0,
-	       const typename element_type_trait<Tp>::element_type& _u=0,
+	       const typename element_type_trait<Tp>::element_type& _l=-std::numeric_limits<typename element_type_trait<Tp>::element_type>::max(),
+	       const typename element_type_trait<Tp>::element_type& _u=std::numeric_limits<typename element_type_trait<Tp>::element_type>::max(),
 	       const Tstr& desc=Tstr())
       :name(_name),value(_v),lower_limit(_l),
        upper_limit(_u),description(desc)
