@@ -9,6 +9,7 @@
 #define OPT_HEADER
 #include "opt_exception.hpp"
 #include "optimizer.hpp"
+#include <limits>
 #include <vector>
 #include <string>
 #include <cstdlib>
@@ -359,7 +360,9 @@ namespace opt_utilities
        default construct
      */
     param_info()
-      :name(),description()
+      :name(),value(),lower_limit(-std::numeric_limits<typename element_type_trait<Tp>::element_type>::max()),
+      upper_limit(std::numeric_limits<typename element_type_trait<Tp>::element_type>::max()),
+       description()
     {}
 
 
