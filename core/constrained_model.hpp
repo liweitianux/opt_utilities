@@ -6,15 +6,15 @@ namespace opt_utilities
 {
   template <typename Ty,typename Tx,typename Tp,typename Tstr=std::string>
   class constrained_model
-    :public model<Ty,Tx,Tp,Tstr=std::string>
+    :public model<Ty,Tx,Tp,Tstr>
   {
   public:
-    bool meet_constraint(const Tp& p)
+    bool meet_constraint(const Tp& p)const
     {
       return do_meet_constraint(p);
     }
   private:
-    virtual bool do_meet_constraint(const Tp& p)=0;
+    virtual bool do_meet_constraint(const Tp& p)const=0;
   };
 
 }
