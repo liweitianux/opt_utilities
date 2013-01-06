@@ -913,7 +913,6 @@ namespace opt_utilities
 	      return;
 	    }
 	}
-      std::cerr<<"param "<<pname<<" unfound"<<std::endl;
       throw param_not_found();
     }
 
