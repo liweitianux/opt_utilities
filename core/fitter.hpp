@@ -519,8 +519,8 @@ namespace opt_utilities
   class model
   {
   private:
-    std::vector<param_info<Tp> > param_info_list;
-    param_info<Tp> null_param;
+    std::vector<param_info<Tp,Tstr> > param_info_list;
+    param_info<Tp,Tstr> null_param;
     //    int num_free_params;
     param_modifier<Ty,Tx,Tp,Tstr>* p_param_modifier;
   private:
