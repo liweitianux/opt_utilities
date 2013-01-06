@@ -559,7 +559,7 @@ namespace opt_utilities
       return Tstr();
     }
 
-    virtual bool do_meet_constraint(const Tp& p)const
+    virtual bool do_meets_constraint(const Tp& p)const
     {
       Tp p1=this->reform_param(p);
       for(size_t i=0;i!=p1.size();++i)
@@ -842,9 +842,9 @@ namespace opt_utilities
        \param p input deformed parameter
        \return if the given param meets the constraint of the model
     */
-    bool meet_constraint(const Tp& p)const
+    bool meets_constraint(const Tp& p)const
     {
-      return do_meet_constraint(p);
+      return do_meets_constraint(p);
     }
 
   public:
