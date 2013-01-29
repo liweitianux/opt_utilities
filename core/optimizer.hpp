@@ -24,6 +24,13 @@ using namespace std;
  */
 namespace opt_utilities
 {
+  /////////NULL_PTR//////////////////////////////////////////
+#if __cplusplus<201103L
+#define NULL_PTR 0
+#else
+  const std::nullptr_t NULL_PTR=nullptr;
+#endif
+
   /////////Forward declare///////////////////////////////////
   template <typename rT,typename pT>
   class optimizer;
@@ -367,7 +374,7 @@ namespace opt_utilities
        default construct function
      */
      optimizer()
-      :p_opt_method(0),p_func_obj(0)
+      :p_opt_method(NULL_PTR),p_func_obj(NULL_PTR)
     {}
 
     /**
@@ -385,13 +392,13 @@ namespace opt_utilities
        copy construct function
      */
     optimizer(const optimizer& rhs)
-      :p_opt_method(0),p_func_obj(0)
+      :p_opt_method(NULL_PTR),p_func_obj(NULL_PTR)
     {
-      if(rhs.p_func_obj!=0)
+      if(rhs.p_func_obj!=NULL_PTR)
 	{
 	  set_func_obj(*(rhs.p_func_obj));
 	}
-      if(rhs.p_opt_method!=0)
+      if(rhs.p_opt_method!=NULL_PTR)
 	{
 	  set_opt_method(*(rhs.p_opt_method));
 	}
@@ -407,11 +414,11 @@ namespace opt_utilities
 	{
 	  return *this;
 	}
-      if(rhs.p_func_obj!=0)
+      if(rhs.p_func_obj!=NULL_PTR)
 	{
 	  set_func_obj(*(rhs.p_func_obj));
 	}
-      if(rhs.p_opt_method!=0)
+      if(rhs.p_opt_method!=NULL_PTR)
 	{
 	  set_opt_method(*(rhs.p_opt_method));
 	}
@@ -423,12 +430,12 @@ namespace opt_utilities
      */
     virtual ~optimizer()
     {
-      if(p_func_obj!=0)
+      if(p_func_obj!=NULL_PTR)
 	{
 	  //delete p_func_obj;
 	  p_func_obj->destroy();
 	}
-      if(p_opt_method!=0)
+      if(p_opt_method!=NULL_PTR)
 	{
 	  //delete p_opt_method;
 	  p_opt_method->destroy();
@@ -442,13 +449,13 @@ namespace opt_utilities
      */
     void set_func_obj(const func_obj<rT,pT>& fc)
     {
-      if(p_func_obj!=0)
+      if(p_func_obj!=NULL_PTR)
 	{
 	  //delete p_func_obj;
 	  p_func_obj->destroy();
 	}
       p_func_obj=fc.clone();
-      if(p_opt_method!=0)
+      if(p_opt_method!=NULL_PTR)
 	{
 	  p_opt_method->set_optimizer(*this);
 	}
@@ -460,7 +467,7 @@ namespace opt_utilities
      */
     void set_opt_method(const opt_method<rT,pT>& om)
     {
-      if(p_opt_method!=0)
+      if(p_opt_method!=NULL_PTR)
 	{
 	  //delete p_opt_method;
 	  p_opt_method->destroy();
@@ -475,7 +482,7 @@ namespace opt_utilities
      */
     opt_method<rT,pT>& get_opt_method()
     {
-      if(p_opt_method==0)
+      if(p_opt_method==NULL_PTR)
 	{
 	  throw opt_method_not_defined();
 	}
@@ -488,7 +495,7 @@ namespace opt_utilities
      */
     const opt_method<rT,pT>& get_opt_method()const
     {
-      if(p_opt_method==0)
+      if(p_opt_method==NULL_PTR)
 	{
 	  throw opt_method_not_defined();
 	}
@@ -502,7 +509,7 @@ namespace opt_utilities
      */
     void set_precision(rT x)
     {
-      if(p_opt_method==0)
+      if(p_opt_method==NULL_PTR)
 	{
 	  throw opt_method_not_defined();
 	}
@@ -515,7 +522,7 @@ namespace opt_utilities
 
     rT get_precision()const
     {
-      if(p_opt_method==0)
+      if(p_opt_method==NULL_PTR)
 	{
 	  throw opt_method_not_defined();
 	}
@@ -529,7 +536,7 @@ namespace opt_utilities
      */
     void set_start_point(const pT& x)
     {
-      if(p_opt_method==0)
+      if(p_opt_method==NULL_PTR)
 	{
 	  throw opt_method_not_defined();
 	}
@@ -542,7 +549,7 @@ namespace opt_utilities
     
     pT get_start_point()const
     {
-      if(p_opt_method==0)
+      if(p_opt_method==NULL_PTR)
 	{
 	  throw opt_method_not_defined();
 	}
@@ -556,7 +563,7 @@ namespace opt_utilities
      */
     void set_lower_limit(const pT& x)
     {
-      if(p_opt_method==0)
+      if(p_opt_method==NULL_PTR)
 	{
 	  throw opt_method_not_defined();
 	}
@@ -569,7 +576,7 @@ namespace opt_utilities
      */
     pT get_lower_limit()const
     {
-      if(p_opt_method==0)
+      if(p_opt_method==NULL_PTR)
 	{
 	  throw opt_method_not_defined();
 	}
@@ -583,7 +590,7 @@ namespace opt_utilities
      */
     void set_upper_limit(const pT& x)
     {
-      if(p_opt_method==0)
+      if(p_opt_method==NULL_PTR)
 	{
 	  throw opt_method_not_defined();
 	}
@@ -596,7 +603,7 @@ namespace opt_utilities
 
     pT get_upper_limit()const
     {
-      if(p_opt_method==0)
+      if(p_opt_method==NULL_PTR)
 	{
 	  throw opt_method_not_defined();
 	}
@@ -611,7 +618,7 @@ namespace opt_utilities
      */
     rT eval(const pT& x)
     {
-      if(p_func_obj==0)
+      if(p_func_obj==NULL_PTR)
 	{
 	  throw object_function_not_defined();
 	}
@@ -626,11 +633,11 @@ namespace opt_utilities
      */
     pT optimize()
     {
-      if(p_opt_method==0)
+      if(p_opt_method==NULL_PTR)
 	{
 	  throw opt_method_not_defined();
 	}
-      if(p_func_obj==0)
+      if(p_func_obj==NULL_PTR)
 	{
 	  throw object_function_not_defined();
 	}
@@ -663,7 +670,7 @@ namespace opt_utilities
      */
     func_obj<rT,pT>& get_func_obj()
     {
-      if(p_func_obj==0)
+      if(p_func_obj==NULL_PTR)
 	{
 	  throw object_function_not_defined();
 	}
@@ -675,7 +682,7 @@ namespace opt_utilities
     */
     const func_obj<rT,pT>& get_func_obj()const
     {
-      if(p_func_obj==0)
+      if(p_func_obj==NULL_PTR)
 	{
 	  throw object_function_not_defined();
 	}

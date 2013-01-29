@@ -586,7 +586,7 @@ namespace opt_utilities
        default construct function
      */
     model()
-      :p_param_modifier(0)
+      :p_param_modifier(NULL_PTR)
     {}
     
 
@@ -594,10 +594,10 @@ namespace opt_utilities
        copy construct
      */
     model(const model& rhs)
-      :p_param_modifier(0)
+      :p_param_modifier(NULL_PTR)
     {
       param_info_list=rhs.param_info_list;
-      if(rhs.p_param_modifier!=0)
+      if(rhs.p_param_modifier!=NULL_PTR)
 	{
 	  set_param_modifier(*(rhs.p_param_modifier));
 	}
@@ -616,7 +616,7 @@ namespace opt_utilities
 	  return *this;
 	}
       param_info_list=rhs.param_info_list;
-      if(rhs.p_param_modifier!=0)
+      if(rhs.p_param_modifier!=NULL_PTR)
 	{
 	  set_param_modifier(*(rhs.p_param_modifier));
 	}
@@ -630,7 +630,7 @@ namespace opt_utilities
      */
     virtual ~model()
     {
-      if(p_param_modifier)
+      if(p_param_modifier!=NULL_PTR)
 	{
 	  //delete p_param_modifier;
 	  p_param_modifier->destroy();
@@ -673,7 +673,7 @@ namespace opt_utilities
      */
     param_modifier<Ty,Tx,Tp,Tstr>& get_param_modifier()
     {
-      if(p_param_modifier==0)
+      if(p_param_modifier==NULL_PTR)
 	{
 	  throw param_modifier_not_defined();
 	}
@@ -685,7 +685,7 @@ namespace opt_utilities
     */
     const param_modifier<Ty,Tx,Tp,Tstr>& get_param_modifier()const
     {
-      if(p_param_modifier==0)
+      if(p_param_modifier==NULL_PTR)
 	{
 	  throw param_modifier_not_defined();
 	}
@@ -698,7 +698,7 @@ namespace opt_utilities
      */
     Tstr report_param_status(const Tstr& s)const
     {
-      if(p_param_modifier==0)
+      if(p_param_modifier==NULL_PTR)
 	{
 	  return Tstr();
 	}
@@ -803,7 +803,7 @@ namespace opt_utilities
      */
     size_t get_num_free_params()const
     {
-      if(p_param_modifier)
+      if(p_param_modifier!=NULL_PTR)
 	{
 	  return p_param_modifier->get_num_free_params();
 	}
@@ -854,7 +854,7 @@ namespace opt_utilities
      */
     void set_param_modifier(const param_modifier<Ty,Tx,Tp,Tstr>& pm)
     {
-      if(p_param_modifier!=0)
+      if(p_param_modifier!=NULL_PTR)
 	{
 	  //delete p_param_modifier;
 	  p_param_modifier->destroy();
@@ -868,12 +868,12 @@ namespace opt_utilities
     */
     void clear_param_modifier()
     {
-      if(p_param_modifier!=0)
+      if(p_param_modifier!=NULL_PTR)
 	{
 	  //delete p_param_modifier;
 	  p_param_modifier->destroy();
 	}
-      p_param_modifier=0;
+      p_param_modifier=NULL_PTR;
     }
     
     /**
@@ -1039,7 +1039,7 @@ namespace opt_utilities
      */
     Tp reform_param(const Tp& p)const
     {
-      if(p_param_modifier==0)
+      if(p_param_modifier==NULL_PTR)
 	{
 	  return p;
 	}
@@ -1052,7 +1052,7 @@ namespace opt_utilities
      */
     Tp deform_param(const Tp& p)const
     {
-      if(p_param_modifier==0)
+      if(p_param_modifier==NULL_PTR)
 	{
 	  return p;
 	}
@@ -1105,7 +1105,7 @@ namespace opt_utilities
        default construct function
     */
     fitter()
-      :p_model(0),p_statistic(0),p_data_set(0),optengine()
+      :p_model(NULL_PTR),p_statistic(NULL_PTR),p_data_set(NULL_PTR),optengine()
     {}
 
     
@@ -1113,18 +1113,18 @@ namespace opt_utilities
        copy construct function
      */
     fitter(const fitter& rhs)
-      :p_model(0),p_statistic(0),p_data_set(0),optengine()
+      :p_model(NULL_PTR),p_statistic(NULL_PTR),p_data_set(NULL_PTR),optengine()
     {
-      if(rhs.p_model!=0)
+      if(rhs.p_model!=NULL_PTR)
 	{
 	  set_model(*(rhs.p_model));
 	}
-      if(rhs.p_statistic!=0)
+      if(rhs.p_statistic!=NULL_PTR)
 	{
 	  set_statistic(*(rhs.p_statistic));
 	  //assert(p_statistic->p_fitter!=0);
 	}
-      if(rhs.p_data_set!=0)
+      if(rhs.p_data_set!=NULL_PTR)
 	{
 	  set_data_set(*(rhs.p_data_set));
 	}
@@ -1141,15 +1141,15 @@ namespace opt_utilities
 	{
 	  return *this;
 	}
-      if(rhs.p_model!=0)
+      if(rhs.p_model!=NULL_PTR)
 	{
 	  set_model(*(rhs.p_model));
 	}
-      if(rhs.p_statistic!=0)
+      if(rhs.p_statistic!=NULL_PTR)
 	{
 	  set_statistic(*(rhs.p_statistic));
 	}
-      if(rhs.p_data_set!=0)
+      if(rhs.p_data_set!=NULL_PTR)
 	{
 	  set_data_set(*(rhs.p_data_set));
 	}
@@ -1164,17 +1164,17 @@ namespace opt_utilities
      */
     virtual ~fitter()
     {
-      if(p_model!=0)
+      if(p_model!=NULL_PTR)
 	{
 	  //delete p_model;
 	  p_model->destroy();
 	}
-      if(p_statistic!=0)
+      if(p_statistic!=NULL_PTR)
 	{
 	  //delete p_statistic;
 	  p_statistic->destroy();
 	}
-      if(p_data_set!=0)
+      if(p_data_set!=NULL_PTR)
 	{
 	  //delete p_data_set;
 	  p_data_set->destroy();
@@ -1190,7 +1190,7 @@ namespace opt_utilities
      */
     Ty eval_model(const Tx& x,const Tp& p)
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1206,7 +1206,7 @@ namespace opt_utilities
     
     Ty eval_model_raw(const Tx& x,const Tp& p)
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1219,7 +1219,7 @@ namespace opt_utilities
     */
     data_set<Ty,Tx>& get_data_set()
     {
-      if(p_data_set==0)
+      if(p_data_set==NULL_PTR)
 	{
 	  throw data_not_loaded();
 	}
@@ -1233,7 +1233,7 @@ namespace opt_utilities
      */
     const data_set<Ty,Tx>& get_data_set()const
     {
-      if(p_data_set==0)
+      if(p_data_set==NULL_PTR)
 	{
 	  throw data_not_loaded();
 	}
@@ -1246,7 +1246,7 @@ namespace opt_utilities
      */
     model<Ty,Tx,Tp,Tstr>& get_model()
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1259,7 +1259,7 @@ namespace opt_utilities
     */
     const model<Ty,Tx,Tp,Tstr>& get_model()const
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1272,7 +1272,7 @@ namespace opt_utilities
      */
     statistic<Ty,Tx,Tp,Ts,Tstr>& get_statistic()
     {
-      if(p_statistic==0)
+      if(p_statistic==NULL_PTR)
 	{
 	  throw statistic_not_defined();
 	}
@@ -1285,7 +1285,7 @@ namespace opt_utilities
      */
     const statistic<Ty,Tx,Tp,Ts,Tstr>& get_statistic()const
     {
-      if(p_statistic==0)
+      if(p_statistic==NULL_PTR)
 	{
 	  throw statistic_not_defined();
 	}
@@ -1326,7 +1326,7 @@ namespace opt_utilities
     */
     param_modifier<Ty,Tx,Tp,Tstr>& get_param_modifier()
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1339,7 +1339,7 @@ namespace opt_utilities
      */
     const param_modifier<Ty,Tx,Tp,Tstr>& get_param_modifier()const
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1353,7 +1353,7 @@ namespace opt_utilities
      */
     Tstr report_param_status(const Tstr& s)const
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1369,7 +1369,7 @@ namespace opt_utilities
      */
     typename element_type_trait<Tp>::element_type get_param_value(const Tstr& pname)const
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1383,7 +1383,7 @@ namespace opt_utilities
      */
     typename element_type_trait<Tp>::element_type get_param_lower_limit(const Tstr& pname)const
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1397,7 +1397,7 @@ namespace opt_utilities
      */
     typename element_type_trait<Tp>::element_type get_param_upper_limit(const Tstr& pname)const
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1411,7 +1411,7 @@ namespace opt_utilities
      */
     const param_info<Tp,Tstr>& get_param_info(const Tstr& pname)const
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1425,7 +1425,7 @@ namespace opt_utilities
      */
     const param_info<Tp,Tstr>& get_param_info(size_t n)const
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1439,7 +1439,7 @@ namespace opt_utilities
      */
     size_t get_param_order(const Tstr& pname)const
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1452,7 +1452,7 @@ namespace opt_utilities
      */
     size_t get_num_params()const
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1465,7 +1465,7 @@ namespace opt_utilities
      */
     Tp get_all_params()const
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1482,7 +1482,7 @@ namespace opt_utilities
      */
     void set_model(const model<Ty,Tx,Tp,Tstr>& m)
     {
-      if(p_model!=0)
+      if(p_model!=NULL_PTR)
 	{
 	  //delete p_model;
 	  p_model->destroy();
@@ -1499,7 +1499,7 @@ namespace opt_utilities
      */
     void set_statistic(const statistic<Ty,Tx,Tp,Ts,Tstr>& s)
     {
-      if(p_statistic!=0)
+      if(p_statistic!=NULL_PTR)
 	{
 	  //delete p_statistic;
 	  p_statistic->destroy();
@@ -1515,7 +1515,7 @@ namespace opt_utilities
      */
     void set_param_modifier(const param_modifier<Ty,Tx,Tp,Tstr>& pm)
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1527,7 +1527,7 @@ namespace opt_utilities
     */
     void clear_param_modifier()
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1540,13 +1540,13 @@ namespace opt_utilities
     */
     void load_data(const data_set<Ty,Tx>& da)
     {
-      if(p_data_set!=0)
+      if(p_data_set!=NULL_PTR)
 	{
 	  //delete p_data_set;
 	  p_data_set->destroy();
 	}
       p_data_set=da.clone();
-      if(p_statistic!=0)
+      if(p_statistic!=NULL_PTR)
 	{
 	  p_statistic->set_fitter(*this);
 	}
@@ -1570,7 +1570,7 @@ namespace opt_utilities
     void set_param_value(const Tstr& pname,
 			 const typename element_type_trait<Tp>::element_type& v)
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1585,7 +1585,7 @@ namespace opt_utilities
     void set_param_lower_limit(const Tstr& pname,
 			       const typename element_type_trait<Tp>::element_type& v)
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1600,7 +1600,7 @@ namespace opt_utilities
     void set_param_upper_limit(const Tstr& pname,
 			       const typename element_type_trait<Tp>::element_type& v)
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1615,7 +1615,7 @@ namespace opt_utilities
 
     void set_param_value(const Tp& param)
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1628,7 +1628,7 @@ namespace opt_utilities
     */
     void set_param_lower_limit(const Tp& param)
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1641,7 +1641,7 @@ namespace opt_utilities
     */
     void set_param_upper_limit(const Tp& param)
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1656,7 +1656,7 @@ namespace opt_utilities
 
     void set_param_info(const param_info<Tp,Tstr>& pinfo)
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
@@ -1671,7 +1671,7 @@ namespace opt_utilities
     */
     void set_opt_method(const opt_method<Ts,Tp>& pm)
     {
-      //assert(p_optimizer!=0);
+      //assert(p_optimizer!=NULL_PTR);
       optengine.set_opt_method(pm);
     }
 
@@ -1690,19 +1690,19 @@ namespace opt_utilities
      */
     Tp fit()
     {
-      //      assert(p_model!=0);
-      if(p_model==0)
+      //      assert(p_model!=NULL_PTR);
+      if(p_model==NULL_PTR)
 	{
 	  throw model_not_defined();
 	}
-      if(p_data_set==0)
+      if(p_data_set==NULL_PTR)
 	{
 	  throw data_not_loaded();
 	}
-      //assert(p_optimizer!=0);
-      //assert(p_data_set!=0);
-      //assert(p_statistic!=0);
-      if(p_statistic==0)
+      //assert(p_optimizer!=NULL_PTR);
+      //assert(p_data_set!=NULL_PTR);
+      //assert(p_statistic!=NULL_PTR);
+      if(p_statistic==NULL_PTR)
 	{
 	  throw statistic_not_defined();
 	}
@@ -1724,12 +1724,12 @@ namespace opt_utilities
       //      std::cout<<start_point.size()<<std::endl;
       
       
-      //for(int i=0;i<(int)start_point.size();++i)
+      //for(int i=NULL_PTR;i<(int)start_point.size();++i)
       //	{
       //	  std::cout<<start_point[i]<<",";
       //	}
       //std::cout<<std::endl;
-      //assert(start_point.size()!=0);
+      //assert(start_point.size()!=NULL_PTR);
       if(get_size(start_point)==0)
 	{
 	  //return start_point;
@@ -1800,7 +1800,7 @@ namespace opt_utilities
        default construct
     */
     statistic()
-      :p_fitter(0)
+      :p_fitter(NULL_PTR)
     {}
     
     /**
@@ -1875,7 +1875,7 @@ namespace opt_utilities
      */
     virtual const fitter<Ty,Tx,Tp,Ts,Tstr>& get_fitter()const
     {
-      if(p_fitter==0)
+      if(p_fitter==NULL_PTR)
 	{
 	  throw fitter_not_set();
 	}
@@ -1890,7 +1890,7 @@ namespace opt_utilities
      */
     Ty eval_model(const Tx& x,const Tp& p)
     {
-      if(p_fitter==0)
+      if(p_fitter==NULL_PTR)
 	{
 	  throw fitter_not_set();
 	}
@@ -1903,7 +1903,7 @@ namespace opt_utilities
      */
     const data_set<Ty,Tx>& get_data_set()const
     {
-      if(p_fitter==0)
+      if(p_fitter==NULL_PTR)
 	{
 	  throw fitter_not_set();
 	}
@@ -1962,7 +1962,7 @@ namespace opt_utilities
        the default construct function
      */
     param_modifier()
-      :p_model(0)
+      :p_model(NULL_PTR)
     {}
     
     /**
@@ -2052,7 +2052,7 @@ namespace opt_utilities
      */
     const model<Ty,Tx,Tp,Tstr>& get_model()const
     {
-      if(p_model==0)
+      if(p_model==NULL_PTR)
 	{
 	  std::cout<<"dajf;asdjfk;";
 	  throw model_not_defined();
