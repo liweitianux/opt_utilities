@@ -54,7 +54,7 @@ namespace opt_utilities
   private:
     rT func(const pT& x)
     {
-      assert(p_fo!=0);
+      assert(p_fo!=NULL_PTR);
       return p_fo->eval(x);
     }
 
@@ -62,11 +62,11 @@ namespace opt_utilities
   private:
     void clear_xi()
     {
-      if(xi_1d!=0)
+      if(xi_1d!=NULL_PTR)
 	{
 	  delete[] xi_1d;
 	}
-      if(xi!=0)
+      if(xi!=NULL_PTR)
 	{
 	  delete[] xi;
 	}
@@ -174,7 +174,7 @@ namespace opt_utilities
   public:
     
     powell_method()
-      :threshold(1e-4),xi(0),xi_1d(0)
+      :threshold(1e-4),xi(NULL_PTR),xi_1d(NULL_PTR)
     {}
 
     virtual ~powell_method()
@@ -187,7 +187,7 @@ namespace opt_utilities
        start_point(rhs.start_point),
        end_point(rhs.end_point),
        ncom(rhs.ncom),
-       threshold(rhs.threshold),xi(0),xi_1d(0)
+       threshold(rhs.threshold),xi(NULL_PTR),xi_1d(NULL_PTR)
     {
     }
 
