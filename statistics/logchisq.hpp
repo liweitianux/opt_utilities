@@ -24,8 +24,8 @@ namespace opt_utilities
       :opt_exception("log chisq statistics cannot be used when has negative data!")
     {}
   };
-  
-  
+
+
 
   /**
      \brief chi-square statistic
@@ -42,8 +42,8 @@ namespace opt_utilities
   private:
     bool verb;
     int n;
-    
-    
+
+
     statistic<Ty,Tx,Tp,Ts,Tstr>* do_clone()const
     {
       // return const_cast<statistic<Ty,Tx,Tp>*>(this);
@@ -54,7 +54,7 @@ namespace opt_utilities
     {
       return "chi^2 statistic";
     }
-    
+
   public:
     void verbose(bool v)
     {
@@ -64,8 +64,8 @@ namespace opt_utilities
     logchisq()
       :verb(false)
     {}
-    
-    
+
+
 
     Ts do_eval(const Tp& p)
     {
@@ -93,7 +93,7 @@ namespace opt_utilities
 	    }
 
 	}
-      
+
       return result;
     }
   };
@@ -113,7 +113,7 @@ namespace opt_utilities
   private:
     bool verb;
     int n;
-    
+
     statistic<Ty,Tx,Tp,Ts,Tstr>* do_clone()const
     {
       // return const_cast<statistic<Ty,Tx,Tp>*>(this);
@@ -133,19 +133,19 @@ namespace opt_utilities
     logchisq()
       :verb(false)
     {}
-    
-    
+
+
 
     Ty do_eval(const Tp& p)
     {
       Ty result(0);
-      for(int i=0;i!=(this->get_data_set()).size();++i)
+      for(size_t i=0;i!=(this->get_data_set()).size();++i)
 	{
 
 	  Ty y_model=this->eval_model(this->get_data_set().get_data(i).get_x(),p);
 	  Ty y_obs=this->get_data_set().get_data(i).get_y();
 	  Ty y_err;
-	  
+
 	  if(y_model>y_obs)
 	    {
 	      y_err=std::abs(this->get_data_set().get_data(i).get_y_upper_err());
@@ -161,10 +161,10 @@ namespace opt_utilities
 	  Ty logy=std::log(y_obs);
 	  Ty logym=std::log(y_model);
 	  Ty logerr=std::log(y_obs+y_err)-log(y_obs);
-	  
-	  
+
+
 	  Ty chi=(logy-logym)/logerr;
-	  
+
 	  //	  Ty chi=(this->get_data_set().get_data(i).get_y()-this->eval_model(this->get_data_set().get_data(i).get_x(),p));
 	  //	  cerr<<chi<<"\n";
 	  result+=chi*chi;
@@ -187,15 +187,13 @@ namespace opt_utilities
 	    }
 
 	}
-      
+
       return result;
     }
   };
 #endif
-  
+
 }
 
 #endif
 //EOF
-
-

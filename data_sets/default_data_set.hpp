@@ -26,7 +26,7 @@ namespace opt_utilities
     //  private:
   public:
     std::vector<data<Ty,Tx> > data_vec;
-    
+
     data_set<Ty,Tx>* do_clone()const
     {
       return new default_data_set<Ty,Tx>(*this);
@@ -37,17 +37,17 @@ namespace opt_utilities
     {
       return data_vec.at(i);
     }
-  
+
     size_t do_size()const
     {
       return data_vec.size();
     }
-  
+
     void do_add_data(const data<Ty,Tx>& d)
     {
       data_vec.push_back(d);
     }
-  
+
     void do_clear()
     {
       data_vec.clear();
@@ -56,7 +56,7 @@ namespace opt_utilities
   public:
     default_data_set()
     {}
-    
+
     default_data_set(const default_data_set<Ty,Tx>& rhs)
       :data_vec(rhs.data_vec)
     {}
@@ -64,7 +64,7 @@ namespace opt_utilities
     default_data_set(const data_set<Ty,Tx>& rhs)
     {
       data_vec.resize(rhs.size());
-      for(int i=0;i<data_vec.size();++i)
+      for(size_t i=0;i<data_vec.size();++i)
 	{
 	  data_vec[i]=(rhs.get_data(i));
 	}
@@ -86,7 +86,7 @@ namespace opt_utilities
       return *this;
     }
 
-    
+
   };
 }
 
