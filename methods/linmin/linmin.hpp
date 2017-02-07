@@ -26,19 +26,19 @@ namespace opt_utilities
     func_adaptor(const func_adaptor&)
       :func_obj<rT,rT>(),p1(),xi1(),pfoo(NULL_PTR)
     {}
-    
+
   public:
     /*
     void set_origin(pT& p2)
     {
       p1=p2;
     }
-    
+
     void set_direction(pT& xi2)
     {
       xi1=xi2;
     }
-    
+
     void set_func_obj(func_obj<rT,pT>& foo)
     {
       pfoo=&foo;
@@ -47,20 +47,22 @@ namespace opt_utilities
     func_adaptor(const pT& _p,const pT& _xi,const func_obj<rT,pT>& pf)
       :p1(_p),xi1(_xi),pfoo(&pf)
     {}
-    
+
   private:
     func_obj<rT,rT>* do_clone()const
     {
       return new func_adaptor(*this);
     }
-      
+
     rT do_eval(const rT& x)
     {
       //assert(p1.size()==xi1.size());
-      
+
       pT xt;
       opt_eq(xt,p1);
-#pragma omp parallel for 
+#ifdef _OPENMP
+#pragma omp parallel for
+#endif
       for(size_t i=0;i<get_size(xt);++i)
 	{
 	  //get_element(xt,i)+=x*get_element((pT)xi1,i);
@@ -72,7 +74,7 @@ namespace opt_utilities
       //return x;
     }
   };
-  
+
 
   template<typename rT,typename pT>
   void linmin(pT& p,pT& xi,rT& fret,func_obj<rT,pT>& func)
@@ -90,13 +92,15 @@ namespace opt_utilities
 
     ax=0.;
     xx=1.;
-    
+
 
     mnbrak(ax,xx,bx,fa,fx,fb,fadpt);
     //cout<<xx<<endl;
     fret=brent(ax,xx,bx,fadpt,TOL,xmin);
     //cout<<xmin<<endl;
-#pragma omp parallel for 
+#ifdef _OPENMP
+#pragma omp parallel for
+#endif
     for(j=0;j<n;++j)
       {
 	//get_element(xi,j)*=xmin;

@@ -35,7 +35,7 @@ namespace opt_utilities
     optimizer<rT,pT>* p_optimizer;
     volatile bool bstop;
     //typedef blitz::Array<rT,2> array2d_type;
-    
+
     const char* do_get_type_name()const
     {
       return "powell method";
@@ -43,7 +43,7 @@ namespace opt_utilities
   private:
     array1d_type start_point;
     array1d_type end_point;
-    
+
   private:
     int ncom;
     array1d_type pcom_p;
@@ -58,7 +58,7 @@ namespace opt_utilities
       return p_fo->eval(x);
     }
 
-   
+
   private:
     void clear_xi()
     {
@@ -117,7 +117,9 @@ namespace opt_utilities
 	  del=0.0;
 	  for(i=0;i<n;++i)
 	    {
-#pragma omp parallel for 
+#ifdef _OPENMP
+#pragma omp parallel for
+#endif
 	      for(j=0;j<n;++j)
 		{
 		  //get_element(xit,j)=xi[j][i];
@@ -140,7 +142,9 @@ namespace opt_utilities
 	      std::cerr<<"powell exceeding maximun iterations."<<std::endl;
 	      return;
 	    }
-#pragma omp parallel for 
+#ifdef _OPENMP
+#pragma omp parallel for
+#endif
 	  for(j=0;j<n;++j)
 	    {
 	      //get_element(ptt,j)=T(2.)*get_element(p,j)-get_element(pt,j);
@@ -158,21 +162,23 @@ namespace opt_utilities
 	      if(t<T(0.))
 		{
 		  linmin(p,xit,fret,*p_fo);
-#pragma omp parallel for 
+#ifdef _OPENMP
+#pragma omp parallel for
+#endif
 		  for(j=0;j<n;++j)
 		    {
 		      xi[j][ibig-1]=xi[j][n-1];
 		      xi[j][n-1]=get_element(xit,j);
-		      
+
 		    }
 		}
 	    }
 	}
     }
 
-    
+
   public:
-    
+
     powell_method()
       :threshold(1e-4),xi(NULL_PTR),xi_1d(NULL_PTR)
     {}
@@ -203,12 +209,12 @@ namespace opt_utilities
       ncom=rhs.ncom;
       threshold=rhs.threshold;
     }
-    
+
     opt_method<rT,pT>* do_clone()const
     {
       return new powell_method<rT,pT>(*this);
     }
-    
+
     void do_set_start_point(const array1d_type& p)
     {
       resize(start_point,get_size(p));
@@ -241,9 +247,9 @@ namespace opt_utilities
       p_optimizer=&o;
       p_fo=p_optimizer->ptr_func_obj();
     }
-    
-    
-    
+
+
+
     pT do_optimize()
     {
       bstop=false;
@@ -257,14 +263,14 @@ namespace opt_utilities
 	      xi[i][j]=(i==j)?1:0;
 	    }
 	}
-      
+
       int iter=100;
       opt_eq(end_point,start_point);
       rT fret;
       powell(end_point,threshold,iter,fret);
       return end_point;
     }
-    
+
     void do_stop()
     {
       bstop=true;
