@@ -53,7 +53,7 @@ namespace opt_utilities
        y_upper_err()
     {}
 
-    
+
     /**
        copy construct
      */
@@ -86,7 +86,7 @@ namespace opt_utilities
       opt_eq(y,_y);
       opt_eq(y_lower_err,_y_lower_err);
       opt_eq(y_upper_err,_y_upper_err);
- 
+
     }
 
 
@@ -114,7 +114,7 @@ namespace opt_utilities
     {
       return x;
     }
-    
+
     /**
        \return x lower error
      */
@@ -122,7 +122,7 @@ namespace opt_utilities
     {
       return x_lower_err;
     }
-    
+
     /**
        \return x upper error
      */
@@ -138,7 +138,7 @@ namespace opt_utilities
     {
       return y;
     }
-    
+
 
     /**
        \return y lower error
@@ -151,7 +151,7 @@ namespace opt_utilities
     /**
        \return y upper error
      */
-    
+
     const Ty& get_y_upper_err()const
     {
       return y_upper_err;
@@ -168,7 +168,7 @@ namespace opt_utilities
     {
       opt_eq(x,_x);
     }
-    
+
     /**
        set x lower error
        \param _x x lower error
@@ -177,7 +177,7 @@ namespace opt_utilities
     {
       opt_eq(x_lower_err,_x);
     }
-    
+
 
     /**
        set x upper error
@@ -190,14 +190,14 @@ namespace opt_utilities
 
 
     /**
-       set y 
+       set y
        \param _y y
      */
     void set_y(const Ty& _y)
     {
       opt_eq(y,_y);
     }
-    
+
 
     /**
        set y lower error
@@ -207,7 +207,7 @@ namespace opt_utilities
     {
       opt_eq(y_lower_err,_y);
     }
-    
+
     /**
        set y upper error
        \param _y y upper error
@@ -216,7 +216,7 @@ namespace opt_utilities
     {
       opt_eq(y_upper_err,_y);
     }
-    
+
 
   };
 
@@ -224,13 +224,13 @@ namespace opt_utilities
      \brief virtual class representing a set of data
      \tparam Ty type of y
      \tparam Tx type of x
-   */  
+   */
   template <typename Ty,typename Tx>
   class data_set
   {
   private:
     virtual const data<Ty,Tx>& do_get_data(size_t i)const=0;
-    virtual void do_set_data(size_t i,const data<Ty,Tx>& d)
+    virtual void do_set_data(size_t, const data<Ty,Tx>&)
     {
       throw data_unsetable();
     }
@@ -246,11 +246,11 @@ namespace opt_utilities
     {
       return typeid(*this).name();
     }
-    
+
     /**
-       Overwrite this function to change the 
+       Overwrite this function to change the
        behavior when destroying a heap-allocated instance.
-       The default function cooperates with then 
+       The default function cooperates with then
        the do_clone function allocates a new instance with
        the new operator.
      */
@@ -267,7 +267,7 @@ namespace opt_utilities
     {
       return this->do_clone();
     }
-    
+
    /**
        destroy the cloned object
      */
@@ -301,7 +301,7 @@ namespace opt_utilities
     const char* get_type_name()const
     {
       return this->do_get_type_name();
-    } 
+    }
 
     /**
        \return the size of the data set
@@ -318,7 +318,7 @@ namespace opt_utilities
     {
       do_set_data(i,d);
     }
-    
+
     /**
        add data point
        \param d data point
@@ -335,10 +335,10 @@ namespace opt_utilities
     {
       do_clear();
     }
-      
+
   };
 
-  
+
 
   /**
      \brief the information of a model parameter
@@ -392,7 +392,7 @@ namespace opt_utilities
       :name(_name),value(_v),lower_limit(_l),
        upper_limit(_u),description(desc)
     {}
-    
+
     /**
        assignment operator
      */
@@ -487,12 +487,12 @@ namespace opt_utilities
        set the name of the parameter
        \param _name the name of the parameter
     */
-    
+
     void set_name(const Tstr& _name)
     {
       name=_name;
     }
-    
+
     /**
        Set the description
        \param desc the description to be assigned
@@ -525,12 +525,12 @@ namespace opt_utilities
     param_modifier<Ty,Tx,Tp,Tstr>* p_param_modifier;
   private:
     /**
-       Clone self, 
+       Clone self,
        The default behavior is to allocate a new instance
        on the heap with new operator and return the pointer.
        \return a point to the cloned instance
      */
-    
+
     virtual model<Ty,Tx,Tp,Tstr>* do_clone()const=0;
 
     /**
@@ -541,7 +541,7 @@ namespace opt_utilities
     {
       delete this;
     }
-    
+
     /**
        Should be implemented to evaluate the model
        \param x the varible
@@ -549,7 +549,7 @@ namespace opt_utilities
        \return the model value
      */
     virtual Ty do_eval(const Tx& x,const Tp& p)=0;
-    
+
     /**
        Can be overrided to return a piece of information of the model.
        The default implement returns a empty string.
@@ -576,7 +576,7 @@ namespace opt_utilities
     /**
        \return the type name of self
     */
-    
+
     virtual const char* do_get_type_name()const
     {
       return typeid(*this).name();
@@ -588,7 +588,7 @@ namespace opt_utilities
     model()
       :p_param_modifier(NULL_PTR)
     {}
-    
+
 
     /**
        copy construct
@@ -602,9 +602,9 @@ namespace opt_utilities
 	  set_param_modifier(*(rhs.p_param_modifier));
 	}
       null_param=rhs.null_param;
-      
+
     }
-    
+
 
     /**
        assignment operator
@@ -623,7 +623,7 @@ namespace opt_utilities
       null_param=rhs.null_param;
       return *this;
     }
-    
+
 
     /**
        destructure function
@@ -656,11 +656,11 @@ namespace opt_utilities
   public:
     /**
        Get the type name
-       Usually used to return the name of this model, which is often 
+       Usually used to return the name of this model, which is often
        used as a key when implementing the prototype pattern
        \return the type name
      */
-    
+
     const char* get_type_name()const
     {
       return this->do_get_type_name();
@@ -702,11 +702,11 @@ namespace opt_utilities
 	{
 	  return Tstr();
 	}
-      
+
       return p_param_modifier->report_param_status(s);
-	
+
     }
-    
+
 
     /**
        \param pname the name of the param
@@ -738,7 +738,7 @@ namespace opt_utilities
       return param_info_list[n%get_num_params()];
     }
 
-    
+
     /**
        \return the full parameter vector
      */
@@ -788,7 +788,7 @@ namespace opt_utilities
       return result;
     }
 
-  
+
     /**
        \return the number of parameters
      */
@@ -828,7 +828,7 @@ namespace opt_utilities
       throw param_not_found();
       //return (size_t)-1;
     }
-    
+
 
     /**
        \return the description of the model
@@ -875,7 +875,7 @@ namespace opt_utilities
 	}
       p_param_modifier=NULL_PTR;
     }
-    
+
     /**
        \param pinfo param information being set
      */
@@ -894,7 +894,7 @@ namespace opt_utilities
 	}
       throw param_not_found();
     }
-    
+
 
     /**
        \param pname the name of the parameter
@@ -916,7 +916,7 @@ namespace opt_utilities
       throw param_not_found();
     }
 
-    
+
     /**
        set the lower limit
        \param pname the parameter name
@@ -961,10 +961,10 @@ namespace opt_utilities
       std::cerr<<"param "<<pname<<" unfound"<<std::endl;
       throw param_not_found();
     }
-    
+
 
     /**
-       set param 
+       set param
        \param param the values of the parameter
      */
     void set_param_value(const Tp& param)
@@ -977,7 +977,7 @@ namespace opt_utilities
 
 
     /**
-       set lower limit 
+       set lower limit
        \param param the lower limit of the parameter
     */
     void set_param_lower_limit(const Tp& param)
@@ -987,10 +987,10 @@ namespace opt_utilities
 	  param_info_list[i].set_lower_limit(get_element(param,i));
 	}
     }
-    
+
 
     /**
-       set upper limit 
+       set upper limit
        \param param the upper limit of the parameter
     */
     void set_param_upper_limit(const Tp& param)
@@ -1000,7 +1000,7 @@ namespace opt_utilities
 	  param_info_list[i].set_upper_limit(get_element(param,i));
 	}
     }
-		
+
   protected:
 
     /**
@@ -1012,7 +1012,7 @@ namespace opt_utilities
       param_info_list.push_back(pinfo);
       //      this->num_free_params++;
     }
-    
+
     /**
        clear the param information list
      */
@@ -1024,7 +1024,7 @@ namespace opt_utilities
 
 
 
-  public:   
+  public:
     /**
        When the parameter modifier exists,
        use it to form the complete parameter list to be fed to the model.
@@ -1047,7 +1047,7 @@ namespace opt_utilities
     }
     /**
        Perform the inverse operator of reform_param
-       \param p the complete parameter list 
+       \param p the complete parameter list
        \param p the vanished parameter list
      */
     Tp deform_param(const Tp& p)const
@@ -1100,7 +1100,7 @@ namespace opt_utilities
     data_set<Ty,Tx>* p_data_set;
     optimizer<Ts,Tp> optengine;
   public:
-    
+
     /**
        default construct function
     */
@@ -1108,7 +1108,7 @@ namespace opt_utilities
       :p_model(NULL_PTR),p_statistic(NULL_PTR),p_data_set(NULL_PTR),optengine()
     {}
 
-    
+
     /**
        copy construct function
      */
@@ -1130,7 +1130,7 @@ namespace opt_utilities
 	}
       optengine=rhs.optengine;
     }
-    
+
 
     /**
        assignment operator
@@ -1157,7 +1157,7 @@ namespace opt_utilities
       optengine=rhs.optengine;
       return *this;
     }
-    
+
 
     /**
        destruct function
@@ -1180,7 +1180,7 @@ namespace opt_utilities
 	  p_data_set->destroy();
 	}
     }
-    
+
   public:
     /**
        evaluate the model
@@ -1201,9 +1201,9 @@ namespace opt_utilities
        evaluate the model, ignore the param_modifier
        \param x the varible
        \param p the parameter
-       \return the model value       
+       \return the model value
      */
-    
+
     Ty eval_model_raw(const Tx& x,const Tp& p)
     {
       if(p_model==NULL_PTR)
@@ -1300,7 +1300,7 @@ namespace opt_utilities
       Tp current_params(get_model().get_all_params());
       return get_statistic().eval(get_model().deform_param(current_params));
     }
-    
+
     /**
        Get the optimization method that used
        \return the reference of the opt_method
@@ -1309,7 +1309,7 @@ namespace opt_utilities
     {
       return optengine.get_opt_method();
     }
-    
+
     /**
        Get the optimization method that used
        \return the reference of the opt_method
@@ -1389,7 +1389,7 @@ namespace opt_utilities
 	}
       return p_model->get_param_info(pname).get_lower_limit();
     }
-    
+
     /**
        get the upper limit of a parameter
        \param pname the name of a parameter
@@ -1417,7 +1417,7 @@ namespace opt_utilities
 	}
       return p_model->get_param_info(pname);
     }
-    
+
     /**
        get the param_info of a parameter by its order
        \param n the order of the parameter
@@ -1533,7 +1533,7 @@ namespace opt_utilities
 	}
       p_model->clear_param_modifier();
     }
-    
+
     /**
        load the data set
        \param da a data set
@@ -1551,7 +1551,7 @@ namespace opt_utilities
 	  p_statistic->set_fitter(*this);
 	}
     }
-    
+
     /**
        Same as load_data
        \param da the data to be set
@@ -1580,7 +1580,7 @@ namespace opt_utilities
     /**
        set the lower limit of a parameter
        \param pname the name of the parameter
-       \param v the lower limit of the parameter       
+       \param v the lower limit of the parameter
      */
     void set_param_lower_limit(const Tstr& pname,
 			       const typename element_type_trait<Tp>::element_type& v)
@@ -1595,7 +1595,7 @@ namespace opt_utilities
     /**
        set the upper limit of a parameter
        \param pname the name of the parameter
-       \param v the upper limit of the parameter       
+       \param v the upper limit of the parameter
      */
     void set_param_upper_limit(const Tstr& pname,
 			       const typename element_type_trait<Tp>::element_type& v)
@@ -1606,7 +1606,7 @@ namespace opt_utilities
 	}
       p_model->set_param_upper_limit(pname,v);
     }
-    
+
 
     /**
        set the values of all parameters
@@ -1663,7 +1663,7 @@ namespace opt_utilities
       p_model->set_param_info(pinfo);
     }
 
-    
+
 
     /**
        set the optimization method used to perform the model fitting
@@ -1722,8 +1722,8 @@ namespace opt_utilities
       opt_eq(lower_limits,p_model->deform_param(current_lower_limits));
 
       //      std::cout<<start_point.size()<<std::endl;
-      
-      
+
+
       //for(int i=NULL_PTR;i<(int)start_point.size();++i)
       //	{
       //	  std::cout<<start_point[i]<<",";
@@ -1738,7 +1738,7 @@ namespace opt_utilities
       optengine.set_lower_limit(lower_limits);
       optengine.set_upper_limit(upper_limits);
       optengine.set_start_point(start_point);
-      
+
       Tp result;
       opt_eq(result,optengine.optimize());
 
@@ -1759,7 +1759,7 @@ namespace opt_utilities
     {
       optengine.stop();
     }
-    
+
   };
 
 
@@ -1789,7 +1789,7 @@ namespace opt_utilities
     /**
        \return the type name of self
     */
-    
+
     virtual const char* do_get_type_name()const
     {
       return typeid(*this).name();
@@ -1802,7 +1802,7 @@ namespace opt_utilities
     statistic()
       :p_fitter(NULL_PTR)
     {}
-    
+
     /**
        copy construct
     */
@@ -1823,7 +1823,7 @@ namespace opt_utilities
       p_fitter=rhs.p_fitter;
       return *this;
     }
-    
+
 
     /**
        destructure function
@@ -1858,7 +1858,7 @@ namespace opt_utilities
     {
       return this->do_get_type_name();
     }
-  public:    
+  public:
     /**
        set the fitter
        \param pfitter the fitter to be linked
@@ -1881,7 +1881,7 @@ namespace opt_utilities
 	}
       return *p_fitter;
     }
-		
+
     /**
        evaluating the model
        \param x the self-var
@@ -1929,7 +1929,7 @@ namespace opt_utilities
     /**
        \return the type name of self
     */
-    
+
     virtual const char* do_get_type_name()const
     {
       return typeid(*this).name();
@@ -1952,7 +1952,7 @@ namespace opt_utilities
     virtual void update(){}
 
     virtual param_modifier<Ty,Tx,Tp,Tstr>* do_clone()const=0;
-    
+
     virtual void do_destroy()
     {
       delete this;
@@ -1964,7 +1964,7 @@ namespace opt_utilities
     param_modifier()
       :p_model(NULL_PTR)
     {}
-    
+
     /**
        copy construct function
      */
@@ -2015,7 +2015,7 @@ namespace opt_utilities
     const char* get_type_name()const
     {
       return this->do_get_type_name();
-    }    
+    }
   public:
     /**
        constructing full parameter list from the free parameters
@@ -2035,7 +2035,7 @@ namespace opt_utilities
 
 
   public:
-    
+
     /**
        Attach the fitter object
        \param pf the fitter to be attached

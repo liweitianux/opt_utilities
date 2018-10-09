@@ -34,10 +34,10 @@ namespace opt_utilities
   /////////Forward declare///////////////////////////////////
   template <typename rT,typename pT>
   class optimizer;
-  
+
   template <typename rT,typename pT>
   class func_obj;
-  
+
   template <typename rT,typename pT>
   class opt_method;
 
@@ -107,7 +107,7 @@ namespace opt_utilities
     {
       return do_eval(p);
     }
-    
+
 
     /**
        The same as operator().
@@ -123,7 +123,7 @@ namespace opt_utilities
     virtual ~func_obj(){};
     //    virtual XT walk(XT,YT)=0;
   };
-  
+
 
   /**
      \brief virtual class representing optimization methods
@@ -162,11 +162,11 @@ namespace opt_utilities
     /**
        \param p the lower limit
      */
-    virtual void do_set_lower_limit(const pT& p){};
+    virtual void do_set_lower_limit(const pT&){};
     /**
        \param p the upper limit
      */
-    virtual void do_set_upper_limit(const pT& p){};
+    virtual void do_set_upper_limit(const pT&){};
 
     /**
        \return start point
@@ -197,11 +197,11 @@ namespace opt_utilities
     {
       delete this;
     }
-    
+
     /**
        \return the type name of self
     */
-    
+
     virtual const char* do_get_type_name()const
     {
       return typeid(*this).name();
@@ -231,11 +231,11 @@ namespace opt_utilities
     {
       do_set_precision(x);
     }
-    
+
     /**
        \return precision
      */
-    
+
     rT get_precision()const
     {
       return do_get_precision();
@@ -249,7 +249,7 @@ namespace opt_utilities
     {
       do_set_start_point(p);
     }
-    
+
     /**
        \return start point
      */
@@ -290,7 +290,7 @@ namespace opt_utilities
     /**
        \return upper limit
      */
-    
+
     pT get_upper_limit()const
     {
       return do_get_upper_limit();
@@ -300,12 +300,12 @@ namespace opt_utilities
        Interface function for performing the optimization
        \return the optimized parameter.
      */
-    
+
     pT optimize()
       {
 	return do_optimize();
       };
-    
+
 
     /**
        \return the cloned object.
@@ -345,8 +345,8 @@ namespace opt_utilities
      */
     virtual ~opt_method(){};
   };
-  
-  
+
+
   /**
      \brief The manager for performing the manager
      \tparam rT the return type
@@ -368,7 +368,7 @@ namespace opt_utilities
        pointer pointing a func_obj object
      */
     func_obj<rT,pT>* p_func_obj;
-    
+
   public:
     /**
        default construct function
@@ -387,7 +387,7 @@ namespace opt_utilities
     {
       p_opt_method->set_optimizer(*this);
     }
-    
+
     /**
        copy construct function
      */
@@ -424,7 +424,7 @@ namespace opt_utilities
 	}
       return *this;
     }
-    
+
     /**
        destruct function
      */
@@ -472,7 +472,7 @@ namespace opt_utilities
 	  //delete p_opt_method;
 	  p_opt_method->destroy();
 	}
-      
+
       p_opt_method=om.clone();
       p_opt_method->set_optimizer(*this);
     }
@@ -489,7 +489,7 @@ namespace opt_utilities
       return *(this->p_opt_method);
     }
 
-    
+
     /**
        \return a const reference of internally kept optimization method
      */
@@ -528,8 +528,8 @@ namespace opt_utilities
 	}
       return p_opt_method->get_precision();
     }
-    
-    
+
+
     /**
        set start point
        \param x start point
@@ -546,7 +546,7 @@ namespace opt_utilities
     /**
        \return start point
      */
-    
+
     pT get_start_point()const
     {
       if(p_opt_method==NULL_PTR)
@@ -555,7 +555,7 @@ namespace opt_utilities
 	}
       return p_opt_method->get_start_point();
     }
-    
+
 
     /**
        set lower limit
@@ -582,7 +582,7 @@ namespace opt_utilities
 	}
       return p_opt_method->get_lower_limit();
     }
-    
+
 
     /**
        set upper limit
@@ -609,7 +609,7 @@ namespace opt_utilities
 	}
       return p_opt_method->get_upper_limit();
     }
-    
+
 
     /**
        call the objection function
@@ -625,7 +625,7 @@ namespace opt_utilities
       return p_func_obj->eval(x);
     }
 
-	
+
 
     /**
        perform the optimization
@@ -654,7 +654,7 @@ namespace opt_utilities
 	  p_opt_method->stop();
 	}
     }
-    
+
     /**
        \return the pointer to the inner object function
      */
@@ -676,7 +676,7 @@ namespace opt_utilities
 	}
       return *p_func_obj;
     }
-    
+
     /**
        \return the const reference of the internal kept func_obj object
     */
@@ -690,7 +690,7 @@ namespace opt_utilities
     }
   };
 }
-  
+
 #endif
 //EOF
 

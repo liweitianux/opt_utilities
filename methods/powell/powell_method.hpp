@@ -226,10 +226,10 @@ namespace opt_utilities
       return start_point;
     }
 
-    void do_set_lower_limit(const array1d_type& p)
+    void do_set_lower_limit(const array1d_type&)
     {}
 
-    void do_set_upper_limit(const array1d_type& p)
+    void do_set_upper_limit(const array1d_type&)
     {}
 
     void do_set_precision(rT t)
